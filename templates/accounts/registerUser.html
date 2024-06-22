@@ -1,0 +1,75 @@
+
+<!--include header footer-->
+
+{% extends 'base.html' %}
+{% load static%}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/registrationstyle.css'%}">
+<div class="cont">
+    <div class="title">User Registration</div>
+    <div style="margin-top: 10px;">
+      <ul style="list-style-type: none;">
+        {% for field in form %}
+          {% if field.errors %}
+            {% for error in field.errors %}
+              <li style="color: red;">{{ error }}</li>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+
+              <li style="color: red;">{{ form.non_field_errors }}</li>
+      </ul>
+    </div>
+    <div class="content">
+      <form action="{% url 'registerUser' %}" method="post">
+        {% csrf_token %}
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">First Name</span>
+            {{form.first_name}}
+          </div>
+          <div class="input-box">
+            <span class="details">Last Name</span>
+            {{form.last_name}}
+          </div>
+          <div class="input-box">
+            <span class="details">Username</span>
+            {{form.username}}
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            {{form.email}}
+          </div>
+            <div class="input-box">
+            <span class="details">Contact</span>
+            {{form.contact}}
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            {{form.password}}
+          </div>
+
+          <div class="input-box">
+            <span class="details">Confirm Password</span>
+            {{form.confirm_password}}
+          </div>
+        </div>
+
+        <div class="d-grid gap-3 col-sm-auto">
+          <button class="btn btn-danger" type="submit">REGISTER</button>
+        </div>
+
+        <div class="d-grid gap-3 col-sm-auto" style="margin-top: 12px;">
+
+          {% include 'includes/alerts.html'%}
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+<!--</div>-->
+
+
+{% endblock %}
