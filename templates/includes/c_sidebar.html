@@ -1,0 +1,32 @@
+
+<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+<nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color: white;">
+          <ul class="nav" style="margin-top: 50px;">
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'custDashboard' %}">
+                <span class="icon-bg"><i class="fa-thin fa-grid-horizontal"></i></span>
+                <span class="menu-title" style="color: black">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="" aria-expanded="false" aria-controls="ui-basic">
+                <span class="icon-bg"><i class="mdi mdi-crosshairs-gps menu-icon"></i></span>
+                <span class="menu-title">My Orders</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'cprofile' %}">
+                <span class="icon-bg"><i class="mdi mdi-crosshairs-gps menu-icon"></i></span>
+                <span class="menu-title">Profile Settings</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                <span class="icon-bg"><i class="mdi mdi-lock menu-icon"></i></span>
+                <span class="menu-title">Change Password</span>
+              </a>
+            </li>
+
+          </ul>
+        </nav>

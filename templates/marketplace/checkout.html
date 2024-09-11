@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+@media (min-width: 1025px) {
+  .h-custom {
+    height: 100vh !important;
+  }
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+  font-size: 1rem;
+  line-height: 2.15;
+  padding-left: .75em;
+  padding-right: .75em;
+}
+
+.card-registration .select-arrow {
+  top: 13px;
+}
+
+.form-check-input {
+        display: inline-block;
+        margin-right: 10px;
+        width: auto;
+        height: auto;
+        margin: 0;
+        padding: 0;
+}
+
+</style>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+ <link href="{% static 'css/registrationstyle.css' %}" rel="stylesheet" />
+<link href="{% static 'css/dashboard.css' %}" rel="stylesheet" />
+<link href="{% static 'css/iconmoon.css' %}" rel="stylesheet" />
+
+<section class="h-100 h-custom" style="margin-top:0;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+          <div class="card-body p-0">
+            <div class="row g-0">
+              <div class="col-lg-8">
+                <div class="p-5">
+                  <div class="d-flex justify-content-between align-items-center mb-5">
+                    <h1 class="fw-bold mb-0">Billing Address</h1>
+                  </div>
+                  <hr class="my-4">
+                      <div class="content">
+                        <form action="{% url 'placeorder' %}" method="post">
+                          {% csrf_token %}
+                          <div class="user-details">
+                          <div class="input-box mb-3">
+                        <span class="details">First Name</span>
+                        {{ form.first_name}}
+                        </div>
+
+                            <div class="input-box mb-3">
+                        <span class="details">Last Name</span>
+                        {{ form.last_name}}
+                        </div>
+
+                             <div class="input-box mb-3">
+                        <span class="details">Phone Number</span>
+                        {{ form.phone}}
+                        </div>
+
+                             <div class="input-box mb-3">
+                        <span class="details">Email</span>
+                        {{ form.email}}
+                        </div>
+
+                             <div class="input-box mb-3" style="max-width:100%; width:100%; ">
+                        <span class="details">Address</span>
+                        {{ form.address}}
+                        </div>
+
+                                  <div class="input-box mb-3">
+                        <span class="details">Country</span>
+                        {{ form.country }}
+                        </div>
+
+                                  <div class="input-box mb-3">
+                        <span class="details">State</span>
+                        {{ form.state}}
+                        </div>
+
+                                  <div class="input-box mb-3">
+                        <span class="details">City</span>
+                        {{ form.city}}
+                        </div>
+
+                                  <div class="input-box mb-3">
+                        <span class="details">Pincode</span>
+                        {{ form.pin_code}}
+                        </div>
+
+                          </div>
+                      </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 bg-body-tertiary">
+                    <div class="p-5">
+                  <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                  <hr class="my-4">
+
+                  <div class="d-flex justify-content-between mb-4">
+                    <h5 class="text-uppercase">Sub Total</h5>
+                    <h5 id="subtotal">{{ subtotal }}</h5>
+                  </div>
+
+                   <div class="d-flex justify-content-between mb-4">
+                    <h5 class="text-uppercase">Tax</h5>
+                    <h5 id="tax">{{ tax }}</h5>
+                  </div>
+
+                  <div class="d-flex justify-content-between mb-4">
+                  <h5 class="text-uppercase">Delivery</h5>
+                    <h5 id="delivery">{{ delivery }}</h5>
+                  </div>
+
+                  <div class="d-flex justify-content-between mb-5">
+                    <h5 class="text-uppercase">Total price</h5>
+                    <h5 id="total">{{ total }}</h5>
+                  </div>
+
+                <div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Sr. No.</th>
+                <th scope="col">Item Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ item.fooditem.food_title }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.fooditem.price }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+       <div class="mb-2 mt-5">
+                <h5>Select Payment Method</h5>
+                <select class="form-control" name="payment_method" required>
+                    <option value="" disabled selected>Select a payment method</option>
+                    <option value="COD">Cash on Delivery (COD)</option>
+                    <option value="UPI">UPI</option>
+                </select>
+            </div>
+
+        <!-- Proceed to Payment Button -->
+        <button onclick="return payMethodConfirm();" type="submit" class="btn btn-dark">Proceed to Payment</button>
+                    </form>
+</div>
+</div>
+</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{% static 'js/custom.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function payMethodConfirm(){
+        var paymethod = $("input[name='payment_method']:checked").val();
+        alert(pymethod);
+        return flase;
+    }
+</script>
+<!--<script src="https://polyfill.io/v3/polyfill.min.js"></script>-->
+
+
+{% endblock %}

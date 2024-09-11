@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block content %}
+{% include 'includes/alerts.html' %}
+
+<link href="{% static 'css/dashboard.css' %}" rel="stylesheet" />
+<link href="{% static 'css/iconmoon.css' %}" rel="stylesheet" />
+<link href="{% static 'css/custom.css' %}" rel="stylesheet" />
+
+<style>
+  /* General styling adjustments for small screens */
+  .main-panel {
+    padding: 15px 10px;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .content-wrapper {
+    margin-left: 0;
+  }
+
+  .content-wrapper .row {
+    margin: 0 -10px;
+  }
+
+  .content-wrapper .col-md-12,
+  .content-wrapper .col-lg-6,
+  .content-wrapper .col-sm-6,
+  .content-wrapper .col-xl-4 {
+    padding: 0 10px;
+  }
+
+  .content-wrapper h2 {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .content-wrapper h5 {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .card-body h2 {
+    font-size: 1.5rem;
+  }
+
+  .card-body h5 {
+    font-size: 1.2rem;
+  }
+
+  .card {
+    margin-bottom: 15px;
+    padding: 15px;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .table thead th,
+  .table td {
+    white-space: nowrap;
+    font-size: 0.875rem;
+  }
+
+  .table .btn {
+    padding: 5px 10px;
+    font-size: 0.875rem;
+  }
+
+  /* Specific styling for 393x714 screen size */
+  @media (max-width: 393px) and (max-height: 714px) {
+    .content-wrapper h2 {
+      font-size: 1.25rem;
+    }
+
+    .content-wrapper h5 {
+      font-size: 0.875rem;
+    }
+
+    .card-body h2 {
+      font-size: 1.25rem;
+    }
+
+    .card-body h5 {
+      font-size: 1rem;
+    }
+
+    .table td {
+      font-size: 0.75rem;
+    }
+
+    .table .btn {
+      padding: 4px 8px;
+      font-size: 0.75rem;
+    }
+
+    .btn {
+      font-size: 0.75rem;
+      padding: 6px 12px;
+    }
+
+    .dashboard-card {
+      padding: 10px;
+    }
+  }
+</style>
+
+<!--Main Section Start-->
+<div class="container-fluid page-body-wrapper" style="margin-top: 60px">
+  {% include 'includes/r_sidebar.html' %}
+  <div class="main-panel">
+    <div class="content-wrapper">
+      {% include 'includes/cover.html' %}
+      <div class="d-xl-flex justify-content-between align-items-start">
+        <h2 class="text-dark font-weight-bold mb-2">Overview dashboard</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="d-sm-flex justify-content-between align-items-center transaparent-tab-border">
+          </div>
+          <div class="tab-content tab-transparent-content">
+            <div class="row">
+              <div class="col-xl-4 col-lg-6 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body text-center">
+                    <h5 class="mb-2 text-dark font-weight-normal">Orders</h5>
+                    <a href="#"><h2 class="mb-4 text-dark font-weight-bold">932.00</h2></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body text-center">
+                    <h5 class="mb-2 text-dark font-weight-normal">Total Revenue</h5>
+                    <a href="#"><h2 class="mb-4 text-dark font-weight-bold">756,00</h2></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body text-center">
+                    <h5 class="mb-2 text-dark font-weight-normal">This Month</h5>
+                    <a href="#"><h2 class="mb-4 text-dark font-weight-bold">100,38</h2></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 50px;">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div>
+                          <h4 class="card-title mb-0">Recent orders</h4>
+                          <br>
+                          <div class="table-responsive">
+                            <table class="table table-hover table-borderless" id="myOrdersTable">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Order #</th>
+                                  <th scope="col">Name</th>
+                                  <th scope="col">Total</th>
+                                  <th scope="col">Status</th>
+                                  <th scope="col">Date</th>
+                                  <th scope="col">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for order in orders %}
+                                <tr>
+                                  <td>{{ order.order_number }}</td>
+                                  <td>{{ order.name }}</td>
+                                  <td>${{ order.total }}</td>
+                                  <td>{{ order.status }}</td>
+                                  <td>{{ order.created_at }}</td>
+                                  <td><a href="" class="btn btn-danger">Details</a></td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Main Section End -->
+
+{% endblock %}

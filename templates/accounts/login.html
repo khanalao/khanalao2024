@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<link rel="stylesheet" href="{% static 'css/registrationstyle.css'%}">
+<div class="cont">
+    <div class="title">Login</div>
+    <div style="margin-top: 10px;">
+      <ul style="list-style-type: none;">
+        {% for field in form %}
+          {% if field.errors %}
+            {% for error in field.errors %}
+              <li style="color: red;">{{ error }}</li>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+
+              <li style="color: red;">{{ form.non_field_errors }}</li>
+      </ul>
+    </div>
+    <div class="content">
+      <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class="user-details">
+          <div class="input-box" style="width: 100%;">
+            <span class="details">Email</span>
+            <input type="email" name="email" placeholder="enter email">
+          </div>
+
+          <div class="input-box" style="width: 100%;">
+            <span class="details">Password</span>
+            <input type="password" name="password" placeholder="enter password">
+          </div>
+
+
+        <div class="d-grid gap-3 col-sm-12">
+          <button class="btn btn-danger" type="submit">LOGIN</button>
+        </div>
+
+        <div class="d-grid gap-3 col-sm-auto" style="margin-top: 12px;">
+
+          {% include 'includes/alerts.html'%}
+
+        </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

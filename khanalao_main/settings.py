@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool)
+DEBUG = config('DEBUG', cast=bool,)
 
 ALLOWED_HOSTS = []
 
@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'vendor',
+    'menu',
+    'marketplace',
+    'orders',
+    'customers',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +67,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'accounts.context_processor.getVendor',
+                'marketplace.context_processor.get_cart_counter',
+                'marketplace.context_processor.get_cart_amounts',
             ],
         },
     },
@@ -113,6 +120,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
@@ -131,3 +140,11 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Email Configurations
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST=config('EMAIL_HOST')
+# EMAIL_PORT=config('EMAIL_PORT', cast=int)
+# EMAIL_HOST_USER=config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_TLS=True

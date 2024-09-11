@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1>Complete Your Payment</h1>
+    <button id="pay-button">Pay Now</button>
+
+    <script>
+        var options = {
+            "key": "{{ settings.RAZORPAY_KEY_ID }}", // Enter the Key ID generated from the Dashboard
+            "amount": "{{ total_amount * 100 }}", // Amount is in currency subunits
+            "currency": "INR",
+            "name": "Your Company Name",
+            "description": "Test Transaction",
+            "order_id": "{{ order_id }}", // This is a sample Order ID
+            "handler": function (response){
+                window.location.href = "{% url 'payment_success' %}?payment_id=" + response.razorpay_payment_id + "&order_id=" + response.razorpay_order_id;
+            },
+            "prefill": {
+                "name": "{{ user.get_full_name }}",
+                "email": "{{ user.email }}"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+
+        document.getElementById('pay-button').onclick = function(e){
+            rzp1.open();
+            e.preventDefault();
+        }
+    </script>
+{% endblock %}

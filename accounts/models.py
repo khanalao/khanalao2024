@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db.models import OneToOneField
 
 
-
 # Create your models here.
 class UserManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, contact, password=None):
@@ -22,6 +21,7 @@ class UserManager(BaseUserManager):
             first_name=first_name,
             last_name=last_name,
             contact=contact
+
         )
 
         user.set_password(password)
@@ -70,7 +70,7 @@ class User(AbstractBaseUser):
     modified_date = models.DateTimeField(auto_now_add=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_superadmin = models.BooleanField(default=False)
 
     # authentucation
@@ -89,13 +89,20 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+    def get_role(self):
+        if self.role == 1:
+            user_role = "Restaurant"
+        elif self.role == 2:
+            user_role = "Customer"
+
+        return user_role
+
 
 class UserProfile(models.Model):
     user = OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     profile_picture = models.ImageField(upload_to='users/profile_pictures', blank=True, null=True)
     cover_pic = models.ImageField(upload_to='users/cover_pic', blank=True, null=True)
-    address_line1 = models.CharField(max_length=50, blank=True, null=True)
-    address_line2 = models.CharField(max_length=50, blank=True, null=True)
+    address = models.CharField(max_length=50, blank=True, null=True)
     country = models.CharField(max_length=20, blank=True, null=True)
     state = models.CharField(max_length=20, blank=True, null=True)
     city = models.CharField(max_length=20, blank=True, null=True)
@@ -107,6 +114,3 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.email
-
-
-

@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block content %}
+{% include 'includes/alerts.html' %}
+
+
+<link href="{% static 'css/dashboard.css' %}" rel="stylesheet" />
+<link href="{% static 'css/iconmoon.css' %}" rel="stylesheet" />
+<link href="{% static 'css/registrationstyle.css' %}" rel="stylesheet" />
+
+
+
+
+
+<!--Main Section Start-->
+      <div class="container-fluid page-body-wrapper" style="margin-top: 18px">
+        {% include 'includes/r_sidebar.html'%}
+        <div class="main-panel">
+          <div class="content-wrapper">
+            {% include 'includes/cover.html' %}
+            <div class="d-xl-flex justify-content-between align-items-start">
+				<div class="row">
+
+</div>
+</div>
+
+
+
+
+<div class="col-xl-12" style="color: black;">
+
+<div class="cont" style="margin-top:20px; max-width:1000px;">
+    <div class="title">Account Details</div>
+    <div class="content">
+      <form action="{% url 'rprofile' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="user-details">
+          <div class="text-holder mb-4 col-lg-12 col-md-12">
+            <span class="details">Update Profile Picture</span>
+            <div class="upload-gallery">
+              {{profile_form.profile_picture}}
+            </div>
+          </div>
+
+          <div class="text-holder mb-4 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <span class="details">Cover photo</span>
+          <div class="upload-gallery">
+            {{profile_form.cover_pic}}
+        </div>
+          </div>
+
+          <div class="text-holder mb-4 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <span class="details">Restaurant License</span>
+          <div class="upload-gallery">
+            {{rest_form.vendor_license}}
+        </div>
+          </div>
+
+          <div class="input-box mb-3">
+            <span class="details">Restaurant Name</span>
+            {{rest_form.vendor_name}}
+          </div>
+        <div class="input-box mb-3">
+            <span class="details">Address</span>
+            {{profile_form.address}}
+          <small class="text-muted float-right mt-1">powered by Google</small>
+          </div>
+
+
+          <div class="input-box mb-3">
+            <span class="details">Country</span>
+            {{profile_form.country}}
+          </div>
+
+            <div class="input-box mb-3">
+            <span class="details">State</span>
+            {{profile_form.state}}
+          </div>
+
+            <div class="input-box mb-3">
+            <span class="details">City</span>
+            {{profile_form.city}}
+          </div>
+
+          <div class="input-box mb-3">
+            <span class="details">Pincode</span>
+            {{profile_form.pincode}}
+          </div>
+
+          <div class="input-box mb-3">
+            <span class="details">Longitude</span>
+            {{profile_form.latitude}}
+          </div>
+
+            <div class="input-box mb-3">
+            <span class="details">Latitude</span>
+            {{profile_form.latitude}}
+          </div>
+
+        </div>
+
+        <div class="d-grid gap-3 col-sm-auto">
+          <button class="btn btn-danger" type="submit">Save Changes</button>
+        </div>
+
+        <div class="d-grid gap-3 col-sm-auto" style="margin-top: 12px;">
+
+          {% include 'includes/alerts.html'%}
+
+        </div>
+
+      </form>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+
+</script>
+			</div>
+		  </div>
+		</div>
+      </div>
+{% endblock %}

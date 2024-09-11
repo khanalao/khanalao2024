@@ -1,0 +1,49 @@
+
+<nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color: white; ">
+          <ul class="nav" style="margin-top: 50px;">
+
+            <li class="nav-item {% if '/accounts/restDashboard/' == request.path or '/accounts/restaurant/' == request.path %}active{% endif %}">
+              <a class="nav-link" href="{% url 'restDashboard'%}">
+                <span class="icon-bg"><i class="fas fa-house-user" style="font-size:20px"></i></span>
+                <span class="menu-title" style="color: black">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item {% if 'profile' in request.path %}active{% endif %}">
+                <a class="nav-link" href="{% url 'rprofile'%}">
+                <span class="icon-bg"><i class="fas fa-user-alt" style="font-size:20px"></i></span>
+                <span class="menu-title">My Restaurants</span>
+              </a>
+            </li>
+            <li class="nav-item {% if 'menu-builder' in request.path %}active{% endif %}">
+              <a class="nav-link" href="{% url 'menu_builder' %}">
+                <span class="icon-bg"><i class="fas fa-pen-nib" style="font-size:20px"></i></span>
+                <span class="menu-title">Menu Builder</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="pages/forms/basic_elements.html">
+                <span class="icon-bg"><i class="fas fa-align-justify" style="font-size:20px"></i></span>
+                <span class="menu-title">Orders</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="pages/charts/chartjs.html">
+                <span class="icon-bg"><i class="fas fa-dollar-sign" style="font-size:20px"></i></span>
+                <span class="menu-title">Earnings</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="pages/tables/basic-table.html">
+                <span class="icon-bg"><i class="fas fa-book" style="font-size:20px"></i></span>
+                <span class="menu-title">Statement</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                <span class="icon-bg"><i class="fas fa-user-lock" style="font-size:20px"></i></span>
+                <span class="menu-title">Change Password</span>
+              </a>
+            </li>
+
+          </ul>
+        </nav>

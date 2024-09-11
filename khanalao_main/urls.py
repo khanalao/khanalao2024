@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from marketplace import views as MarketPlaceViews
 
 
 from . import views
@@ -25,7 +26,14 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('accounts/', include('accounts.urls')),
+    path('', include('accounts.urls')),
+    path('marketplace/', include('marketplace.urls')),
+    path('cart/', MarketPlaceViews.cart, name='cart'),
+    path('checkout/', MarketPlaceViews.checkout, name='checkout'),
+    path('process-payment/', MarketPlaceViews.process_payment, name='process_payment'),
+    # path('payment-success/', Mpayment_success, name='payment_success'),
+    path('orders/', include('orders.urls')),
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

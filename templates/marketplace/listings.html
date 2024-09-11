@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .restaurant-card {
+        height: 100%;
+        margin-bottom: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .restaurant-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .restaurant-card img {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .restaurant-card:hover img {
+        transform: scale(1.1);
+    }
+
+    @media (max-width: 767px) {
+        .restaurant-card {
+            margin-bottom: 20px;
+        }
+
+        .restaurant-card img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .restaurant-card .d-flex {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .restaurant-card .ms-auto {
+            margin-top: 10px;
+            align-self: flex-end;
+        }
+
+        .restaurant-card .w-100 {
+            margin-top: 10px;
+        }
+
+        .restaurant-card h5 {
+            font-size: 1.1rem;
+        }
+
+        .restaurant-card small {
+            font-size: 0.9rem;
+        }
+
+        .container-xxl {
+            padding: 0 15px;
+        }
+    }
+</style>
+
+<!-- Menu Start -->
+
+<div class="container-fluid page-body-wrapper" style="margin-top: 10px">
+    <div class="container-xxl py-5">
+        <div class="container mt-5">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s mt-5">
+                <h1 class="mb-2">Restaurants</h1>
+                <h5 class="text-center text-primary fw-normal mb-5">{{rest_count}} Restaurants Found</h5>
+            </div>
+            <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
+                <div class="tab-content">
+                    <div class="tab-pane fade show p-0 active">
+                        <div class="row g-4">
+                            {% for r in rest %}
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                <div class="restaurant-card border border-4 p-3 h-100">
+                                    <div class="d-flex align-items-center">
+                                        {% if r.user_profile.profile_picture %}
+                                        <img class="img-fluid rounded" src="{{ r.user_profile.profile_picture.url }}" alt="" style="width: 90px; height: 90px;">
+                                        {% else %}
+                                        <img class="img-fluid rounded" src="{% static 'img/logo.png' %}" alt="" style="width: 90px; height: 90px;">
+                                        {% endif %}
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>{{r.vendor_name}}</span>
+                                            </h5>
+                                            <small class="fst-italic">{{r.user_profile.address}}, {{r.user_profile.city}}, {{r.user_profile.state}}, {{r.user_profile.country}}</small>
+                                        </div>
+                                        <div class="ms-auto">
+                                            <a href="{% url 'rest_details' r.vendor_slug %}" ><button class="btn btn-primary" type="submit">Menu</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Menu End -->
+
+{% endblock %}

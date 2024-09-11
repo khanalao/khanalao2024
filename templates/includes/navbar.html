@@ -1,37 +1,114 @@
 {% load static %}
 
 <main class="main" id="top">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-navbar-on-scroll="data-navbar-on-scroll">
-        <div class="container"><a class="navbar-brand d-inline-flex" href="{% url 'home' %}"><img class="d-inline-block" src="{% static 'img/gallery/logo.svg'%}" alt="logo" /><span class="text-1000 fs-3 fw-bold ms-2 text-gradient">Khana Lao</span></a>
-<!--          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>-->
-          <div class="collapse navbar-collapse border-top border-lg-0 my-2 mt-lg-0" id="navbarSupportedContent">
-            <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">
-              <p class="mb-0 fw-bold text-lg-center">Deliver to: <i class="fas fa-map-marker-alt text-warning mx-2"></i><span class="fw-normal">Current Location </span><span>Mirpur 1 Bus Stand, Dhaka</span></p>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-navbar-on-scroll="data-navbar-on-scroll">
+        <div class="container">
+            <a class="navbar-brand d-inline-flex" href="{% url 'home' %}">
+                <img class="d-inline-block" src="{% static 'img/gallery/logo.svg'%}" alt="logo" style="width: 30px;" />
+                <span class="text-1000 fs-4 fw-bold ms-2 text-gradient">Khana Lao</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    {% if user.is_authenticated %}<li class="nav-item">
+                        <a class="nav-link" href="{% url 'marketplace' %}">
+                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button"><i class="fa fa-phone" style="font-size:24px"></i>8769478689</button>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'marketplace' %}">
+                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button">Market Place</button>
+                        </a>
+                    </li>
+                    <li class="nav-item position-relative">
+                        <a class="nav-link" href="{% url 'cart' %}">
+                            <i class="fas fa-shopping-cart text-warning" style="font-size: 1.5em;"></i>
+                            <span class="badge bg-warning text-dark position-absolute" id="cart_counter" style="border-radius:50%; top: -8px; right: -10px;">{{cart_count}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'myAccount'%}">
+                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button"><i class="fas fa-user me-1"></i>My Account</button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout'%}">
+                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button">Logout</button>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'registerUser'%}">
+                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button"><i class="fas fa-user me-1"></i>Register</button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login'%}">
+                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button"><i class="fas fa-user me-1"></i>Login</button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'registerVendor'%}">
+                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button"><i class="fas fa-user me-1"></i>Restaurant</button>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
-            <form class="d-flex mt-4 mt-lg-0 ms-lg-auto ms-xl-0">
-              <div class="input-group-icon pe-2"><i class="input-box-icon text-primary"></i>
-<!--                <input class="form-control border-0 input-box bg-100" type="search" placeholder="Search Food" aria-label="Search" />-->
-                  <a href="{% url 'registerUser'%}">
-                    <button class="btn btn-white shadow-warning text-warning" type="button"> <i class="fas fa-user me-2"></i>Register</button>
-                  </a>
-
-
-              </div>
-                <button class="btn btn-white shadow-warning text-warning" type="submit"> <i class="fas fa-user me-2"></i>Login</button>
-
-                <a href="{% url 'registerVendor'%}">
-                <button class="btn btn-white shadow-warning text-warning" type="button" style="margin-left: 8px;"> <i class="fas fa-user me-2"></i>Restaurant</button>
-                </a>
-            </form>
-          </div>
         </div>
-      </nav>
+    </nav>
+</main>
 
-    <script src="{% static '@popperjs/popper.min.js' %}"></script>
-    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
-    <script src="{% static 'is/is.min.js' %}"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="{% static 'fontawesome/all.min.js' %}"></script>
-    <script src="{% static 'js/theme.js' %}"></script>
+<script src="{% static '@popperjs/popper.min.js' %}"></script>
+<script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+<script src="{% static 'is/is.min.js' %}"></script>
+<script src="{% static 'fontawesome/all.min.js' %}"></script>
+<script src="{% static 'js/theme.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&amp;display=swap" rel="stylesheet">
+
+<style>
+    .navbar-brand img {
+        width: 30px;
+    }
+
+    .navbar-brand span {
+        font-size: 1.25rem;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .navbar-toggler {
+        border-color: transparent;
+    }
+
+    @media (max-width: 393px) {
+        .navbar-brand img {
+            width: 25px;
+        }
+
+        .navbar-brand span {
+            font-size: 1rem;
+        }
+
+        .btn-sm {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.75rem;
+        }
+
+        .navbar-nav .nav-link {
+            padding: 0.25rem 0.5rem;
+        }
+
+        .navbar-collapse {
+            text-align: center;
+        }
+    }
+</style>
