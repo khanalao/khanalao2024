@@ -50,7 +50,7 @@
                   </div>
                   <hr class="my-4">
                       <div class="content">
-                        <form action="{% url 'placeorder' %}" method="post">
+                        <form action="{% url 'place_order' %}" method="post">
                           {% csrf_token %}
                           <div class="user-details">
                           <div class="input-box mb-3">
@@ -154,7 +154,7 @@
                 <select class="form-control" name="payment_method" required>
                     <option value="" disabled selected>Select a payment method</option>
                     <option value="COD">Cash on Delivery (COD)</option>
-                    <option value="UPI">UPI</option>
+<!--                    <option value="UPI">UPI</option>-->
                 </select>
             </div>
 
@@ -181,7 +181,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     function payMethodConfirm(){
-        var paymethod = $("input[name='payment_method']:checked").val();
+        var paymethod = "COD";
         alert(pymethod);
         return flase;
     }

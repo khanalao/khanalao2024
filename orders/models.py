@@ -12,7 +12,6 @@ from vendor.models import Vendor
 class Payment(models.Model):
     PAYMENT_METHOD = (
         ('COD', 'Cash on Delivery'),
-        ('UPI', 'UPI'),
         # Only for Indian Students.
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)

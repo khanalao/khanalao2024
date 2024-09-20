@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from django.core.exceptions import PermissionDenied
+from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.defaultfilters import slugify
@@ -156,18 +159,44 @@ def myAccount(request):
 @login_required(login_url='login')
 @user_passes_test(check_role_customer)
 def custDashboard(request):
-    orders = Order.objects.filter(user=request.user, is_ordered=True)
+    # orders = Order.objects.filter(user=request.user, is_ordered=True)
+    # context = {
+    #     'orders': orders,
+    # }
+    # return render(request, 'accounts/custDashboard.html',context)
+    user_orders = Order.objects.filter(user=request.user, is_ordered=True).order_by(
+        '-created_at')
+    recent_orders = user_orders[:5]
+
     context = {
-        'orders': orders,
+        'user_orders':user_orders,
+        'recent_orders':recent_orders,
     }
-    return render(request, 'accounts/custDashboard.html',context)
+    return render(request, 'accounts/custDashboard.html', context)
 
 
 @login_required(login_url='login')
 @user_passes_test(check_role_restaurant)
 def restDashboard(request):
-    orders = Order.objects.filter(user=request.user, is_ordered=True)
+    vendor = Vendor.objects.get(user=request.user)
+    current_date = datetime.now()
+
+    # Filtering orders based on the restaurant and that the order has been placed (is_ordered=True)
+    orders = Order.objects.filter(vendors=vendor, is_ordered=True).order_by('-created_at')
+    recent_orders = orders[:5]
+    total_orders = orders.count
+    total_revenue = Order.objects.aggregate(total_sum=Sum('total'))['total_sum'] or 0
+    current_month_revenue = Order.objects.filter(
+        vendors=vendor,
+        is_ordered=True,
+        created_at__year=current_date.year,
+        created_at__month=current_date.month
+    ).aggregate(Sum('total'))['total__sum'] or 0
     context = {
         'orders': orders,
+        'recent_orders': recent_orders,
+        'total_orders' : total_orders,
+        'total_revenue': total_revenue,
+        'current_month_revenue': current_month_revenue,
     }
     return render(request, 'accounts/restDashboard.html', context)

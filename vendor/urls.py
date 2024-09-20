@@ -7,6 +7,8 @@ urlpatterns = [
     path('profile/', views.rprofile, name='rprofile'),
     path('menu-builder/', views.menu_builder, name='menu_builder'),
     path('menu-builder/category/<int:pk>/', views.foodItems_by_category, name='foodItems_by_category'),
+    path('myorders/', views.myorders, name='rest_myorders'),
+    path('order_detail/<int:order_number>/', views.order_detail, name='rest_order_detail'),
 
     # category urls
     path('menu-builder/category/add', views.add_category, name='add_category'),

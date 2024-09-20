@@ -1,7 +1,7 @@
 import json
 
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from accounts.models import User
 from marketplace.context_processor import get_cart_amounts
@@ -9,11 +9,12 @@ from marketplace.models import Cart
 from menu.models import FoodItem
 from orders.forms import OrderForm
 from orders.models import Order, Payment, OrderedFood
-from orders.utils import generate_order_number
+from orders.utils import generate_order_number, generate_transaction_id
+
 
 # Create your views here.
 
-def placeorder(request):
+def place_order(request):
     cart_items = Cart.objects.filter(user=request.user).order_by('created_at')
     cart_count = cart_items.count()
     if cart_count <= 0:
@@ -49,11 +50,18 @@ def placeorder(request):
             order.tax = tax
             order.delivery = delivery
             order.total = total
-            order.payment_method = request.POST['payment_method']
+            order.payment_method = "COD"
             order.save()
             order.order_number = generate_order_number(order.id)
             order.vendors.add(*vendors_ids)
             order.save()
+
+            context = {
+                'order': order,
+                'cart_items': cart_items,
+            }
+
+            return render(request, 'orders/placeorder.html', context)
         else:
             print(form.errors)  # Debug: Print form errors
 
@@ -65,49 +73,95 @@ def placeorder(request):
                   )
 
 
-def place_order(request):
+# def payment(request):
+#     order_number = request.POST.get('order_number')
+#     transaction_id = generate_transaction_id()
+#     payment_method = 'COD'
+#     status = request.POST.get('status')
+#
+#     order = Order.objects.get(user=request.user, order_number=order_number)
+#     payment = Payment(
+#         transaction_id=transaction_id,
+#         payment_method=payment_method,
+#         amount=order.total,
+#         status=status
+#     )
+#     payment.save()
+#
+#     order.payment=payment
+#     order.is_ordered=True
+#     order.save()
+
+def payment(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
+        order_number = request.POST.get('order_number')
+        transaction_id = generate_transaction_id()
+        payment_method = 'COD'
+        status = request.POST.get('status')
 
-        # Create the Order entry
-        order = Order.objects.create(
-            user=User.objects.get(pk=data['user_id']),
-            payment=Payment.objects.get(pk=data['payment_id']) if 'payment_id' in data else None,
-            first_name=data['first_name'],
-            last_name=data['last_name'],
-            phone=data['phone'],
-            email=data['email'],
-            address=data['address'],
-            country=data['country'],
-            state=data['state'],
-            city=data['city'],
-            pin_code=data['pin_code'],
-            subtotal=data['subtotal'],
-            tax=data['tax'],
-            delivery=data['delivery'],
-            total=data['total'],
-            payment_method=data['payment_method'],
-            status='New',
+        # Retrieve the order by order_number and user
+        try:
+            order = Order.objects.get(user=request.user, order_number=order_number)
+        except Order.DoesNotExist:
+            # Handle case where order is not found
+            return render(request, 'error_page.html', {'message': 'Order not found.'})
+
+        # Save the payment details
+        payment = Payment(
+            user=request.user,
+            transaction_id=transaction_id,
+            payment_method=payment_method,
+            amount=order.total,
+            status=status
         )
+        payment.save()
 
-        # Create the OrderedFood entries from the Order
-        for item in data['items']:  # Assume data['items'] is a list of items
-            food_item = FoodItem.objects.get(pk=item['fooditem_id'])
-            OrderedFood.objects.create(
-                order=order,
-                payment=order.payment,
-                user=order.user,
-                fooditem=food_item,
-                quantity=item['quantity'],
-                price=item['price'],
-                amount=item['quantity'] * item['price'],
-            )
-
-        # Mark the order as ordered
+        # Link the payment to the order and mark it as ordered
+        order.payment = payment
         order.is_ordered = True
+        order.status = status
         order.save()
 
-        # Return a success response
-        return JsonResponse({'success': True})
+        cart_items = Cart.objects.filter(user=request.user)
+        for items in cart_items:
+            ordered_food = OrderedFood()
+            ordered_food.order = order
+            ordered_food.payment = payment
+            ordered_food.user = request.user
+            ordered_food.fooditem = items.fooditem
+            ordered_food.quantity = items.quantity
+            ordered_food.price = items.fooditem.price
+            ordered_food.amount = items.fooditem.price * items.quantity
+            ordered_food.save()
 
-    return JsonResponse({'success': False})
+        cart_items.delete()
+
+        # Redirect to success page
+        return redirect('order_complete')  # Assuming you have an 'order_success' page
+
+    return redirect('checkout')  # Redirect if method is not POST
+
+
+def order_complete(request):
+    return render(request, 'orders/order_complete.html', {'message': 'Your order has been successfully placed!'})
+
+
+def order_complete(request):
+        # Retrieve the latest order for the logged-in user
+    orders = Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
+
+        # If no orders are found, redirect to an error page or handle accordingly
+    if not orders:
+        return render(request, 'error_page.html', {'message': 'No orders found.'})
+
+        # Get the latest order (first in the ordered list)
+    latest_order = orders.first()
+
+        # Fetch items associated with the order
+    items = OrderedFood.objects.filter(order=latest_order)
+
+    context = {
+            'order': latest_order,
+            'items': items,
+        }
+    return render(request, 'orders/order_complete.html', context)

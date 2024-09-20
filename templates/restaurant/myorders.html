@@ -164,7 +164,7 @@
                           <h4 class="card-title mb-0">Recent orders</h4>
                           <br>
                           <div class="table-responsive">
-                            <table class="table table-hover table-borderless" id="myOrdersTable">
+                            <table class="table table-hover table-borderless" id="myorderstable">
                               <thead>
                                 <tr>
                                   <th scope="col">Order #</th>
@@ -176,7 +176,7 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                {% for order in recent_orders %}
+                                {% for order in orders %}
                                 <tr>
                                   <td>{{ order.order_number }}</td>
                                   <td>{{ order.name }}</td>

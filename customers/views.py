@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from accounts.forms import UserProfileForm, UserInfoForm
 from accounts.models import UserProfile
 from accounts.views import check_role_customer
+from orders.models import Order, OrderedFood
 
 
 # Create your views here.
@@ -35,3 +36,24 @@ def cprofile(request):
     return render(request, 'customers/cprofile.html', context)
 
 
+def myorders(request):
+    user_orders = Order.objects.filter(user=request.user, is_ordered=True).order_by(
+        '-created_at')
+    context = {
+        'orders': user_orders,
+    }
+    return render(request, "customers/myorders.html", context)
+
+
+def order_detail(request, order_number):
+    try:
+        order = Order.objects.get(order_number=order_number, is_ordered=True)
+        ordered_food = OrderedFood.objects.filter(order=order)
+        context = {
+            'order': order,
+            'ordered_food': ordered_food,
+        }
+    except:
+        return redirect('customer')
+
+    return render(request, "customers/order_detail.html", context)

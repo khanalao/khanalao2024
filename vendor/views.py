@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from django.contrib import messages
+from django.db.models import Sum
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.defaultfilters import slugify
 
@@ -7,6 +10,7 @@ from accounts.models import UserProfile
 from accounts.views import check_role_restaurant
 from menu.forms import CategoryForm, FoodForm
 from menu.models import Category, FoodItem
+from orders.models import Order, OrderedFood
 from .forms import VendorForm
 from vendor.models import Vendor
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -194,3 +198,40 @@ def delete_food(request, pk=None):
     food.delete()
     messages.success(request, 'Food Item Deleted Successfully !')
     return redirect('foodItems_by_category', food.category.id)
+
+def myorders(request):
+    vendor = Vendor.objects.get(user=request.user)
+    current_date = datetime.now()
+
+    orders = Order.objects.filter(vendors=vendor, is_ordered=True).order_by(
+        '-created_at')
+    total_orders = orders.count
+    total_revenue = Order.objects.aggregate(total_sum=Sum('total'))['total_sum'] or 0
+    current_month_revenue = Order.objects.filter(
+        vendors=vendor,
+        is_ordered=True,
+        created_at__year=current_date.year,
+        created_at__month=current_date.month
+    ).aggregate(Sum('total'))['total__sum'] or 0
+
+    context = {
+        'orders': orders,
+        'total_orders': total_orders,
+        'total_revenue': total_revenue,
+        'current_month_revenue': current_month_revenue,
+    }
+
+    return render(request, 'restaurant/myorders.html', context)
+
+def order_detail(request, order_number):
+    try:
+        order = Order.objects.get(order_number=order_number, is_ordered=True)
+        ordered_food = OrderedFood.objects.filter(order=order)
+
+        context = {
+            'order': order,
+            'ordered_food': ordered_food,
+        }
+    except:
+        return redirect('customer')
+    return render(request, 'restaurant/rest_order_detail.html', context)

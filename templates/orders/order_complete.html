@@ -1,25 +1,6 @@
 {% extends 'base.html' %}
-{% load static %}
+
 {% block content %}
-<style>
-@media (min-width: 1025px) {
-  .h-custom {
-    height: 100vh !important;
-  }
-}
-
-.card-registration .select-input.form-control[readonly]:not([disabled]) {
-  font-size: 1rem;
-  line-height: 2.15;
-  padding-left: .75em;
-  padding-right: .75em;
-}
-
-.card-registration .select-arrow {
-  top: 13px;
-}
-</style>
-
 <section class="h-100 h-custom" style="margin-bottom:300px;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -27,19 +8,19 @@
         <div class="card card-registration card-registration-2" style="border-radius: 15px;">
           <div class="card-body p-0">
             <div class="row g-0">
-              <!-- Left Side (Review Address + Items) -->
+              <!-- Left Side (Order Details) -->
               <div class="col-lg-8">
                 <div class="p-5">
-                  <!-- Review Address Section -->
                   <div class="d-flex flex-column align-items-start mb-5">
-                    <h1 class="fw-bold mb-0">Review Address</h1>
+                    <h2 class="fw-bold mb-0">Thank You for Ordering with us !!</h2>
+                    <h1 class="fw-bold mb-0">Order Details</h1>
                     <div style="margin-top: 20px;">
                       <p>
-                        {{ order.name }} <br>
-                        {{ order.address }} <br>
-                        {{ order.city }} - {{ order.pin_code }} <br>
+                        <strong>Order Number:</strong> {{ order.order_number }} <br>
+                        <strong>Name:</strong> {{ order.name }} <br>
+                        <strong>Address:</strong> {{ order.address }}, {{ order.city }} - {{ order.pin_code }} <br>
                         {{ order.state }}, {{ order.country }} <br>
-                        {{ order.phone }}
+                        <strong>Phone:</strong> {{ order.phone }} <br>
                       </p>
                     </div>
                   </div>
@@ -53,15 +34,17 @@
                           <th scope="col">Item Name</th>
                           <th scope="col">Quantity</th>
                           <th scope="col">Price</th>
+                          <th scope="col">Total</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {% for item in cart_items %}
+                        {% for item in items %}
                           <tr>
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ item.fooditem.food_title }}</td>
                             <td>{{ item.quantity }}</td>
-                            <td>{{ item.fooditem.price }}</td>
+                            <td>${{ item.price }}</td>
+                            <td>${{ item.amount }}</td>
                           </tr>
                         {% endfor %}
                       </tbody>
@@ -77,36 +60,29 @@
                   <hr class="my-4">
 
                   <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">Sub Total</h5>
-                    <h5 id="subtotal">{{ subtotal }}</h5>
+                    <h5 class="text-uppercase">Subtotal</h5>
+                    <h5>${{ order.subtotal }}</h5>
                   </div>
 
                   <div class="d-flex justify-content-between mb-4">
                     <h5 class="text-uppercase">Tax</h5>
-                    <h5 id="tax">{{ tax }}</h5>
+                    <h5>${{ order.tax }}</h5>
                   </div>
 
                   <div class="d-flex justify-content-between mb-4">
                     <h5 class="text-uppercase">Delivery</h5>
-                    <h5 id="delivery">{{ delivery }}</h5>
+                    <h5>${{ order.delivery }}</h5>
                   </div>
 
                   <div class="d-flex justify-content-between mb-5">
-                    <h5 class="text-uppercase">Total price</h5>
-                    <h5 id="total">{{ total }}</h5>
+                    <h5 class="text-uppercase">Total Price</h5>
+                    <h5>${{ order.total }}</h5>
                   </div>
-
-                  <!-- Order form -->
-                  <form action="{% url 'payment' %}" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="order_number" value="{{ order.order_number }}">
-                    <input type="hidden" name="status" value="Completed">
-                    <button type="submit" class="btn btn-dark btn-block btn-lg">Place Order</button>
-                  </form>
-
+                </div>
+                <div class="d-flex justify-content-between mb-5" style="margin-left:50px;">
+                <i class="fa fa-check-circle" style="font-size:100px;color:green"></i>
                 </div>
               </div>
-
             </div>
           </div>
         </div>

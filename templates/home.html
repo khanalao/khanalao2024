@@ -1,77 +1,143 @@
-
-
 {% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
-<!-- Main Content -->
+
 <style>
-  /* General Styles */
-  .banner-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-  .form-control, .btn {
-    border-radius: 5px;
-  }
-  .form-control {
-    padding: 15px;
-    border: 1px solid #ccc;
-  }
-  .btn {
-    padding: 12px 20px;
-    font-size: 1rem;
-    border: none;
-  }
-  .card {
-    border-radius: 10px;
-    overflow: hidden;
+  .restaurant-card {
+    height: 100%;
+    margin-bottom: 15px;
   }
   .card-img-top {
     height: 200px;
     object-fit: cover;
   }
-  .carousel-control-prev-icon, .carousel-control-next-icon {
-    background-color: rgba(0,0,0,0.5);
-    border-radius: 50%;
+
+<!--  @media (max-width: 393px) {-->
+<!--    .container, .container-fluid {-->
+<!--      padding-left: 10px;-->
+<!--      padding-right: 10px;-->
+<!--    }-->
+
+<!--    h1, h2, h3, h4, h5, h6 {-->
+<!--      font-size: 1rem;-->
+<!--    }-->
+
+<!--    .carousel-item {-->
+<!--      text-align: center;-->
+<!--    }-->
+
+<!--    .card {-->
+<!--      margin-bottom: 20px;-->
+<!--    }-->
+
+<!--    .card-img-top {-->
+<!--      height: auto;-->
+<!--    }-->
+
+<!--    .card-body {-->
+<!--      padding: 10px;-->
+<!--    }-->
+
+<!--    .badge {-->
+<!--      font-size: 0.8rem;-->
+<!--      padding: 5px 10px;-->
+<!--    }-->
+
+<!--    .btn {-->
+<!--      padding: 8px 12px;-->
+<!--      font-size: 0.9rem;-->
+<!--    }-->
+
+<!--    #home img {-->
+<!--      width: 100%;-->
+<!--      height: auto;-->
+<!--    }-->
+
+<!--    .flex-center {-->
+<!--      justify-content: center;-->
+<!--    }-->
+
+<!--    .row {-->
+<!--      margin-left: 0;-->
+<!--      margin-right: 0;-->
+<!--    }-->
+<!--  }-->
+
+<!--@media (max-width: 393px) {-->
+<!--  .carousel-item .row {-->
+<!--    display: flex;-->
+<!--    flex-wrap: wrap;-->
+<!--  }-->
+
+<!--  /* Adjust the category cards to fit in two rows */-->
+<!--  .carousel-item .col-sm-6,-->
+<!--  .carousel-item .col-md-4,-->
+<!--  .carousel-item .col-xl {-->
+<!--    flex: 0 0 20%; /* Makes each item take up 50% of the row width */-->
+<!--    max-width: 50%;-->
+<!--  }-->
+<!--}-->
+
+@media (max-width: 393px) {
+  /* Adjust the category cards to fit in two rows */
+  .carousel-item .col-sm-6,
+  .carousel-item .col-md-4,
+  .carousel-item .col-xl {
+    flex: 0 0 50%; /* Makes each item take up 50% of the row width */
+    max-width: 50%;
   }
-  .testimonial-card {
-    transition: transform 0.3s;
+  .carousel-item .row {
+    display: flex;
+    flex-wrap: wrap;
   }
-  .testimonial-card:hover {
-    transform: scale(1.05);
-  }
-  .text-primary {
-    color: #007bff;
-  }
-  .text-danger {
-    color: #dc3545;
-  }
+
+.carousel-item {
+    padding: 10px;
+    margin: 10px;
+    }
+
+    .img-fluid {
+     width: 100%;
+     max-width:100%;
+     height: auto;
+    }
+
+    .col-sm-6.col-md-3{
+        width: 50%;
+    }
+    .col-sm-6.col-md-3.mb-6{
+        margin-bottom: 10px;
+    }
+
+    }
 </style>
 
 <section class="py-5 overflow-hidden" id="home">
   <div class="container">
-    <!-- Banner Image -->
-    <div class="row">
+    <div class="row flex-center">
+      <!-- Banner Image -->
       <div class="col-12">
-        <img class="banner-image img-fluid" src="{% static 'img/banner.jpeg' %}" alt="banner" />
+        <img class="img-fluid" src="{% static 'img/banner.jpeg' %}" alt="banner" />
       </div>
-    </div>
 
-    <!-- Find Food Section -->
-    <div class="row mt-4">
-      <div class="col-md-7 col-lg-6 mx-auto">
-        <div class="card">
+      <!-- Find Food Section -->
+      <div class="col-md-7 col-lg-6 py-4 text-md-start text-center mx-auto">
+        <div class="card w-100">
           <div class="card-body">
             <form class="row gx-2 gy-2 align-items-center">
               <div class="col">
-                <div class="input-group">
-                  <input class="form-control" id="inputDelivery" type="text" placeholder="Enter your delivery address" />
+                <div class="input-group-icon">
+                  <i class="fas fa-map-marker-alt text-danger input-box-icon"></i>
+                  <label class="visually-hidden" for="inputDelivery">Address</label>
+                  <input class="form-control input-box form-foodwagon-control" id="inputDelivery" type="text" placeholder="Enter Your Address" />
                 </div>
               </div>
-              <div class="col-auto">
-                <button class="btn btn-danger" type="submit">Find Food</button>
+              <div class="d-grid gap-3 col-sm-auto">
+<!--                <button class="btn btn-danger" type="submit">Find Food</button>-->
+                <a href="{% url 'login'%}">
+                            <button class="btn btn-danger" type="button"><i class="fas fa-user me-1"></i>Login</button>
+                        </a>
               </div>
             </form>
           </div>
@@ -81,256 +147,179 @@
   </div>
 </section>
 
-<section class="py-8">
-  <div class="container">
-    <!-- Search by Food -->
-    <div class="row align-items-center mb-6">
-      <div class="col-lg-7 text-center text-lg-start">
-        <h5 class="fw-bold fs-3 fs-lg-5">Search by Food</h5>
-      </div>
-      <div class="col-lg-4 text-lg-end text-center">
-        <a class="btn btn-primary" href="#" role="button">VIEW ALL <i class="fas fa-chevron-right ms-2"></i></a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="carousel slide" id="carouselSearchByFood" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <!-- Carousel items -->
-            <div class="row flex-center">
-                <div class="carousel-inner">
-                  <div class="carousel-item active" data-bs-interval="10000">
-                    <div class="row h-100 align-items-center">
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="{% static 'img/gallery/search-pizza.png' %}" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">pizza</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="{% static 'img/gallery/burger.png' %}" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="{% static 'img/gallery/noodles.png' %}" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="{% static 'img/gallery/sub-sandwich.png' %}" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-sandwiches</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="{% static 'img/gallery/chowmein.png' %}" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="{% static 'img/gallery/steak.png' %}" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h5>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="carousel-item" data-bs-interval="5000">
-                    <div class="row h-100 align-items-center">
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="{% static 'img/gallery/search-pizza.png' %}" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">pizza</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/burger.png" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/noodles.png" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/sub-sandwich.png" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-sandwiches</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/chowmein.png" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/steak.png" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h5>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="carousel-item" data-bs-interval="3000">
-                    <div class="row h-100 align-items-center">
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/search-pizza.png" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">pizza</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/burger.png" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/noodles.png" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/sub-sandwich.png" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-sandwiches</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/chowmein.png" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/steak.png" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h5>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="row h-100 align-items-center">
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/search-pizza.png" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">pizza</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/burger.png" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/noodles.png" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
-                        <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/sub-sandwich.png" alt="..." />
-                          <div class="card-body ps-0">
-                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-sandwiches</h5>
-                          </div>
-                        </div>
-            <!-- Repeat carousel items with different images and text -->
+<section class="py-6 overflow-hidden" style="padding-top: 0rem !important;">
+
+        <div class="container mb-0">
+          <div class="row flex-center mb-2">
+            <div class="col-lg-7">
+              <h5 class="fw-bold fs-3 fs-lg-5 lh-sm text-center text-lg-start">Search by Food</h5>
+            </div>
+            <div class="col-lg-4 text-lg-end text-center"><a class="btn btn-lg text-800 me-2" href="#" role="button">VIEW ALL <i class="fas fa-chevron-right ms-2"></i></a></div>
+            <div class="col-lg-auto position-relative">
+              <button class="carousel-control-prev s-icon-prev carousel-icon" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="prev"><span class="carousel-control-prev-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
+              <button class="carousel-control-next s-icon-next carousel-icon" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="next"><span class="carousel-control-next-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>
+            </div>
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+          <div class="row flex-center">
+            <div class="col-12">
+              <div class="carousel slide" id="carouselSearchByFood" data-bs-touch="false" data-bs-interval="false">
+
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    <!-- First slide (active) -->
+    <div class="carousel-item active">
+      <div class="row">
+        <div class="col-6">
+          <div class="card card-span h-100 rounded-circle">
+            <img class="img-fluid rounded-circle" src="{% static 'img/gallery/search-pizza.png' %}" alt="Pizza" />
+            <div class="card-body ps-0">
+              <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Pizza</h5>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
+        <div class="col-6">
+          <div class="card card-span h-100 rounded-circle">
+            <img class="img-fluid rounded-circle" src="{% static 'img/gallery/burger.png' %}" alt="Burger" />
+            <div class="card-body ps-0">
+              <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h5>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- Second slide -->
+    <div class="carousel-item">
+      <div class="row">
+        <div class="col-6">
+          <div class="card card-span h-100 rounded-circle">
+            <img class="img-fluid rounded-circle" src="{% static 'img/gallery/noodles.png' %}" alt="Salad" />
+            <div class="card-body ps-0">
+              <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="card card-span h-100 rounded-circle">
+            <img class="img-fluid rounded-circle" src="{% static 'img/gallery/sub-sandwich.png' %}" alt="Sushi" />
+            <div class="card-body ps-0">
+              <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-Sandwich</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Add more slides in the same way -->
   </div>
 
-</section>
+  <div>
 
-<section id="testimonial">
-  <div class="container">
-    <div class="row text-center mb-6">
-      <div class="col-lg-7 mx-auto">
-        <h5 class="fw-bold fs-3">Featured Restaurants</h5>
-      </div>
-    </div>
-    <div class="row gx-4 gy-4">
-      {% for r in rest %}
-      {% if forloop.counter <= 8 %}
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="card testimonial-card">
-          {% if r.user_profile.profile_picture %}
-          <img class="card-img-top img-fluid" src="{{ r.user_profile.profile_picture.url }}" alt="{{ r.vendor_name }}" />
-          {% else %}
-          <img class="card-img-top img-fluid" src="{% static 'img/logo.png' %}" alt="Default Image" />
-          {% endif %}
-          <div class="card-body">
-            <a href="{% url 'rest_details' r.vendor_slug %}">
-              <h5 class="mb-0 fw-bold">{{ r.vendor_name }}</h5>
-            </a>
-            <span class="text-primary"><i class="fas fa-star"></i> 46 Reviews</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <span class="badge bg-soft-danger p-2">Opens Tomorrow</span>
-        </div>
+        </div><!-- end of .container-->
+
+      </section>
+
+
+
+<section id="testimonial" style="padding-top: 0rem;">
+  <div class="container">
+    <div class="row h-100">
+      <div class="col-lg-7 mx-auto text-center mb-3">
+        <h5 class="fw-bold fs-3 fs-lg-5 lh-sm">Featured Restaurants</h5>
       </div>
-      {% endif %}
-      {% endfor %}
+
+        <div class="col-lg-auto position-relative mb-4">
+              <button class="carousel-control-prev s-icon-prev carousel-icon" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="prev"><span class="carousel-control-prev-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
+              <button class="carousel-control-next s-icon-next carousel-icon" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="next"><span class="carousel-control-next-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>
+            </div>
     </div>
-    <div class="text-center mt-5">
-      <a class="btn btn-lg btn-primary" href="#!">View All <i class="fas fa-chevron-right ms-2"></i></a>
+    <!-- Carousel controls -->
+
+
+    <!-- Carousel -->
+    <div id="restaurantCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        {% for r in rest %}
+        {% if forloop.counter0|divisibleby:2 %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <div class="row gx-4 gy-4">
+        {% endif %}
+
+          <!-- Restaurant Card -->
+          <div class="col-sm-6 col-md-4 col-lg-3 restaurant-card">
+            <div class="card h-100 text-white rounded-3">
+              {% if r.user_profile.profile_picture %}
+              <img class="card-img-top img-fluid" src="{{ r.user_profile.profile_picture.url }}" alt="{{ r.vendor_name }}" />
+              {% else %}
+              <img class="card-img-top img-fluid rounded-3" src="{% static 'img/logo.png' %}" alt="{{ r.vendor_name }}" />
+              {% endif %}
+              <div class="card-body ps-0">
+                <div class="flex-1 ms-3">
+                  <a href="{% url 'rest_details' r.vendor_slug %}">
+                    <h5 class="mb-0 fw-bold text-1000">{{ r.vendor_name }}</h5>
+                  </a>
+                  <span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span>
+                  <span class="mb-0 text-primary">46</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        {% if forloop.counter0|add:1|divisibleby:2 or forloop.last %}
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+<div class="col-lg-4 text-lg-end text-center"><a class="btn btn-danger text-800 me-2" href="{% url 'marketplace'%}" role="button">VIEW ALL RESTAURANTS <i class="fas fa-chevron-right ms-2"></i></a></div>
+
     </div>
   </div>
 </section>
+
 
 <section class="py-0 bg-primary-gradient">
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-xl-9 text-center">
-        <h1 class="fw-bold mb-4 text-black">Ready to order with the best deals?</h1>
-        <a class="btn btn-danger" href="{% url 'marketplace' %}">Proceed to Order <i class="fas fa-chevron-right ms-2"></i></a>
+    <div class="row justify-content-center g-0">
+      <div class="col-xl-9">
+        <div class="col-lg-6 text-center mx-auto mb-3 mb-md-5 mt-4">
+          <h5 class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6">How does it work</h5>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-md-3 mb-6">
+            <div class="text-center">
+              <img class="shadow-icon" src="{% static 'img/gallery/location.png' %}" height="112" alt="Select location" />
+              <h5 class="mt-4 fw-bold">Select location</h5>
+              <p class="mb-md-0">Delivered in Nath Dwara</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3 mb-6">
+            <div class="text-center">
+              <img class="shadow-icon" src="{% static 'img/gallery/order.png' %}" height="112" alt="Choose order" />
+              <h5 class="mt-4 fw-bold">Choose order</h5>
+              <p class="mb-md-0">Check over hundreds of menus to pick your favorite food</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3 mb-6">
+            <div class="text-center">
+              <img class="shadow-icon" src="{% static 'img/gallery/pay.png' %}" height="112" alt="Payment" />
+              <h5 class="mt-4 fw-bold">Payment</h5>
+              <p class="mb-md-0">Cash on Delivery</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3 mb-6">
+            <div class="text-center">
+              <img class="shadow-icon" src="{% static 'img/gallery/meals.png' %}" height="112" alt="Delivery" />
+              <h5 class="mt-4 fw-bold">Delivery</h5>
+              <p class="mb-md-0">Get your food delivered straight to your door</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
 {% endblock %}
