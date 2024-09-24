@@ -12,7 +12,7 @@ from orders.models import Order, OrderedFood
 @login_required(login_url='login')
 @user_passes_test(check_role_customer)
 def cprofile(request):
-    profile = get_object_or_404(UserProfile, user=request.user)
+    profile = get_object_or_404(UserProfile,user=request.user)
     if request.method == 'POST':
         profile_form = UserProfileForm(request.POST, request.FILES, instance=profile)
         user_form = UserInfoForm(request.POST, instance=request.user)

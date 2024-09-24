@@ -18,6 +18,67 @@
 .card-registration .select-arrow {
   top: 13px;
 }
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .card-body img {
+    width: 60px; /* Reduce food item image size */
+    height: auto;
+  }
+
+  /* Ensure the cart details are displayed in one line */
+  .cart-item-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cart-item-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: left;
+    margin-bottom: 20px;
+  }
+
+  .cart-item-container > div {
+    flex: 1 1 45%;
+    text-align: left;
+    margin: 5px 0;
+  }
+
+  .cart-item-container > div img {
+    width: 50px;
+    height: auto;
+  }
+
+  /* Adjustments for very small screens (like mobile) */
+  @media (max-width: 575px) {
+    .cart-item-container {
+      flex-direction: column;
+    }
+
+    .cart-item-container > div {
+      flex: 1 1 100%;
+      text-align: left;
+    }
+  }
+}
+
+/* Smaller text for summary */
+.summary-text {
+  font-size: 0.9rem;
+}
+
+.summary-heading {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Adjust button size */
+.btn-sm-custom {
+  font-size: 0.9rem;
+  padding: 10px 20px;
+}
 </style>
 
 <section class="h-100 h-custom" style="margin-bottom:300px;">
@@ -37,21 +98,21 @@
 
                   {% if cart_items %}
                     {% for item in cart_items %}
-                      <div class="row mb-4 d-flex justify-content-between align-items-center">
-                        <div class="col-md-2 col-lg-2 col-xl-2">
-                          <img src="{{ item.fooditem.image.url }}" class="img-fluid rounded-3" alt="{{ item.fooditem.name }}">
+                      <div class="cart-item-container">
+                        <div>
+                          <img src="{{ item.fooditem.image.url }}" alt="{{ item.fooditem.name }}" class="img-fluid rounded-3">
                         </div>
-                        <div class="col-md-3 col-lg-3 col-xl-3">
+                        <div>
                           <h6 class="">{{ item.fooditem.food_title }}</h6>
                           <h6 class="mb-0 text-muted">{{ item.fooditem.description }}</h6>
                         </div>
-                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                        <div>
                           <h6 class="mb-0">{{ item.quantity }}</h6>
                         </div>
-                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                        <div>
                           <h6 class="mb-0">{{ item.fooditem.price }}</h6>
                         </div>
-                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                        <div class="text-end">
                           <a href="" class="text-muted delete_cart" data-id="{{item.id}}" data-url="{% url 'delete_cart' item.id %}"><i class="fas fa-times"></i></a>
                         </div>
                       </div>
@@ -61,38 +122,36 @@
                     <p class="text-center">Your cart is empty.</p>
                   {% endif %}
                 </div>
-<!--                <div class="pt-5">-->
-<!--                  <h6 class="mb-0"><a href="" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>-->
-<!--                </div>-->
               </div>
               <div class="col-lg-4 bg-body-tertiary">
                 <div class="p-5">
-                  <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                  <h3 class="summary-heading mb-5 mt-2 pt-1">Summary</h3>
                   <hr class="my-4">
 
                   <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">Sub Total</h5>
-                    <h5 id="subtotal">{{ subtotal }}</h5>
-                  </div>
-
-                   <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">Tax</h5>
-                    <h5 id="tax">{{ tax }}</h5>
+                    <h5 class="summary-text text-uppercase">Sub Total</h5>
+                    <h5 id="subtotal" class="summary-text">{{ subtotal }}</h5>
                   </div>
 
                   <div class="d-flex justify-content-between mb-4">
-                  <h5 class="text-uppercase">Delivery</h5>
-                    <h5 id="delivery">{{ delivery }}</h5>
+                    <h5 class="summary-text text-uppercase">Tax</h5>
+                    <h5 id="tax" class="summary-text">{{ tax }}</h5>
+                  </div>
+
+                  <div class="d-flex justify-content-between mb-4">
+                    <h5 class="summary-text text-uppercase">Delivery</h5>
+                    <h5 id="delivery" class="summary-text">{{ delivery }}</h5>
                   </div>
 
                   <div class="d-flex justify-content-between mb-5">
-                    <h5 class="text-uppercase">Total price</h5>
-                    <h5 id="total">{{ total }}</h5>
+                    <h5 class="summary-text text-uppercase">Total price</h5>
+                    <h5 id="total" class="summary-text">{{ total }}</h5>
                   </div>
 
-                  <a href="{% url 'checkout' %}"><button type="submit" class="btn btn-dark btn-block btn-lg">
-                    Proceed to CheckOut
-                  </button>
+                  <a href="{% url 'checkout' %}">
+                    <button type="submit" class="btn btn-dark btn-block btn-lg btn-sm-custom">
+                      Proceed to Checkout
+                    </button>
                   </a>
                 </div>
               </div>
@@ -106,8 +165,4 @@
 
 <script src="{% static 'js/custom.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!--<script src="https://polyfill.io/v3/polyfill.min.js"></script>-->
-
-
-
 {% endblock %}

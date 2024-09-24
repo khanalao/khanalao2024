@@ -1,157 +1,121 @@
 <style>
-  .sidebar {
-    position: fixed;
-    width: 250px;
-    height: 100vh;
-    background-color: #f8f9fa;
-    z-index: 999; /* Ensures it stays above the main content */
-    transition: all 0.3s ease-in-out
-  }
-  /* Specific styling for 393x714 screen size */
-  @media (max-width: 393px) and (max-height: 714px) {
-    .content-wrapper h2 {
-      font-size: 1.25rem;
+    body {
+        margin: 0;
     }
 
-    .content-wrapper h5 {
-      font-size: 0.875rem;
+    .sidebar {
+        position: fixed;
+        width: 150px;
+        background-color: #f8f9fa;
+        z-index: 999; /* Ensures it stays above the main content */
+        left: -250px; /* Start off-screen */
+        transition: left 0.3s ease-in-out; /* Smooth slide in/out */
     }
 
-    .card-body h2 {
-      font-size: 1.25rem;
+    .sidebar.visible {
+        left: 0; /* Slide in */
     }
 
-    .card-body h5 {
-      font-size: 1rem;
-    }
-
-    .table td {
-      font-size: 0.75rem;
-    }
-
-    .table .btn {
-      padding: 4px 8px;
-      font-size: 0.75rem;
-    }
-
-    .btn {
-      font-size: 0.75rem;
-      padding: 6px 12px;
-    }
-
-    .dashboard-card {
-      padding: 10px;
-    }
-  }
-  @media (max-width: 393px) {
-    .content-wrapper h2 {
-        font-size: 1.1rem;
-    }
-
-    .content-wrapper h5 {
-        font-size: 0.75rem;
-    }
-
-    .card-body h2 {
-        font-size: 1.1rem;
-    }
-
-    .card-body h5 {
-        font-size: 0.875rem;
-    }
-
-    .table td {
-        font-size: 0.7rem;
-    }
-
-    .table .btn {
-        padding: 4px 6px;
-        font-size: 0.7rem;
-    }
-
-    .btn {
-        font-size: 0.75rem;
-        padding: 5px 10px;
-    }
-
-    .dashboard-card {
-        padding: 8px;
-    }
-     .sidebar {
-        width: 60px;
-    }
-
-    .main-panel {
-        margin-left: 60px;
-    }
-
-    .sidebar .nav-link {
-        font-size: 0.7rem;
-    }
-
-    .sidebar .nav-link i {
-        font-size: 1.2rem;
-    }
     .toggle-sidebar {
-        display: block;
+        position: fixed;
+        top: 60px;
+        left: 10px;
+        z-index: 1000;
+        font-size: 1rem;
+        cursor: pointer;
+        display: block; /* Always visible */
+        background: #ff3300; /* Toggle button background */
+        color: white; /* Toggle button color */
+        border: none;
+        border-radius: 5px;
+        padding: 10px; /* Button padding */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        transition: background 0.3s;
     }
-    }
-    .toggle-sidebar {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 1000;
-    font-size: 1.5rem;
-    cursor: pointer;
-    display: none; /* Hide this by default */
-}
-</style>
-</style>
-<nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color: white; ">
-          <ul class="nav" style="margin-top: 50px;">
 
-            <li class="nav-item {% if '/accounts/restDashboard/' == request.path or '/accounts/restaurant/' == request.path %}active{% endif %}">
-              <a class="nav-link" href="{% url 'restDashboard'%}">
+    .toggle-sidebar:hover {
+        background: #e62e00; /* Darker on hover */
+    }
+
+    /* Specific styling for mobile */
+    @media (max-width: 768px) {
+        .sidebar {
+            width: 250px; /* Width remains the same */
+        }
+        .main-panel {
+            margin-left: 0; /* No margin for main panel */
+        }
+    }
+
+    @media (max-width: 393px) {
+        .sidebar {
+            width: 200px; /* Smaller width for mobile */
+        }
+        .main-panel {
+            margin-left: 0; /* No margin for main panel */
+        }
+    }
+</style>
+
+<button class="toggle-sidebar" id="toggleSidebar">
+    <i class="fas fa-bars"></i> <!-- Icon for the toggle button -->
+</button>
+
+<nav class="sidebar" id="sidebar" style="background-color: white;">
+    <ul class="nav" style="margin-top: 50px;">
+        <li class="nav-item {% if '/accounts/restDashboard/' == request.path or '/accounts/restaurant/' == request.path %}active{% endif %}">
+            <a class="nav-link" href="{% url 'restDashboard' %}">
                 <span class="icon-bg"><i class="fas fa-house-user" style="font-size:20px"></i></span>
                 <span class="menu-title" style="color: black">Dashboard</span>
-              </a>
-            </li>
-            <li class="nav-item {% if 'profile' in request.path %}active{% endif %}">
-                <a class="nav-link" href="{% url 'rprofile'%}">
+            </a>
+        </li>
+        <li class="nav-item {% if 'profile' in request.path %}active{% endif %}">
+            <a class="nav-link" href="{% url 'rprofile' %}">
                 <span class="icon-bg"><i class="fas fa-user-alt" style="font-size:20px"></i></span>
                 <span class="menu-title">My Restaurants</span>
-              </a>
-            </li>
-            <li class="nav-item {% if 'menu-builder' in request.path %}active{% endif %}">
-              <a class="nav-link" href="{% url 'menu_builder' %}">
+            </a>
+        </li>
+        <li class="nav-item {% if 'menu-builder' in request.path %}active{% endif %}">
+            <a class="nav-link" href="{% url 'menu_builder' %}">
                 <span class="icon-bg"><i class="fas fa-pen-nib" style="font-size:20px"></i></span>
                 <span class="menu-title">Menu Builder</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'rest_myorders'%}">
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'rest_myorders' %}">
                 <span class="icon-bg"><i class="fas fa-align-justify" style="font-size:20px"></i></span>
                 <span class="menu-title">Orders</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages/charts/chartjs.html">
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="pages/charts/chartjs.html">
                 <span class="icon-bg"><i class="fas fa-dollar-sign" style="font-size:20px"></i></span>
                 <span class="menu-title">Earnings</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages/tables/basic-table.html">
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="pages/tables/basic-table.html">
                 <span class="icon-bg"><i class="fas fa-book" style="font-size:20px"></i></span>
                 <span class="menu-title">Statement</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                <span class="icon-bg"><i class="fas fa-user-lock" style="font-size:20px"></i></span>
-                <span class="menu-title">Change Password</span>
-              </a>
-            </li>
+            </a>
+        </li>
+<!--        <li class="nav-item">-->
+<!--            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">-->
+<!--                <span class="icon-bg"><i class="fas fa-user-lock" style="font-size:20px"></i></span>-->
+<!--                <span class="menu-title">Change Password</span>-->
+<!--            </a>-->
+<!--        </li>-->
+    </ul>
+</nav>
 
-          </ul>
-        </nav>
+
+
+<script>
+    // Toggle sidebar visibility
+    const toggleButton = document.getElementById('toggleSidebar');
+    const sidebar = document.getElementById('sidebar');
+
+    toggleButton.addEventListener('click', () => {
+        sidebar.classList.toggle('visible'); // Toggle the visible class
+    });
+</script>

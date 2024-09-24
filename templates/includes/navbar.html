@@ -4,7 +4,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-navbar-on-scroll="data-navbar-on-scroll">
         <div class="container">
             <a class="navbar-brand d-inline-flex" href="{% url 'home' %}">
-                <img class="d-inline-block" src="{% static 'img/gallery/logo.svg'%}" alt="logo" style="width: 30px;" />
+                <img class="d-inline-block" src="{% static 'img/gallery/logo.svg' %}" alt="logo" style="width: 30px;" />
                 <span class="text-1000 fs-4 fw-bold ms-2 text-gradient">Khana Lao</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,12 +12,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    {% if user.is_authenticated %}<li class="nav-item">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'marketplace' %}">
                             <button class="btn btn-white shadow-warning text-warning btn-sm" type="button"><i class="fa fa-phone" style="font-size:24px"></i>8769478689</button>
                         </a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'marketplace' %}">
                             <button class="btn btn-white shadow-warning text-warning btn-sm" type="button">Market Place</button>
@@ -30,28 +30,23 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'myAccount'%}">
+                        <a class="nav-link" href="{% url 'myAccount' %}">
                             <button class="btn btn-white shadow-warning text-warning btn-sm" type="button"><i class="fas fa-user me-1"></i>My Account</button>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout'%}">
+                        <a class="nav-link" href="{% url 'logout' %}">
                             <button class="btn btn-white shadow-warning text-warning btn-sm" type="button">Logout</button>
                         </a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'registerUser'%}">
+                        <a class="nav-link" href="{% url 'registerUser' %}">
                             <button class="btn btn-white shadow-warning text-warning btn-sm" type="button"><i class="fas fa-user me-1"></i>Register</button>
                         </a>
                     </li>
                     <li class="nav-item">
-<!--                        <a class="nav-link" href="{% url 'login'%}">-->
-<!--                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button"><i class="fas fa-user me-1"></i>Login</button>-->
-<!--                        </a>-->
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'registerVendor'%}">
+                        <a class="nav-link" href="{% url 'registerVendor' %}">
                             <button class="btn btn-white shadow-warning text-warning btn-sm" type="button"><i class="fas fa-user me-1"></i>Restaurant</button>
                         </a>
                     </li>
@@ -69,7 +64,26 @@
 <script src="{% static 'js/theme.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&amp;display=swap" rel="stylesheet">
+<script>
+    // Toggle the navbar when the toggle button is clicked
+    const navbarToggle = document.querySelector('.navbar-toggler');
+    const navbarContent = document.getElementById('navbarContent');
+
+    navbarToggle.addEventListener('click', () => {
+        navbarContent.classList.toggle('show'); // Use Bootstrap's class to show/hide
+    });
+
+    // Close the navbar when a link is clicked (optional)
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navbarContent.classList.contains('show')) {
+                navbarContent.classList.remove('show'); // Close the navbar
+            }
+        });
+    });
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
     .navbar-brand img {

@@ -1,82 +1,24 @@
 {% extends 'base.html' %}
-{% load static%}
+
 {% block content %}
+
+{% load static %}
 {% include 'includes/alerts.html' %}
 
 <link href="{% static 'css/dashboard.css' %}" rel="stylesheet" />
 <link href="{% static 'css/iconmoon.css' %}" rel="stylesheet" />
-<link href="{% static 'css/custom.css' %}" rel="stylesheet" />
 
 <style>
-  /* General styling adjustments for small screens */
-  .main-panel {
-    padding: 15px 10px;
+
+.content-wrapper {
+  margin-left: 300px;
   }
 
-  .sidebar {
-    position: static;
-    margin-bottom: 20px;
-  }
+  @media (max-width: 767px) {
 
   .content-wrapper {
-    margin-left: 262px;
-  }
-
-  .content-wrapper .row {
-    margin: 0 -10px;
-  }
-
-  .content-wrapper .col-md-12,
-  .content-wrapper .col-lg-6,
-  .content-wrapper .col-sm-6,
-  .content-wrapper .col-xl-4 {
-    padding: 0 10px;
-  }
-
-  .content-wrapper h2 {
-    font-size: 1.5rem;
-    margin-top: 45px;
-    text-align: center;
-  }
-
-  .content-wrapper h5 {
-    font-size: 1rem;
-    text-align: center;
-  }
-
-  .card-body h2 {
-    font-size: 1.5rem;
-  }
-
-  .card-body h5 {
-    font-size: 1.2rem;
-  }
-
-  .card {
-    margin-bottom: 15px;
-    padding: 15px;
-  }
-
-  .table-responsive {
-    overflow-x: auto;
-  }
-
-  .table thead th,
-  .table td {
-    white-space: nowrap;
-    font-size: 0.875rem;
-  }
-
-  .table .btn {
-    padding: 5px 10px;
-    font-size: 0.875rem;
-  }
-
-  /* Specific styling for 393x714 screen size */
-  @media (max-width: 393px) and (max-height: 714px) {
-
-     .content-wrapper {
-    margin-left: -62px;
+    margin-left: -10px;
+    background: white;
   }
     .content-wrapper h2 {
       font-size: 1.25rem;
@@ -86,136 +28,196 @@
       font-size: 0.875rem;
     }
 
-    .card-body h2 {
-      font-size: 1.25rem;
+    .main-panel {
+      padding: 5px;
     }
 
-    .card-body h5 {
-      font-size: 1rem;
+    h2 {
+      font-size: 1.2rem; /* Make the heading smaller */
+      text-align: center;
     }
 
-    .table td {
-      font-size: 0.75rem;
+
+
+    /* Adjust the table layout for mobile */
+    .responsive-table {
+      overflow-x: auto;
+
     }
 
-    .table .btn {
-      padding: 4px 8px;
-      font-size: 0.75rem;
+    .p-5 {
+    padding: 1rem !important;
+}
+
+    table thead {
+      display: none; /* Hide headers for mobile */
     }
 
-    .btn {
-      font-size: 0.75rem;
-      padding: 6px 12px;
+    table tbody tr {
+      display: block;
+      margin-bottom: 10px;
+      border-bottom: 1px solid black;
+      padding-bottom: 5px;
     }
 
-    .dashboard-card {
+    table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    table tbody tr td {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px;
+      font-size: 0.9rem; /* Smaller font size for mobile */
+    }
+
+    table tbody tr td::before {
+      content: attr(data-label); /* Label for mobile view */
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    /* Adjust the summary section for mobile */
+    .col-lg-4 {
       padding: 10px;
+    }
+
+    .fw-bold {
+      font-size: 1.2rem; /* Slightly smaller for mobile */
+    }
+
+    .text-uppercase {
+      font-size: 1rem; /* Adjust font size */
+    }
+
+    .btn-danger {
+      font-size: 0.8rem;
+      padding: 6px;
+    }
+
+    .container-fluid {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .card-registration-2 {
+      margin: 0px;
+    }
+
+    .fa-check-circle {
+      font-size: 80px; /* Adjust icon size for mobile */
+    }
+  }
+
+  /* For screens larger than 767px, ensure good readability */
+  @media (min-width: 768px) {
+    .fa-check-circle {
+      font-size: 100px;
     }
   }
 </style>
 
 <!--Main Section Start-->
-<div class="container-fluid page-body-wrapper" style="margin-top: 60px;">
+<div class="container-fluid page-body-wrapper" style="margin-top: 40px">
   {% include 'includes/r_sidebar.html' %}
-  <div class="main-panel">
+  <div class="main-panel mb-5">
     <div class="content-wrapper">
       {% include 'includes/cover.html' %}
-      <div class="d-xl-flex justify-content-between align-items-start">
-          <h2 class="text-dark font-weight-bold mb-2">Order Details</h2>
-      </div>
-        <div class="row content-wrapper d-xl-flex justify-content-between align-items-start">
-                            <div class="row">
-                              <div class="col-sm-12">
+    </div>
+    <h2 class="text-dark font-weight-bold mb-2 mt-5">Order Details</h2>
 
-    <div class="row d-flex justify-content-center align-items-center h-100 mb-5">
-      <div class="col-12">
-        <div class="card card-registration card-registration-2" style="border-radius: 10px;">
-          <div class="card-body p-0">
-            <div class="row g-0">
-              <!-- Left Side (Order Details) -->
-              <div class="col-lg-8">
-                <div class="p-5">
-                  <div class="d-flex flex-column align-items-start mb-5">
+    <div class="row content-wrapper d-xl-flex justify-content-between align-items-start">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row d-flex justify-content-center align-items-center h-100 mb-5">
+            <div class="col-12">
+              <div class="card card-registration card-registration-2" style="border-radius: 10px;">
+                <div class="card-body p-0">
+                  <div class="row g-0">
+                    <!-- Left Side (Order Details) -->
+                    <div class="col-lg-8">
+                      <div class="">
+                        <div class="d-flex flex-column align-items-start mb-5">
+                          <div style="margin-top: 0px;">
+                            <p style="color:black; font-size:16px;">
+                              <strong>Order Number:</strong> {{ order.order_number }} <br>
+                              <strong>Name:</strong> {{ order.name }} <br>
+                              <strong>Address:</strong> {{ order.address }}, {{ order.city }} - {{ order.pin_code }} <br>
+                              {{ order.state }}, {{ order.country }} <br>
+                              <strong>Phone:</strong> {{ order.phone }} <br>
+                            </p>
+                          </div>
+                        </div>
 
-                    <div style="margin-top: 0px;">
-                      <p style="color:black; font-size:20px;">
-                        <strong>Order Number:</strong> {{ order.order_number }} <br>
-                        <strong>Name:</strong> {{ order.name }} <br>
-                        <strong>Address:</strong> {{ order.address }}, {{ order.city }} - {{ order.pin_code }} <br>
-                        {{ order.state }}, {{ order.country }} <br>
-                        <strong>Phone:</strong> {{ order.phone }} <br>
-                      </p>
+                        <!-- Items Table -->
+                        <div>
+                          <table class="table table-striped responsive-table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Sr. No.</th>
+                                <th scope="col">Item Name</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Total</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for item in ordered_food %}
+                              <tr>
+                                <th scope="row" data-label="Sr. No.">{{ forloop.counter }}</th>
+                                <td data-label="Item Name">{{ item.fooditem.food_title }}</td>
+                                <td data-label="Quantity">{{ item.quantity }}</td>
+                                <td data-label="Price">${{ item.price }}</td>
+                                <td data-label="Total">${{ item.amount }}</td>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Right Side (Summary) -->
+                    <div class="col-lg-4 bg-body-tertiary">
+                      <div class="p-5">
+                        <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                        <hr class="my-4">
+
+                        <div class="d-flex justify-content-between mb-4">
+                          <h5 class="text-uppercase">Subtotal</h5>
+                          <h5>${{ order.subtotal }}</h5>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-4">
+                          <h5 class="text-uppercase">Tax</h5>
+                          <h5>${{ order.tax }}</h5>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-4">
+                          <h5 class="text-uppercase">Delivery</h5>
+                          <h5>${{ order.delivery }}</h5>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-5">
+                          <h5 class="text-uppercase">Total Price</h5>
+                          <h5>${{ order.total }}</h5>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-between mb-5" style="margin-left:50px;">
+                        <i class="fa fa-check-circle" style="font-size:80px;color:green"></i>
+                      </div>
                     </div>
                   </div>
-
-                  <!-- Items Table -->
-                  <div>
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th scope="col">Sr. No.</th>
-                          <th scope="col">Item Name</th>
-                          <th scope="col">Quantity</th>
-                          <th scope="col">Price</th>
-                          <th scope="col">Total</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {% for item in ordered_food %}
-                          <tr>
-                            <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ item.fooditem.food_title }}</td>
-                            <td>{{ item.quantity }}</td>
-                            <td>${{ item.price }}</td>
-                            <td>${{ item.amount }}</td>
-                          </tr>
-                        {% endfor %}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Right Side (Summary) -->
-              <div class="col-lg-4 bg-body-tertiary">
-                <div class="p-5">
-                  <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
-                  <hr class="my-4">
-
-                  <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">Subtotal</h5>
-                    <h5>${{ order.subtotal }}</h5>
-                  </div>
-
-                  <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">Tax</h5>
-                    <h5>${{ order.tax }}</h5>
-                  </div>
-
-                  <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">Delivery</h5>
-                    <h5>${{ order.delivery }}</h5>
-                  </div>
-
-                  <div class="d-flex justify-content-between mb-5">
-                    <h5 class="text-uppercase">Total Price</h5>
-                    <h5>${{ order.total }}</h5>
-                  </div>
-                </div>
-                <div class="d-flex justify-content-between mb-5" style="margin-left:50px;">
-                <i class="fa fa-check-circle" style="font-size:100px;color:green"></i>
                 </div>
               </div>
             </div>
           </div>
         </div>
-    </div>
-  </div>
-</div>
-                            </div>
-        </div>
+      </div>
     </div>
   </div>
 </div>
 
-{%endblock%}
+<!-- Main Section End -->
+
+{% endblock %}

@@ -8,7 +8,11 @@
 <link href="{% static 'css/iconmoon.css' %}" rel="stylesheet" />
 <link href="{% static 'css/registrationstyle.css' %}" rel="stylesheet" />
 
-
+<style>
+  .thumbnail {
+  height: 100px;
+  width: 100px;
+</style>
 
 
 
@@ -38,6 +42,20 @@
         <div class="user-details">
           <div class="text-holder mb-4 col-lg-12 col-md-12">
             <span class="details">Update Profile Picture</span>
+            <ul class="foodbakery-gallery-holder mt-2">
+              <li class="gal-img">
+                <div class="drag-list">
+                  <div class="item-thumb">
+                    {% if profile.profile_picture %}
+                    <img class="thumbnail" src="{{profile.profile_picture.url}}" alt="Profile Picture">
+                    {% else %}
+                    <img class="thumbnail" src="{% static 'images/default-profile.png' %}" alt="Profile Picture">
+                    {% endif %}
+                  </div>
+                </div>
+              </li>
+            </ul>
+
             <div class="upload-gallery">
               {{profile_form.profile_picture}}
             </div>
@@ -45,6 +63,19 @@
 
           <div class="text-holder mb-4 col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <span class="details">Cover photo</span>
+            <ul class="foodbakery-gallery-holder mt-2">
+              <li class="gal-img">
+                <div class="drag-list">
+                  <div class="item-thumb">
+                    {% if profile.profile_picture %}
+                    <img class="thumbnail" src="{{profile.cover_pic.url}}" alt="Profile Picture">
+                    {% else %}
+                    <img class="thumbnail" src="{% static 'images/default-profile.png' %}" alt="Profile Picture">
+                    {% endif %}
+                  </div>
+                </div>
+              </li>
+            </ul>
           <div class="upload-gallery">
             {{ profile_form.cover_pic}}
         </div>

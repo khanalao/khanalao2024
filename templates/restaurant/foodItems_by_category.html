@@ -8,14 +8,96 @@
 <link href="{% static 'css/iconmoon.css' %}" rel="stylesheet" />
 <link href="{% static 'css/registrationstyle.css' %}" rel="stylesheet" />
 
+<style>
 
+    .content-wrapper {
+    margin-left: 300px;
+    }
+
+    .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+
+    @media (max-width: 393px) and (max-height: 714px) {
+
+     .content-wrapper {
+    margin-left: -62px;
+    background: white;
+  }
+    .content-wrapper h2 {
+      font-size: 1.25rem;
+    }
+
+    .content-wrapper h5 {
+      font-size: 0.875rem;
+    }
+
+    .cont {
+     width: 120%;
+    }
+
+    .content h4{
+        font-size: 1rem;
+        margin-top: 20px;
+        }
+
+    .content h4 text-uppercase{
+        font-size: 1rem;
+        }
+
+    .table-hover thead {
+      display: none; /* Hide the table header */
+    }
+
+    .table-hover tbody, .table-hover tr, .table-hover td {
+      display: block;
+      width: 100%;
+    }
+
+    .table-hover tr {
+      margin-bottom: 15px; /* Add spacing between rows */
+    }
+
+    .table-hover td {
+      padding-left: 8%;
+      position: relative;
+    }
+
+    .table-hover td::before {
+      content: attr(data-label); /* Add data-label attribute for mobile view */
+      position: absolute;
+      left: 0;
+      width: 50%;
+      padding-left: 15px;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .table tbody tr td {
+        justify-content: left;
+    }
+
+    /* Adjust font sizes for mobile */
+    .fs-6 {
+      font-size: 0.9rem;
+    }
+
+    .fw-bold {
+      font-weight: bold;
+    }
+
+ }
+</style>
 
 
 
 <!--Main Section Start-->
       <div class="container-fluid page-body-wrapper" style="margin-top: 18px">
         {% include 'includes/r_sidebar.html'%}
-        <div class="main-panel" style="margin-left:250px;">
+        <div class="main-panel">
           <div class="content-wrapper">
             {% include 'includes/cover.html' %}
             <div class="d-xl-flex justify-content-between align-items-start">

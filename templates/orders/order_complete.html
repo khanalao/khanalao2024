@@ -1,8 +1,55 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="h-100 h-custom" style="margin-bottom:300px;">
-  <div class="container py-5 h-100">
+<style>
+/* Custom adjustments to remove extra spaces */
+@media (max-width: 768px) {
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-striped {
+    font-size: 0.85rem;
+  }
+
+  /* Adjust margin and padding */
+  .table td, .table th {
+    padding: 0.5rem;
+  }
+
+  .summary-heading {
+    font-size: 1.1rem;
+  }
+
+  .summary-text {
+    font-size: 0.9rem;
+  }
+
+  .btn-dark {
+    font-size: 0.85rem;
+    padding: 8px 15px;
+  }
+
+  .mb-5 {
+    margin-bottom: 1.2rem !important;
+  }
+
+  .mt-2, .pt-1 {
+    margin-top: 0.5rem !important;
+    padding-top: 0.3rem !important;
+  }
+}
+
+.table th, .table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+</style>
+
+<section class="h-100 h-custom" style="margin-bottom: 60px;">
+  <div class="container py-4 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12">
         <div class="card card-registration card-registration-2" style="border-radius: 15px;">
@@ -10,11 +57,11 @@
             <div class="row g-0">
               <!-- Left Side (Order Details) -->
               <div class="col-lg-8">
-                <div class="p-5">
-                  <div class="d-flex flex-column align-items-start mb-5">
-                    <h2 class="fw-bold mb-0">Thank You for Ordering with us !!</h2>
-                    <h1 class="fw-bold mb-0">Order Details</h1>
-                    <div style="margin-top: 20px;">
+                <div class="p-4">
+                  <div class="d-flex flex-column align-items-start mb-4">
+                    <h2 class="fw-bold mb-2">Thank You for Ordering with Us!</h2>
+                    <h3 class="fw-bold mb-0">Order Details</h3>
+                    <div style="margin-top: 15px;">
                       <p>
                         <strong>Order Number:</strong> {{ order.order_number }} <br>
                         <strong>Name:</strong> {{ order.name }} <br>
@@ -26,7 +73,7 @@
                   </div>
 
                   <!-- Items Table -->
-                  <div>
+                  <div class="table-responsive">
                     <table class="table table-striped">
                       <thead>
                         <tr>
@@ -55,32 +102,34 @@
 
               <!-- Right Side (Summary) -->
               <div class="col-lg-4 bg-body-tertiary">
-                <div class="p-5">
-                  <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
-                  <hr class="my-4">
+                <div class="p-4">
+                  <h3 class="summary-heading fw-bold mb-4 mt-1 pt-1">Summary</h3>
+                  <hr class="my-3">
 
-                  <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">Subtotal</h5>
-                    <h5>${{ order.subtotal }}</h5>
+                  <div class="d-flex justify-content-between mb-3">
+                    <h6 class="summary-text text-uppercase">Subtotal</h6>
+                    <h6 class="summary-text">${{ order.subtotal }}</h6>
+                  </div>
+
+                  <div class="d-flex justify-content-between mb-3">
+                    <h6 class="summary-text text-uppercase">Tax</h6>
+                    <h6 class="summary-text">${{ order.tax }}</h6>
+                  </div>
+
+                  <div class="d-flex justify-content-between mb-3">
+                    <h6 class="summary-text text-uppercase">Delivery</h6>
+                    <h6 class="summary-text">${{ order.delivery }}</h6>
                   </div>
 
                   <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">Tax</h5>
-                    <h5>${{ order.tax }}</h5>
-                  </div>
-
-                  <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">Delivery</h5>
-                    <h5>${{ order.delivery }}</h5>
-                  </div>
-
-                  <div class="d-flex justify-content-between mb-5">
-                    <h5 class="text-uppercase">Total Price</h5>
-                    <h5>${{ order.total }}</h5>
+                    <h6 class="summary-text text-uppercase">Total Price</h6>
+                    <h6 class="summary-text">${{ order.total }}</h6>
                   </div>
                 </div>
-                <div class="d-flex justify-content-between mb-5" style="margin-left:50px;">
-                <i class="fa fa-check-circle" style="font-size:100px;color:green"></i>
+
+                <!-- Checkmark Icon -->
+                <div class="d-flex justify-content-center my-4">
+                  <i class="fa fa-check-circle" style="font-size: 100px; color: green;"></i>
                 </div>
               </div>
             </div>

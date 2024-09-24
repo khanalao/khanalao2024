@@ -8,8 +8,31 @@
 <link href="{% static 'css/iconmoon.css' %}" rel="stylesheet" />
 <link href="{% static 'css/registrationstyle.css' %}" rel="stylesheet" />
 
+<style>
+     .content-wrapper {
+    margin-left: 300px;
+    }
 
+    @media (max-width: 393px) and (max-height: 714px) {
 
+     .content-wrapper {
+    margin-left: -62px;
+    background: white;
+  }
+    .content-wrapper h2 {
+      font-size: 1.25rem;
+    }
+
+    .content-wrapper h5 {
+      font-size: 0.875rem;
+    }
+
+    .cont {
+     width: 300px;
+    }
+
+ }
+</style>
 
 
 <!--Main Section Start-->
@@ -50,13 +73,13 @@
             <span class="details">Category Name</span>
             {{form.cat_name}}
           </div>
-          <div class="input-box" style="width: 100%;">
+          <div class="input-box description-box" style="width: 100%;">
             <span class="details">Description</span>
             {{form.description}}
           </div>
-
+            <div>
           <button class="btn btn-danger btn-lg" type="submit">Update</button>
-
+            </div>
         </div>
         </form>
     </div>

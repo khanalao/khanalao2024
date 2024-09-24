@@ -3,109 +3,229 @@
 {% block content %}
 
 <style>
-        .category-nav {
+    .category-nav {
+        position: fixed;
+        top: 60px;
+        background-color: #f2f2f2;
+        height: calc(100% - 60px);
+        overflow-y: auto;
+    }
+
+    .category-item {
+        cursor: pointer;
+    }
+
+    .category-item:hover {
+        background-color: #ff3300;
+        color: black;
+    }
+
+    .menu-item {
+        margin-bottom: 20px;
+    }
+
+    .menu-item img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .menu-item .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .menu-item .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-item {
+        width: 31%; /* Adjust this width to fit three cards on larger screens if needed */
+        margin-right: 1.5%; /* Add spacing between cards */
+    }
+
+    .menu-item:nth-child(3n) {
+        margin-right: 0; /* Remove margin for every third item to align properly */
+    }
+
+    .sidebar-sticky {
+        position: fixed;
+        top: 130px;
+        background-color: #f2f2f2;
+        height: calc(100% - 60px);
+        overflow-y: auto;
+        transition: transform 0.3s ease;
+        transform: translateX(-100%); /* Hidden by default */
+        z-index: 1050;
+    }
+
+    .sidebar-sticky.active {
+        transform: translateX(0); /* Slide in when active */
+    }
+
+    .content-wrapper {
+        margin-left: 220px;
+        transition: margin-left 0.3s ease;
+        z-index: 1050;
+    }
+
+    .content-wrapper.fullwidth {
+        margin-left: 0; /* Full width when sidebar is hidden */
+    }
+
+
+
+
+    @media (max-width: 768px) {
+        .sidebar-sticky {
+            width: 80%;
+            transform: translateX(-100%);
+        }
+
+        .sidebar-sticky.active {
+            transform: translateX(0);
+        }
+
+        .content-wrapper {
+            margin-left: 0;
+        }
+
+        #toggleSidebar {
             position: fixed;
-            top: 60px;
-            background-color: #f2f2f2;
-            height: calc(100% - 60px);
-            overflow-y: auto;
+            top: 70px;
+            left: 20px;
+            z-index: 1100;
         }
 
-        .category-item {
-            cursor: pointer;
+         .menu-item {
+            width: 20%; /* Two cards per row */
+            margin-right: 2%; /* Space between the cards */
         }
 
-        .category-item:hover {
-            background-color: #ff3300;
-            color: black
-        }
-
-        .menu-item {
-            margin-bottom: 20px;
+        .menu-item:nth-child(2n) {
+            margin-right: 0; /* Remove the margin for every second item */
         }
 
         .menu-item img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 5px;
+            height: 100px; /* Reduce the image height for mobile */
+        }
+    }
+
+     @media (max-width: 576px) {
+
+        .menu-item {
+            width: 100%; /* Full width for smaller screens */
+            height 20px;
+            margin-right: 0; /* No margin for full-width items */
         }
 
-        .menu-item .card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .menu-item img {
+            height: 50px; /* Further reduce image size on small screens */
+
+
         }
 
-        .menu-item .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        .card-body h5{
+        font-size: 15px;
+    }
+
+    .card-body p {
+        font-size: 10px;
         }
-    </style>
+
+    .add_to_cart {
+     width: 100%;
+     font-size: 15px;
+     }
+     }
+</style>
+
+<!-- Toggle button for sidebar -->
+<button id="toggleSidebar" class="btn btn-primary" style="margin-top: 20px;">Menu</button>
+
+<div class="container-fluid" style="margin-top: 80px; margin-left: 20px;">
+    <div class="row">
 
 
-<div class="container-fluid page-body-wrapper" style="margin-top: 18px">
-        <div class="main-panel">
-          <div class="content-wrapper">
-            {% include 'includes/cover.html' %}
-          </div>
-<!-- Main Content -->
-<div class="container-fluid" style="margin-top: 80px; margin-left:20px;" xmlns="http://www.w3.org/1999/html">
-        <div class="row">
-            <h3>Menu</h3>
-            <div class="sidebar-sticky" style="width:200px;">
-                <ul class="nav flex-column">
-                    {% for c in cat %}
-                    <li class="nav-item">
-                        <a class="nav-link category-item" href="#">
-                            {{c.cat_name}}
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+        <!-- Sidebar (Add id="sidebar") -->
+        <div id="sidebar" class="sidebar-sticky" style="width: 200px;">
+            <ul class="nav flex-column">
+                {% for c in cat %}
+                <li class="nav-item">
+                    <a class="nav-link category-item" href="#" data-category="{{ c.slug }}">
+                        {{c.cat_name}}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
 
-                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mb-5">
-                <div class="pt-3">
-
-                        {% for c in cat %}
-                    <h3 id="{{ c.slug }}">Category: {{c.cat_name}}</h3>
+        <!-- Main content -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mb-5 mt-5">
+            <div class="pt-3 content-wrapper">
+                {% for c in cat %}
+                <div class="category-section" id="category-{{ c.slug }}" style="display: {% if forloop.first %}block{% else %}none{% endif %};">
+                    <h3>Category: {{c.cat_name}}</h3>
                     <span>{{c.description}}</span>
                     <div class="row mt-2">
                         {% for food in c.fooditems.all %}
                         <div class="col-md-4 menu-item">
                             <div class="card">
-                                <img src="{{ food.image.url }}" class="card-img-top" alt="{{ food.food_title}}">
+                                <img src="{{ food.image.url }}" class="card-img-top" alt="{{ food.food_title }}">
                                 <div class="card-body">
                                     <h5 class="card-title">{{food.food_title}}</h5>
                                     <p class="card-text">{{ food.description }}</p>
-                                    <p class="card-text"><strong>{{ food.price }}</strong>
-<!--                                    <a href="#" class="float-right add_to_cart" data-id = "{{ food.id }}" data-url="{% url 'add_to_cart' food.id %}"><i class='fas fa-plus-circle' style='font-size:24px;color:#ff3300'></i></a>-->
-<!--                                        <label id="qty-{{ food.id }}" class="float-right mr-4 fw-bold">0</label>-->
-<!--                                        <a href="#" class=" float-right mr-4"><i class='fas fa-minus-circle' style='font-size:24px;color:#ff3300'></i></a>-->
-                                    </p>
+                                    <p class="card-text"><strong>{{ food.price }}</strong></p>
                                     <p>
-                                        <a><button class="btn btn-warning add_to_cart" data-id = "{{ food.id }}" data-url="{% url 'add_to_cart' food.id %}">Add to Cart</button></a>
+                                        <button class="btn btn-warning add_to_cart" data-id="{{ food.id }}" data-url="{% url 'add_to_cart' food.id %}">Add to Cart</button>
                                     </p>
                                 </div>
                             </div>
                         </div>
                         {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
-                    {% for item in cart_items %}
-                    <span id="qty-{{ item.foodItem.id }}" class="item_qty" data-qty="{{ item.quantity }}">{{ item.quantity }}</span>
-                    {% endfor %}
-            </main>
-        </div>
+                {% endfor %}
+            </div>
+        </main>
     </div>
-    </div>
-</main>
-        </div>
-
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const categoryItems = document.querySelectorAll('.category-item');
+    const categorySections = document.querySelectorAll('.category-section');
 
+    categoryItems.forEach(item => {
+        item.addEventListener('click', function (e) {
+            e.preventDefault();
+            const selectedCategory = item.getAttribute('data-category');
+
+            categorySections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            const selectedSection = document.getElementById('category-' + selectedCategory);
+            if (selectedSection) {
+                selectedSection.style.display = 'block';
+            }
+        });
+    });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const toggleButton = document.getElementById('toggleSidebar');
+    const sidebar = document.getElementById('sidebar');
+    const contentWrapper = document.querySelector('.content-wrapper');
+
+    toggleButton.addEventListener('click', function () {
+        sidebar.classList.toggle('active');
+        contentWrapper.classList.toggle('fullwidth');
+    });
+});
 </script>
 
 {% endblock %}

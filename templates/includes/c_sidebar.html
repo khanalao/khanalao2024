@@ -1,37 +1,81 @@
+<style>
+    .sidebar {
+        position: fixed;
+        width: 200px;
+        height: 100vh;
+        background-color: #f8f9fa;
+        z-index: 999; /* Ensures it stays above the main content */
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(-100%); /* Start off-screen */
+    }
+
+    .sidebar.active {
+        transform: translateX(0); /* Slide in when active */
+    }
+
+    .toggle-sidebar {
+        position: fixed;
+        top: 60px; /* Adjusted to be below the top nav */
+        left: 5px;
+        z-index: 1000; /* Ensure it stays above other content */
+        font-size: 1rem;
+        cursor: pointer;
+        display: block; /* Always visible */
+        background: #ff3300; /* Button background color */
+        color: white; /* Button text color */
+        border: none;
+        border-radius: 5px;
+        padding: 10px; /* Button padding */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        transition: background 0.3s;
+    }
+
+    .toggle-sidebar:hover {
+        background: #e62e00; /* Darker background on hover */
+    }
+</style>
 
 <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 
-<nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color: white;">
-          <ul class="nav" style="margin-top: 50px;">
+<button class="toggle-sidebar" id="toggleSidebar">
+    <i class="fas fa-bars"></i> <!-- Icon for the toggle button -->
+</button>
 
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'custDashboard' %}">
+<nav class="sidebar" id="sidebar" style="background-color: white;">
+    <ul class="nav" style="margin-top: 50px;">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'custDashboard' %}">
                 <span class="icon-bg"><i class="fas fa-house-user"></i></span>
                 <span class="menu-title" style="color: black">Dashboard</span>
-              </a>
-            </li>
-
-
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'customer_myorders' %}">
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'customer_myorders' %}">
                 <span class="icon-bg"><i class="fas fa-align-justify"></i></span>
                 <span class="menu-title" style="color: black">My Orders</span>
-              </a>
-            </li>
-
-
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'cprofile' %}">
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'cprofile' %}">
                 <span class="icon-bg"><i class="fas fa-user-alt"></i></span>
                 <span class="menu-title">Profile Settings</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                <span class="icon-bg"><i class="fas fa-user-lock"></i></span>
-                <span class="menu-title">Change Password</span>
-              </a>
-            </li>
+            </a>
+        </li>
+<!--        <li class="nav-item">-->
+<!--            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">-->
+<!--                <span class="icon-bg"><i class="fas fa-user-lock"></i></span>-->
+<!--                <span class="menu-title">Change Password</span>-->
+<!--            </a>-->
+<!--        </li>-->
+    </ul>
+</nav>
 
-          </ul>
-        </nav>
+<script>
+    // Toggle sidebar visibility
+    const toggleButton = document.getElementById('toggleSidebar');
+    const sidebar = document.getElementById('sidebar');
+
+    toggleButton.addEventListener('click', () => {
+        sidebar.classList.toggle('active'); // Add or remove active class
+    });
+</script>

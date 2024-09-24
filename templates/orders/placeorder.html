@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 <style>
+/* Custom styles for large screens */
 @media (min-width: 1025px) {
   .h-custom {
     height: 100vh !important;
@@ -18,10 +19,62 @@
 .card-registration .select-arrow {
   top: 13px;
 }
+
+/* Custom responsive adjustments */
+@media (max-width: 768px) {
+  /* Adjust the table layout for smaller screens */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Adjust the table font size */
+  .table-striped {
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  /* Table cell padding adjustment for mobile view */
+  .table td, .table th {
+    padding: 0.4rem;
+  }
+
+  /* Adjust summary heading */
+  .summary-heading {
+    font-size: 1.1rem;
+  }
+
+  /* Adjust summary text */
+  .summary-text {
+    font-size: 0.9rem;
+  }
+
+  /* Adjust button size */
+  .btn-dark {
+    font-size: 0.85rem;
+    padding: 8px 15px;
+  }
+
+  /* Reduce margins */
+  .mb-5 {
+    margin-bottom: 1.2rem !important;
+  }
+
+  .mt-2, .pt-1 {
+    margin-top: 0.5rem !important;
+    padding-top: 0.3rem !important;
+  }
+}
+
+.table th, .table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
 </style>
 
-<section class="h-100 h-custom" style="margin-bottom:300px;">
-  <div class="container py-5 h-100">
+<section class="h-100 h-custom" style="margin-bottom:60px;">
+  <div class="container py-4 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12">
         <div class="card card-registration card-registration-2" style="border-radius: 15px;">
@@ -29,11 +82,11 @@
             <div class="row g-0">
               <!-- Left Side (Review Address + Items) -->
               <div class="col-lg-8">
-                <div class="p-5">
+                <div class="p-4">
                   <!-- Review Address Section -->
-                  <div class="d-flex flex-column align-items-start mb-5">
+                  <div class="d-flex flex-column align-items-start mb-4">
                     <h1 class="fw-bold mb-0">Review Address</h1>
-                    <div style="margin-top: 20px;">
+                    <div style="margin-top: 15px;">
                       <p>
                         {{ order.name }} <br>
                         {{ order.address }} <br>
@@ -45,7 +98,7 @@
                   </div>
 
                   <!-- Items Table -->
-                  <div>
+                  <div class="table-responsive">
                     <table class="table table-striped">
                       <thead>
                         <tr>
@@ -72,28 +125,28 @@
 
               <!-- Right Side (Summary) -->
               <div class="col-lg-4 bg-body-tertiary">
-                <div class="p-5">
-                  <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
-                  <hr class="my-4">
+                <div class="p-4">
+                  <h3 class="summary-heading fw-bold mb-4 mt-1 pt-1">Summary</h3>
+                  <hr class="my-3">
 
-                  <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">Sub Total</h5>
-                    <h5 id="subtotal">{{ subtotal }}</h5>
+                  <div class="d-flex justify-content-between mb-3">
+                    <h6 class="summary-text text-uppercase">Sub Total</h6>
+                    <h6 class="summary-text" id="subtotal">{{ subtotal }}</h6>
+                  </div>
+
+                  <div class="d-flex justify-content-between mb-3">
+                    <h6 class="summary-text text-uppercase">Tax</h6>
+                    <h6 class="summary-text" id="tax">{{ tax }}</h6>
+                  </div>
+
+                  <div class="d-flex justify-content-between mb-3">
+                    <h6 class="summary-text text-uppercase">Delivery</h6>
+                    <h6 class="summary-text" id="delivery">{{ delivery }}</h6>
                   </div>
 
                   <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">Tax</h5>
-                    <h5 id="tax">{{ tax }}</h5>
-                  </div>
-
-                  <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">Delivery</h5>
-                    <h5 id="delivery">{{ delivery }}</h5>
-                  </div>
-
-                  <div class="d-flex justify-content-between mb-5">
-                    <h5 class="text-uppercase">Total price</h5>
-                    <h5 id="total">{{ total }}</h5>
+                    <h6 class="summary-text text-uppercase">Total Price</h6>
+                    <h6 class="summary-text" id="total">{{ total }}</h6>
                   </div>
 
                   <!-- Order form -->
