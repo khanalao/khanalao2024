@@ -20,8 +20,10 @@
     }
 
     h2 {
-      font-size: 1.2rem; /* Make the heading smaller */
+      font-size: 2rem; /* Make the heading smaller */
       text-align: center;
+      background: #ff704d;
+      height:40px;
     }
 
 
@@ -125,7 +127,7 @@
                         <div class="d-flex flex-column align-items-start mb-5">
                           <div style="margin-top: 0px;">
                             <p style="color:black; font-size:16px;">
-                              <strong>Order Number:</strong> {{ order.order_number }} <br>
+                              <strong>Order Number:</strong><span style="background: #ff704d;"> {{ order.order_number }} </span><br>
                               <strong>Name:</strong> {{ order.name }} <br>
                               <strong>Address:</strong> {{ order.address }}, {{ order.city }} - {{ order.pin_code }} <br>
                               {{ order.state }}, {{ order.country }} <br>
@@ -152,8 +154,8 @@
                                 <th scope="row" data-label="Sr. No.">{{ forloop.counter }}</th>
                                 <td data-label="Item Name">{{ item.fooditem.food_title }}</td>
                                 <td data-label="Quantity">{{ item.quantity }}</td>
-                                <td data-label="Price">${{ item.price }}</td>
-                                <td data-label="Total">${{ item.amount }}</td>
+                                <td data-label="Price"><i class='fas fa-rupee-sign'></i>{{ item.price }}</td>
+                                <td data-label="Total"><i class='fas fa-rupee-sign'></i>{{ item.amount }}</td>
                               </tr>
                               {% endfor %}
                             </tbody>
@@ -165,28 +167,29 @@
                     <!-- Right Side (Summary) -->
                     <div class="col-lg-4 bg-body-tertiary">
                       <div class="p-5">
-                        <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                        <h3 class="fw-bold mb-2 mt-2 pt-1" style="color: #e63900;">Summary</h3>
                         <hr class="my-4">
 
                         <div class="d-flex justify-content-between mb-4">
                           <h5 class="text-uppercase">Subtotal</h5>
-                          <h5>${{ order.subtotal }}</h5>
+                          <h5><i class='fas fa-rupee-sign'></i>{{ order.subtotal }}</h5>
                         </div>
 
                         <div class="d-flex justify-content-between mb-4">
                           <h5 class="text-uppercase">Tax</h5>
-                          <h5>${{ order.tax }}</h5>
+                          <h5><i class='fas fa-rupee-sign'></i>{{ order.tax }}</h5>
                         </div>
 
                         <div class="d-flex justify-content-between mb-4">
                           <h5 class="text-uppercase">Delivery</h5>
-                          <h5>${{ order.delivery }}</h5>
+                          <h5><i class='fas fa-rupee-sign'></i>{{ order.delivery }}</h5>
                         </div>
 
-                        <div class="d-flex justify-content-between mb-5">
+                        <div class="d-flex justify-content-between mb-2">
                           <h5 class="text-uppercase">Total Price</h5>
-                          <h5>${{ order.total }}</h5>
+                          <h5><i class='fas fa-rupee-sign'></i>{{ order.total }}</h5>
                         </div>
+                        <hr class="my-4">
                       </div>
                       <div class="d-flex justify-content-between mb-5" style="margin-left:50px;">
                         <i class="fa fa-check-circle" style="font-size:80px;color:green"></i>

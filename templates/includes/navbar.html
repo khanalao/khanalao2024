@@ -4,7 +4,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-navbar-on-scroll="data-navbar-on-scroll">
         <div class="container">
             <a class="navbar-brand d-inline-flex" href="{% url 'home' %}">
-                <img class="d-inline-block" src="{% static 'img/gallery/logo.svg' %}" alt="logo" style="width: 30px;" />
+                <img class="d-inline-block" src="{% static 'img/gallery/logo.svg' %}" alt="logo" />
                 <span class="text-1000 fs-4 fw-bold ms-2 text-gradient">Khana Lao</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,7 +15,9 @@
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'marketplace' %}">
-                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button"><i class="fa fa-phone" style="font-size:24px"></i>8769478689</button>
+                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button">
+                                <i class="fa fa-phone" style="font-size:24px"></i>8769478689
+                            </button>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -23,15 +25,25 @@
                             <button class="btn btn-white shadow-warning text-warning btn-sm" type="button">Market Place</button>
                         </a>
                     </li>
+<!--                    <li class="nav-item position-relative">-->
+<!--                        <a class="nav-link" href="{% url 'cart' %}">-->
+<!--                            <i class="fas fa-shopping-cart text-warning" style="font-size: 1.5em;"></i>-->
+<!--                            <span class="badge bg-warning text-dark position-absolute" id="cart_counter" style="border-radius:50%; top: -8px; right: -10px;">{{cart_count}}</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
+
                     <li class="nav-item position-relative">
-                        <a class="nav-link" href="{% url 'cart' %}">
-                            <i class="fas fa-shopping-cart text-warning" style="font-size: 1.5em;"></i>
-                            <span class="badge bg-warning text-dark position-absolute" id="cart_counter" style="border-radius:50%; top: -8px; right: -10px;">{{cart_count}}</span>
-                        </a>
-                    </li>
+    <a class="nav-link" href="{% url 'cart' %}">
+        <i class="fas fa-shopping-cart text-warning" style="font-size: 1.5em;"></i>
+        <span class="badge bg-warning text-dark position-absolute cart-counter">{{cart_count}}</span>
+    </a>
+</li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'myAccount' %}">
-                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button"><i class="fas fa-user me-1"></i>My Account</button>
+                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button">
+                                <i class="fas fa-user me-1"></i>My Account
+                            </button>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -42,12 +54,16 @@
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'registerUser' %}">
-                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button"><i class="fas fa-user me-1"></i>Register</button>
+                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button">
+                                <i class="fas fa-user me-1"></i>Register
+                            </button>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'registerVendor' %}">
-                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button"><i class="fas fa-user me-1"></i>Restaurant</button>
+                            <button class="btn btn-white shadow-warning text-warning btn-sm" type="button">
+                                <i class="fas fa-user me-1"></i>Restaurant
+                            </button>
                         </a>
                     </li>
                     {% endif %}
@@ -103,6 +119,31 @@
         border-color: transparent;
     }
 
+    .navbar-nav {
+        text-align: left; /* Align items to the left */
+    }
+
+    .navbar-collapse {
+        justify-content: flex-start; /* Align the entire navbar contents to the left */
+    }
+
+    .cart-counter {
+    border-radius: 50%;
+    top: -10px;
+    right: -10px;
+    font-size: 0.75em; /* Adjust the size of the counter */
+    padding: 0.25em 0.5em;
+}
+
+.nav-item.position-relative {
+    display: flex;
+    align-items: center;
+}
+
+.nav-item.position-relative .fa-shopping-cart {
+    margin-right: 5px; /* Adds space between the icon and the counter */
+}
+
     @media (max-width: 393px) {
         .navbar-brand img {
             width: 25px;
@@ -122,7 +163,25 @@
         }
 
         .navbar-collapse {
-            text-align: center;
+            text-align: left;
         }
+
+        .navbar-nav {
+            width: 100%;
+            text-align: left;
+            margin-left: 0; /* Ensure no extra margin on the left */
+        }
+
+
+    .cart-counter {
+        top: 7px;
+        right: 245px;
+    }
+
+    .nav-item.position-relative .fa-shopping-cart {
+        margin-top:10px;
+        margin-left: 10px;
+        font-size: 1.25em; /* Adjust size for smaller screens */
+    }
     }
 </style>

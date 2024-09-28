@@ -74,9 +74,7 @@
         margin-left: 0; /* Full width when sidebar is hidden */
     }
 
-
-
-
+    /* Media Queries for Mobile View */
     @media (max-width: 768px) {
         .sidebar-sticky {
             width: 80%;
@@ -98,47 +96,54 @@
             z-index: 1100;
         }
 
-         .menu-item {
-            width: 20%; /* Two cards per row */
-            margin-right: 2%; /* Space between the cards */
-        }
+        .menu-item {
+            padding: 0px;
+            }
 
-        .menu-item:nth-child(2n) {
-            margin-right: 0; /* Remove the margin for every second item */
-        }
+        .card{
+            flex-direction: row;
+            }
 
-        .menu-item img {
-            height: 100px; /* Reduce the image height for mobile */
-        }
-    }
-
-     @media (max-width: 576px) {
+        .card-body{
+            padding: 0rem 0rem;
+           }
 
         .menu-item {
-            width: 100%; /* Full width for smaller screens */
-            height 20px;
-            margin-right: 0; /* No margin for full-width items */
+            width: 100%; /* Full width for small screens */
+            display: flex; /* Use flexbox to align image and text horizontally */
+            flex-direction: row; /* Ensure the image and text are in the same row */
+            align-items: center; /* Align items vertically centered */
+            padding: 10px;
         }
 
         .menu-item img {
-            height: 50px; /* Further reduce image size on small screens */
-
-
+            width: 50%; /* Make the image take up 30% of the width */
+            height: auto; /* Maintain aspect ratio */
+            margin-right: 15px;
         }
 
-        .card-body h5{
-        font-size: 15px;
+        .menu-item .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 70%;
+        }
+
+        .card-body h5 {
+            font-size: 15px;
+            margin-top: 3px;
+        }
+
+        .card-body p {
+            font-size: 11px;
+        }
+
+        .add_to_cart {
+            width: 95%;
+            font-size: 13px;
+            margin-right: 5px;
+        }
     }
-
-    .card-body p {
-        font-size: 10px;
-        }
-
-    .add_to_cart {
-     width: 100%;
-     font-size: 15px;
-     }
-     }
 </style>
 
 <!-- Toggle button for sidebar -->
@@ -146,8 +151,6 @@
 
 <div class="container-fluid" style="margin-top: 80px; margin-left: 20px;">
     <div class="row">
-
-
         <!-- Sidebar (Add id="sidebar") -->
         <div id="sidebar" class="sidebar-sticky" style="width: 200px;">
             <ul class="nav flex-column">
@@ -170,15 +173,15 @@
                     <span>{{c.description}}</span>
                     <div class="row mt-2">
                         {% for food in c.fooditems.all %}
-                        <div class="col-md-4 menu-item">
+                        <div class="col-md-2 menu-item">
                             <div class="card">
                                 <img src="{{ food.image.url }}" class="card-img-top" alt="{{ food.food_title }}">
                                 <div class="card-body">
                                     <h5 class="card-title">{{food.food_title}}</h5>
                                     <p class="card-text">{{ food.description }}</p>
-                                    <p class="card-text"><strong>{{ food.price }}</strong></p>
+                                    <p class="card-text"><strong><i class='fas fa-rupee-sign' style="font-size: 9px;"></i>{{ food.price }}</strong></p>
                                     <p>
-                                        <button class="btn btn-warning add_to_cart" data-id="{{ food.id }}" data-url="{% url 'add_to_cart' food.id %}">Add to Cart</button>
+                                        <button class="btn btn-warning add_to_cart" data-id="{{ food.id }}" data-url="{% url 'add_to_cart' food.id %}">+ Cart</button>
                                     </p>
                                 </div>
                             </div>

@@ -9,17 +9,21 @@
 <link href="{% static 'css/registrationstyle.css' %}" rel="stylesheet" />
 
 <style>
+  .content-wrapper {
+    margin-left: 300px;
+  }
+
+  @media (max-width: 393px) and (max-height: 714px) {
 
     .content-wrapper {
-    margin-left: 300px;
+      margin-left: -25px;
+      background: white;
     }
 
-    @media (max-width: 393px) and (max-height: 714px) {
+    .table {
+      margin-right: 50px;
+    }
 
-     .content-wrapper {
-    margin-left: 10px;
-    background: white;
-  }
     .content-wrapper h2 {
       font-size: 1.25rem;
     }
@@ -29,14 +33,24 @@
     }
 
     .cont {
-     width: 120%;
+      width: 120%;
     }
 
- }
+    /* Style adjustments for buttons on small screens */
+    .btn {
+      font-size: 0.8rem; /* Reduce font size */
+      padding: 5px 10px; /* Adjust padding */
+      margin-bottom: 5px; /* Add margin for spacing */
+    }
+
+    .float-right.mb-4 {
+      display: flex;  /* Ensure buttons are inline */
+      flex-wrap: wrap; /* Make them wrap in case of small width */
+      justify-content: flex-end;
+      gap: 5px; /* Small gap between buttons */
+    }
+  }
 </style>
-
-
-
 
 <!--Main Section Start-->
       <div class="container-fluid page-body-wrapper" style="margin-top: 18px">
@@ -58,7 +72,7 @@
 <div class="cont" style="margin-top:20px; max-width:1000px;">
     <div class="title">Build Your Food Menu</div>
     <div class="content" style="margin-top:20px;">
-        <h4>Menu Categories</h4>
+        <h4 style="color: #e63900;">Menu Categories</h4>
         <div class="float-right mb-4">
             <a href="{% url 'add_category' %}"><button class="btn btn-outline-danger btn-lg mr-2" type="submit"><i class="fa fa-plus" style="font-size:16px; color:black;"></i> Category</button></a>
             <a href="{% url 'add_food' %}"><button class="btn btn-outline-danger btn-lg" type="submit"><i class="fa fa-plus" style="font-size:16px; color:black;"></i> Food Item</button></a>
@@ -67,7 +81,7 @@
         {% if cat %}
 
         <table class="table table-hover">
-  <thead style="background-color:#ff471a;">
+  <thead style="background-color:#ff471a; color:white;">
     <tr>
       <th scope="col" class="fs-6 fw-bold">Sr. No.</th>
       <th scope="col" class="fs-6 fw-bold">Category</th>

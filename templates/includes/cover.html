@@ -1,5 +1,8 @@
 {% load static %}
-<div class="page-section restaurant-detail-image-section" style="background: url({% if vendor.user_profile.cover_pic %}{{vendor.user_profile.cover_pic.url}} {%else%} {% static 'img/default_cover.jfif' %} {% endif %}) no-repeat center center; background-size: cover;">
+<div class="page-section restaurant-detail-image-section" style="background: url({% if vendor.user_profile.cover_pic %}{{vendor.user_profile.cover_pic.url}} {%else%} {% static 'img/default_cover.jfif' %} {% endif %}) no-repeat center center; background-size: cover; position: relative;">
+    <!-- Opacity Overlay -->
+    <div class="cover-overlay"></div>
+
     <!-- Container Start -->
     <div class="container">
         <!-- Row Start -->
@@ -35,6 +38,23 @@
     .restaurant-detail-image-section {
         height: 300px;
         width: 100%;
+        position: relative;
+    }
+
+    /* Cover Overlay to Increase Opacity */
+    .cover-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+        z-index: 1;
+    }
+
+    .company-info-detail {
+        position: relative;
+        z-index: 2; /* Ensure profile details are above the overlay */
     }
 
     .company-info {
@@ -55,7 +75,7 @@
 
     .restaurant-title {
         font-size: 2rem;
-        color: black;
+        color: white; /* Change to white for better visibility */
         margin-left: 20px;
     }
 
@@ -76,7 +96,7 @@
         .restaurant-title {
             font-size: 1.5rem;
             margin-left: 15px;
-                    font-weight: bold;
+            font-weight: bold;
         }
 
         .company-info {
@@ -106,7 +126,7 @@
         .restaurant-title {
             font-size: 1.2rem;
             margin-left: 10px;
-                    font-weight: bold;
+            font-weight: bold;
         }
 
         .company-info {

@@ -24,7 +24,7 @@
     @media (max-width: 393px) and (max-height: 714px) {
 
      .content-wrapper {
-    margin-left: -62px;
+    margin-left: -20px;
     background: white;
   }
     .content-wrapper h2 {
@@ -89,6 +89,20 @@
       font-weight: bold;
     }
 
+     /* Style adjustments for buttons on small screens */
+    .btn {
+      font-size: 0.8rem; /* Reduce font size */
+      padding: 5px 10px; /* Adjust padding */
+      margin-bottom: 5px; /* Add margin for spacing */
+    }
+
+    .float-right.mb-4 {
+      display: flex;  /* Ensure buttons are inline */
+      flex-wrap: wrap; /* Make them wrap in case of small width */
+      justify-content: flex-end;
+      gap: 5px; /* Small gap between buttons */
+    }
+
  }
 </style>
 
@@ -141,7 +155,7 @@
           <a href="" style="text-decoration: none; color:black;"><p class="mb-0 fw-bold">{{food}}</p></a>
           <small class="text-muted">{{ food.description }}</small>
       </td>
-        <td>{{food.price}}</td>
+        <td><i class='fas fa-rupee-sign'></i>{{food.price}}</td>
         <td>
             {% if food.is_available %}
                 <span class="text-success">Available</span>

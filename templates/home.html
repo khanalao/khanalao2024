@@ -4,121 +4,133 @@
 {% block content %}
 
 <style>
+
+  /* Restaurant Card Styling */
   .restaurant-card {
-    height: 100%;
+    height: 350px; /* Set a fixed height for the restaurant card */
+    width: 100%; /* Ensure width is responsive */
     margin-bottom: 15px;
   }
-  .card-img-top {
-    height: 200px;
-    object-fit: cover;
+
+   .category-card {
+    height: 250px; /* Set a fixed height for the category card */
+    width: 100%; /* Ensure width is responsive */
+    margin-bottom: 15px;
   }
 
-<!--  @media (max-width: 393px) {-->
-<!--    .container, .container-fluid {-->
-<!--      padding-left: 10px;-->
-<!--      padding-right: 10px;-->
-<!--    }-->
+   .card:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Add subtle shadow on hover */
+  }
 
-<!--    h1, h2, h3, h4, h5, h6 {-->
-<!--      font-size: 1rem;-->
-<!--    }-->
+  .card-img-top {
+    height: 150px; /* Set a fixed height for the images */
+    width: 100%;
+    object-fit: cover; /* Ensure the images cover the area properly without distortion */
+  }
 
-<!--    .carousel-item {-->
-<!--      text-align: center;-->
-<!--    }-->
+  .card-body {
+    padding: 10px;
+    overflow: hidden; /* Prevent overflowing text */
+    text-align: center; /* Center text inside the card body */
+  }
 
-<!--    .card {-->
-<!--      margin-bottom: 20px;-->
-<!--    }-->
+  /* Responsive Adjustments for Smaller Screens */
+  @media (max-width: 393px) {
+    .restaurant-card {
+      height: 200px; /* Adjust the card height for smaller screens */
+    }
 
-<!--    .card-img-top {-->
-<!--      height: auto;-->
-<!--    }-->
+    .card-img-top {
+      height: 50px; /* Adjust the image height for smaller screens */
+    }
 
-<!--    .card-body {-->
-<!--      padding: 10px;-->
-<!--    }-->
+    .card-body h4 {
+      font-size: 0.9rem; /* Reduce font size for smaller screens */
+    }
 
-<!--    .badge {-->
-<!--      font-size: 0.8rem;-->
-<!--      padding: 5px 10px;-->
-<!--    }-->
+    .card-body .fw-bold {
+      font-size: -0.8rem; /* Adjust title font size */
+    }
 
-<!--    .btn {-->
-<!--      padding: 8px 12px;-->
-<!--      font-size: 0.9rem;-->
-<!--    }-->
+    .carousel-control-prev-icon {
+      width: 1.75rem;
+      margin-top: 318px;
+    }
 
-<!--    #home img {-->
-<!--      width: 100%;-->
-<!--      height: auto;-->
-<!--    }-->
+    .carousel-control-next-icon {
+      width: 1.75rem;
+      margin-top: 318px;
+    }
 
-<!--    .flex-center {-->
-<!--      justify-content: center;-->
-<!--    }-->
+}
 
-<!--    .row {-->
-<!--      margin-left: 0;-->
-<!--      margin-right: 0;-->
-<!--    }-->
-<!--  }-->
+  /* Other Custom Styles */
+  .carousel-item .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-<!--@media (max-width: 393px) {-->
-<!--  .carousel-item .row {-->
-<!--    display: flex;-->
-<!--    flex-wrap: wrap;-->
-<!--  }-->
-
-<!--  /* Adjust the category cards to fit in two rows */-->
-<!--  .carousel-item .col-sm-6,-->
-<!--  .carousel-item .col-md-4,-->
-<!--  .carousel-item .col-xl {-->
-<!--    flex: 0 0 20%; /* Makes each item take up 50% of the row width */-->
-<!--    max-width: 50%;-->
-<!--  }-->
-<!--}-->
-
-@media (max-width: 393px) {
-  /* Adjust the category cards to fit in two rows */
+  /* Adjust category cards to fit in two rows */
   .carousel-item .col-sm-6,
   .carousel-item .col-md-4,
   .carousel-item .col-xl {
     flex: 0 0 50%; /* Makes each item take up 50% of the row width */
     max-width: 50%;
   }
-  .carousel-item .row {
-    display: flex;
-    flex-wrap: wrap;
-  }
 
-.carousel-item {
+  .carousel-item {
     padding: 10px;
     margin: 10px;
-    }
+  }
 
-    .img-fluid {
-     width: 100%;
-     max-width:100%;
-     height: auto;
-    }
+  .img-fluid {
+    width: 90%;
+    max-width: 100%;
+    height: auto;
+  }
 
-    .col-sm-6.col-md-3{
-        width: 50%;
-    }
-    .col-sm-6.col-md-3.mb-6{
-        margin-bottom: 10px;
-    }
+  .col-sm-6.col-md-3 {
+    width: 50%;
+  }
 
-    }
+  .col-sm-6.col-md-3.mb-6 {
+    margin-bottom: 10px;
+  }
+
+  .carousal-icon {
+    font-size: 20px;
+  }
+
+  h4 {
+    font-size: 0.75rem;
+  }
+
+  .shadow-icon {
+    height: 30px;
+  }
+
+  h5 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  .py-4{
+  padding-bottom: 0.4rem !important;
+  }
+
 </style>
 
-<section class="py-5 overflow-hidden" id="home">
+
+<section class="py-5 overflow-hidden mt-2" id="home">
   <div class="container">
     <div class="row flex-center">
       <!-- Banner Image -->
       <div class="col-12">
-        <img class="img-fluid" src="{% static 'img/banner.jpeg' %}" alt="banner" />
+        <img class="img-fluid" style="width:100%; height:50%;" src="{% static 'img/banner.jpeg' %}" alt="banner" />
       </div>
 
       <!-- Find Food Section -->
@@ -128,9 +140,9 @@
             <form class="row gx-2 gy-2 align-items-center">
               <div class="col">
                 <div class="input-group-icon">
-                  <i class="fas fa-map-marker-alt text-danger input-box-icon"></i>
+<!--                  <i class="fas fa-map-marker-alt text-danger input-box-icon"></i>-->
                   <label class="visually-hidden" for="inputDelivery">Address</label>
-                  <input class="form-control input-box form-foodwagon-control" id="inputDelivery" type="text" placeholder="Enter Your Address" />
+                  <input class="form-control input-box form-foodwagon-control" id="inputDelivery" type="text" placeholder="Login Here" />
                 </div>
               </div>
               <div class="d-grid gap-3 col-sm-auto">
@@ -147,67 +159,106 @@
   </div>
 </section>
 
-<section class="py-6 overflow-hidden" style="padding-top: 0rem !important;">
+<section class="py-2 overflow-hidden" style="padding-top: 0rem !important;">
 
         <div class="container mb-0">
-          <div class="row flex-center mb-2">
+          <div class="row flex-center">
             <div class="col-lg-7">
               <h5 class="fw-bold fs-3 fs-lg-5 lh-sm text-center text-lg-start">Search by Food</h5>
             </div>
-            <div class="col-lg-4 text-lg-end text-center"><a class="btn btn-lg text-800 me-2" href="#" role="button">VIEW ALL <i class="fas fa-chevron-right ms-2"></i></a></div>
+<!--            <div class="col-lg-4 text-lg-end text-center"><a class="btn btn-lg text-800 me-2" href="#" role="button">VIEW ALL <i class="fas fa-chevron-right ms-2"></i></a></div>-->
             <div class="col-lg-auto position-relative">
               <button class="carousel-control-prev s-icon-prev carousel-icon" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="prev"><span class="carousel-control-prev-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
               <button class="carousel-control-next s-icon-next carousel-icon" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="next"><span class="carousel-control-next-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>
             </div>
           </div>
           <div class="row flex-center">
-            <div class="col-12">
-              <div class="carousel slide" id="carouselSearchByFood" data-bs-touch="false" data-bs-interval="false">
+      <div class="col-12">
+        <div class="carousel slide" id="carouselSearchByFood" data-bs-touch="true" data-bs-interval="false">
+          <div class="carousel-inner">
+            <!-- First carousel item (active) -->
+            <div class="carousel-item active">
+              <div class="row">
+                <!-- Row 1 -->
+                <div class="col-sm-6">
+                  <div class="card card-span h-100 rounded-circle">
+                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/search-pizza.png' %}" alt="Pizza" />
+                    <div class="card-body ps-0">
+                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Pizza</h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="card card-span h-100 rounded-circle">
+                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/burger.png' %}" alt="Burger" />
+                    <div class="card-body ps-0">
+                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <!-- Row 2 -->
+                <div class="col-sm-6">
+                  <div class="card card-span h-100 rounded-circle">
+                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/noodles.png' %}" alt="Noodles" />
+                    <div class="card-body ps-0">
+                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="card card-span h-100 rounded-circle">
+                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/sub-sandwich.png' %}" alt="Sub-Sandwich" />
+                    <div class="card-body ps-0">
+                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-Sandwich</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  <!-- Carousel items -->
-  <div class="carousel-inner">
-    <!-- First slide (active) -->
-    <div class="carousel-item active">
-      <div class="row">
-        <div class="col-6">
-          <div class="card card-span h-100 rounded-circle">
-            <img class="img-fluid rounded-circle" src="{% static 'img/gallery/search-pizza.png' %}" alt="Pizza" />
-            <div class="card-body ps-0">
-              <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Pizza</h5>
+            <!-- Second carousel item -->
+            <div class="carousel-item">
+              <div class="row">
+                <!-- Row 1 -->
+                <div class="col-sm-6">
+                  <div class="card card-span h-100 rounded-circle">
+                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/thai-soup.png' %}" alt="Sushi" />
+                    <div class="card-body ps-0">
+                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Soup</h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="card card-span h-100 rounded-circle">
+                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/dancake.png' %}" alt="Salad" />
+                    <div class="card-body ps-0">
+                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Pan Cake</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <!-- Row 2 -->
+                <div class="col-sm-6">
+                  <div class="card card-span h-100 rounded-circle">
+                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/steak.png' %}" alt="Steak" />
+                    <div class="card-body ps-0">
+                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="card card-span h-100 rounded-circle">
+                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/chowmein.png' %}" alt="Pasta" />
+                    <div class="card-body ps-0">
+                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="card card-span h-100 rounded-circle">
-            <img class="img-fluid rounded-circle" src="{% static 'img/gallery/burger.png' %}" alt="Burger" />
-            <div class="card-body ps-0">
-              <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Second slide -->
-    <div class="carousel-item">
-      <div class="row">
-        <div class="col-6">
-          <div class="card card-span h-100 rounded-circle">
-            <img class="img-fluid rounded-circle" src="{% static 'img/gallery/noodles.png' %}" alt="Salad" />
-            <div class="card-body ps-0">
-              <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="card card-span h-100 rounded-circle">
-            <img class="img-fluid rounded-circle" src="{% static 'img/gallery/sub-sandwich.png' %}" alt="Sushi" />
-            <div class="card-body ps-0">
-              <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-Sandwich</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- Add more slides in the same way -->
   </div>
 
@@ -226,19 +277,23 @@
 <section id="testimonial" style="padding-top: 0rem;">
   <div class="container">
     <div class="row h-100">
-      <div class="col-lg-7 mx-auto text-center mb-3">
+      <div class="col-lg-7 mx-auto text-center mb-1">
         <h5 class="fw-bold fs-3 fs-lg-5 lh-sm">Featured Restaurants</h5>
       </div>
 
-        <div class="col-lg-auto position-relative mb-4">
-              <button class="carousel-control-prev s-icon-prev carousel-icon" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="prev"><span class="carousel-control-prev-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
-              <button class="carousel-control-next s-icon-next carousel-icon" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="next"><span class="carousel-control-next-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>
-            </div>
+      <div class="col-lg-auto position-relative">
+        <button class="carousel-control-prev s-icon-prev carousel-icon" type="button" data-bs-target="#restaurantCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon hover-top-shadow" aria-hidden="true" style="margin-top:225px;"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next s-icon-next carousel-icon" type="button" data-bs-target="#restaurantCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon hover-top-shadow" aria-hidden="true" style="margin-top:225px;"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
-    <!-- Carousel controls -->
 
-
-    <!-- Carousel -->
+    <!-- Restaurant Carousel -->
     <div id="restaurantCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         {% for r in rest %}
@@ -247,25 +302,23 @@
           <div class="row gx-4 gy-4">
         {% endif %}
 
-          <!-- Restaurant Card -->
-          <div class="col-sm-6 col-md-4 col-lg-3 restaurant-card">
-            <div class="card h-100 text-white rounded-3">
-              {% if r.user_profile.profile_picture %}
-              <img class="card-img-top img-fluid" src="{{ r.user_profile.profile_picture.url }}" alt="{{ r.vendor_name }}" />
-              {% else %}
-              <img class="card-img-top img-fluid rounded-3" src="{% static 'img/logo.png' %}" alt="{{ r.vendor_name }}" />
-              {% endif %}
-              <div class="card-body ps-0">
-                <div class="flex-1 ms-3">
-                  <a href="{% url 'rest_details' r.vendor_slug %}">
-                    <h5 class="mb-0 fw-bold text-1000">{{ r.vendor_name }}</h5>
-                  </a>
-                  <span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span>
-                  <span class="mb-0 text-primary">46</span>
-                </div>
-              </div>
+        <!-- Restaurant Card -->
+        <div class="col-sm-6 col-md-4 col-lg-3 restaurant-card" style="margin-left: -7px;">
+          <div class="card h-100 text-white rounded-3">
+            {% if r.user_profile.profile_picture %}
+            <img class="card-img-top img-fluid" src="{{ r.user_profile.profile_picture.url }}" alt="{{ r.vendor_name }}" />
+            {% else %}
+            <img class="card-img-top img-fluid rounded-3" src="{% static 'img/logo.png' %}" alt="{{ r.vendor_name }}" />
+            {% endif %}
+            <div class="card-body ps-0">
+              <a href="{% url 'rest_details' r.vendor_slug %}">
+                <h4 class="mb-0 fw-bold text-1000">{{ r.vendor_name }}</h4>
+              </a>
+              <span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span>
+              <span class="mb-0 text-primary">46</span>
             </div>
           </div>
+        </div>
 
         {% if forloop.counter0|add:1|divisibleby:2 or forloop.last %}
           </div>
@@ -273,8 +326,10 @@
         {% endif %}
         {% endfor %}
       </div>
-<div class="col-lg-4 text-lg-end text-center"><a class="btn btn-danger text-800 me-2" href="{% url 'marketplace'%}" role="button">VIEW ALL RESTAURANTS <i class="fas fa-chevron-right ms-2"></i></a></div>
 
+      <div class="col-lg-4 text-lg-end text-center" style="color:white;">
+        <a class="btn btn-danger me-2" href="{% url 'marketplace' %}" role="button">VIEW ALL RESTAURANTS <i class="fas fa-chevron-right ms-2"></i></a>
+      </div>
     </div>
   </div>
 </section>
@@ -284,36 +339,36 @@
   <div class="container">
     <div class="row justify-content-center g-0">
       <div class="col-xl-9">
-        <div class="col-lg-6 text-center mx-auto mb-3 mb-md-5 mt-4">
-          <h5 class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6">How does it work</h5>
+        <div class="col-lg-6 text-center mb-2 mt-2">
+          <h5 class="fw-bold text-danger lh-sm my-4">How does it work</h5>
         </div>
         <div class="row">
-          <div class="col-sm-6 col-md-3 mb-6">
+          <div class="col-sm-6 col-md-3 mb-3">
             <div class="text-center">
               <img class="shadow-icon" src="{% static 'img/gallery/location.png' %}" height="112" alt="Select location" />
-              <h5 class="mt-4 fw-bold">Select location</h5>
+              <h6 class="mt-2 fw-bold">Select location</h6>
               <p class="mb-md-0">Delivered in Nath Dwara</p>
             </div>
           </div>
-          <div class="col-sm-6 col-md-3 mb-6">
+          <div class="col-sm-6 col-md-3 mb-3">
             <div class="text-center">
               <img class="shadow-icon" src="{% static 'img/gallery/order.png' %}" height="112" alt="Choose order" />
-              <h5 class="mt-4 fw-bold">Choose order</h5>
-              <p class="mb-md-0">Check over hundreds of menus to pick your favorite food</p>
+              <h6 class="mt-2 fw-bold">Choose order</h6>
+              <p class="mb-md-0">Pick your favorite food</p>
             </div>
           </div>
-          <div class="col-sm-6 col-md-3 mb-6">
+          <div class="col-sm-6 col-md-3 mb-3">
             <div class="text-center">
               <img class="shadow-icon" src="{% static 'img/gallery/pay.png' %}" height="112" alt="Payment" />
-              <h5 class="mt-4 fw-bold">Payment</h5>
+              <h6 class="mt-2 fw-bold">Payment</h6>
               <p class="mb-md-0">Cash on Delivery</p>
             </div>
           </div>
-          <div class="col-sm-6 col-md-3 mb-6">
+          <div class="col-sm-6 col-md-3 mb-3">
             <div class="text-center">
               <img class="shadow-icon" src="{% static 'img/gallery/meals.png' %}" height="112" alt="Delivery" />
-              <h5 class="mt-4 fw-bold">Delivery</h5>
-              <p class="mb-md-0">Get your food delivered straight to your door</p>
+              <h6 class="mt-2 fw-bold">Delivery</h6>
+              <p class="mb-md-0">Get your food delivered</p>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static%}
+{% load static %}
 {% block content %}
 {% include 'includes/alerts.html' %}
 
@@ -13,10 +13,9 @@
     padding: 15px 10px;
   }
 
-.content-wrapper {
-  margin-left: 300px;
+  .content-wrapper {
+    margin-left: 300px;
   }
-
 
   .content-wrapper .row {
     margin: 0 -10px;
@@ -39,7 +38,6 @@
     font-size: 1rem;
     text-align: center;
   }
-
 
   .card-body h2 {
     font-size: 1.5rem;
@@ -72,10 +70,11 @@
   /* Specific styling for 393x714 screen size */
   @media (max-width: 393px) and (max-height: 714px) {
 
-     .content-wrapper {
-    margin-left: 0px;
-    background: white;
-  }
+    .content-wrapper {
+      margin-left: -10px;
+      background: white;
+    }
+
     .content-wrapper h2 {
       font-size: 1.25rem;
     }
@@ -84,14 +83,14 @@
       font-size: 0.875rem;
     }
 
-    .card{
-      margin-bottom:1px;
-      background:#ff5c33;
-      }
+    .card {
+      margin-bottom: 1px;
+      background: #ff5c33;
+    }
 
-     .card:hover{
+    .card:hover {
       background: #ff3300;
-      }
+    }
 
     .card-body h2 {
       font-size: 1.25rem;
@@ -99,56 +98,68 @@
 
     .card-body h5 {
       font-size: 1rem;
+      color:white;
     }
 
-    .card-body h4{
+    .card-body h4 {
       font-size: 1.75rem;
-      }
 
-     /* For tables on smaller screens, ensure they are scrollable */
+    }
+
+    .card-body h3{
+    color:white;
+    }
+
+    /* For tables on smaller screens, ensure they are scrollable */
     .responsive-table {
-        overflow-x: auto;
+      overflow-x: auto;
     }
 
     table thead {
-        display: none; /* Hide table headers on mobile */
+      display: none; /* Hide table headers on mobile */
     }
 
-    table tbody tr {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 10px;
-        border-bottom: 1px solid black;
-    }
-
-    table tbody tr:last-child {
-        border-bottom: none;
+   table tbody tr {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+      border: 1px solid black;
+      background-color: #f9f9f9;
+      padding: 15px;
     }
 
     table tbody tr td {
-        display: flex;
-        justify-content: left;
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
-         padding-bottom: 10px;
-        border-bottom: none;
-
+      display: flex;
+      justify-content: left;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
     }
 
-    .table tbody tr td::before {
-        content: attr(data-label); /* Add labels for mobile view */
-        font-weight: bold;
+    table tbody tr td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      display: inline-block;
+      width: 50%;
+    }
+
+    /* Serial number styling */
+    .serial-number {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
     }
 
     /* Adjust button size */
     .btn-danger {
-        font-size: 0.8rem;
-        padding: 8px;
+      font-size: 0.8rem;
+      padding: 8px;
     }
 
     .container-fluid {
-        padding-left: 15px;
-        padding-right: 15px;
+      padding-left: 15px;
+      padding-right: 15px;
     }
   }
 </style>
@@ -171,7 +182,7 @@
               <div class="col-xl-4 col-lg-6 col-sm-2 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body text-center">
-                    <h5 class="mb-2 text-dark font-weight-normal">Orders</h5>
+                    <h5 class="mb-2 font-weight-normal">Orders</h5>
                     <h3>{{total_orders}}</h3>
                   </div>
                 </div>
@@ -179,7 +190,7 @@
               <div class="col-xl-4 col-lg-6 col-sm-2 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body text-center">
-                    <h5 class="mb-2 text-dark font-weight-normal">Total Revenue</h5>
+                    <h5 class="mb-2 font-weight-normal">Total Revenue</h5>
                     <h3>${{total_revenue}}</h3>
                   </div>
                 </div>
@@ -187,7 +198,7 @@
               <div class="col-xl-4 col-lg-6 col-sm-2 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body text-center">
-                    <h5 class="mb-2 text-dark font-weight-normal">This Month</h5>
+                    <h5 class="mb-2 font-weight-normal">This Month</h5>
                     <h3>${{current_month_revenue}}</h3>
                   </div>
                 </div>
@@ -195,39 +206,40 @@
             </div>
             <div class="row" style="margin-top: 50px;">
               <div class="col-12 grid-margin">
-<!--                <div class="card">-->
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-sm-12">
-                        <div>
-                          <h4 class="card-title mb-0">Recent orders</h4>
-                          <br>
-                          <div class="table-responsive">
-                            <table class="table table-hover table-borderless" id="myOrdersTable">
-                              <thead>
-                                <tr>
-                                  <th scope="col">Order #</th>
-                                  <th scope="col">Name</th>
-                                  <th scope="col">Total</th>
-                                  <th scope="col">Status</th>
-                                  <th scope="col">Date</th>
-                                  <th scope="col">Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {% for order in recent_orders %}
-                                <tr>
-                                  <td>{{ order.order_number }}</td>
-                                  <td>{{ order.name }}</td>
-                                  <td>${{ order.total }}</td>
-                                  <td>{{ order.status }}</td>
-                                  <td>{{ order.created_at }}</td>
-                                  <td><a href="{% url 'rest_order_detail' order.order_number %}" class="btn btn-danger">Details</a></td>
-                                </tr>
-                                {% endfor %}
-                              </tbody>
-                            </table>
-                          </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div>
+                        <h4 class="card-title mb-0">Recent orders</h4>
+                        <br>
+                        <div class="table-responsive">
+                          <table class="table table-hover table-borderless" id="myOrdersTable">
+                            <thead>
+                              <tr>
+                                <th scope="col">Order #</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for order in recent_orders %}
+                              <tr>
+<!--                                <td><span class="serial-number">{{ forloop.counter }}</span></td>-->
+                                <td data-label="Order #" style="background: #ff704d; color:white">
+                                  {{ order.order_number }}
+                                </td>
+                                <td data-label="Name">{{ order.name }}</td>
+                                <td data-label="Total"><i class='fas fa-rupee-sign'></i>{{ order.total }}</td>
+                                <td data-label="Status">{{ order.status }}</td>
+                                <td data-label="Date">{{ order.created_at }}</td>
+                                <td data-label="Action"><a href="{% url 'rest_order_detail' order.order_number %}" class="btn btn-danger">Details</a></td>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
                         </div>
                       </div>
                     </div>

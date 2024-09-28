@@ -110,7 +110,7 @@
                           <h6 class="mb-0">{{ item.quantity }}</h6>
                         </div>
                         <div>
-                          <h6 class="mb-0">{{ item.fooditem.price }}</h6>
+                          <h6 class="mb-0"><i class='fas fa-rupee-sign'></i>{{ item.fooditem.price }}</h6>
                         </div>
                         <div class="text-end">
                           <a href="" class="text-muted delete_cart" data-id="{{item.id}}" data-url="{% url 'delete_cart' item.id %}"><i class="fas fa-times"></i></a>
@@ -130,22 +130,22 @@
 
                   <div class="d-flex justify-content-between mb-4">
                     <h5 class="summary-text text-uppercase">Sub Total</h5>
-                    <h5 id="subtotal" class="summary-text">{{ subtotal }}</h5>
+                    <h5 id="subtotal" class="summary-text"><i class='fas fa-rupee-sign'></i>{{ subtotal }}</h5>
                   </div>
 
                   <div class="d-flex justify-content-between mb-4">
                     <h5 class="summary-text text-uppercase">Tax</h5>
-                    <h5 id="tax" class="summary-text">{{ tax }}</h5>
+                    <h5 id="tax" class="summary-text"><i class='fas fa-rupee-sign'></i>{{ tax }}</h5>
                   </div>
 
                   <div class="d-flex justify-content-between mb-4">
                     <h5 class="summary-text text-uppercase">Delivery</h5>
-                    <h5 id="delivery" class="summary-text">{{ delivery }}</h5>
+                    <h5 id="delivery" class="summary-text"><i class='fas fa-rupee-sign'></i>{{ delivery }}</h5>
                   </div>
 
                   <div class="d-flex justify-content-between mb-5">
                     <h5 class="summary-text text-uppercase">Total price</h5>
-                    <h5 id="total" class="summary-text">{{ total }}</h5>
+                    <h5 id="total" class="summary-text"><i class='fas fa-rupee-sign'></i>{{ total }}</h5>
                   </div>
 
                   <a href="{% url 'checkout' %}">

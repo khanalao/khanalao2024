@@ -90,8 +90,8 @@
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ item.fooditem.food_title }}</td>
                             <td>{{ item.quantity }}</td>
-                            <td>${{ item.price }}</td>
-                            <td>${{ item.amount }}</td>
+                            <td><i class='fas fa-rupee-sign'></i>{{ item.price }}</td>
+                            <td><i class='fas fa-rupee-sign'></i>{{ item.amount }}</td>
                           </tr>
                         {% endfor %}
                       </tbody>
@@ -108,22 +108,22 @@
 
                   <div class="d-flex justify-content-between mb-3">
                     <h6 class="summary-text text-uppercase">Subtotal</h6>
-                    <h6 class="summary-text">${{ order.subtotal }}</h6>
+                    <h6 class="summary-text"><i class='fas fa-rupee-sign'></i>{{ order.subtotal }}</h6>
                   </div>
 
                   <div class="d-flex justify-content-between mb-3">
                     <h6 class="summary-text text-uppercase">Tax</h6>
-                    <h6 class="summary-text">${{ order.tax }}</h6>
+                    <h6 class="summary-text"><i class='fas fa-rupee-sign'></i>{{ order.tax }}</h6>
                   </div>
 
                   <div class="d-flex justify-content-between mb-3">
                     <h6 class="summary-text text-uppercase">Delivery</h6>
-                    <h6 class="summary-text">${{ order.delivery }}</h6>
+                    <h6 class="summary-text"><i class='fas fa-rupee-sign'></i>{{ order.delivery }}</h6>
                   </div>
 
                   <div class="d-flex justify-content-between mb-4">
                     <h6 class="summary-text text-uppercase">Total Price</h6>
-                    <h6 class="summary-text">${{ order.total }}</h6>
+                    <h6 class="summary-text"><i class='fas fa-rupee-sign'></i>{{ order.total }}</h6>
                   </div>
                 </div>
 
