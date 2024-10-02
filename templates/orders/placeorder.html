@@ -20,6 +20,13 @@
   top: 13px;
 }
 
+.summary-container {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
 /* Custom responsive adjustments */
 @media (max-width: 768px) {
   /* Adjust the table layout for smaller screens */
@@ -45,8 +52,9 @@
   }
 
   /* Adjust summary text */
-  .summary-text {
-    font-size: 0.9rem;
+   .summary-text {
+    font-size: 0.75rem;
+    padding: 0.2rem !important;
   }
 
   /* Adjust button size */
@@ -73,7 +81,7 @@
 
 </style>
 
-<section class="h-100 h-custom" style="margin-bottom:60px;">
+<section class="h-100 h-custom" style="margin-bottom:630px;">
   <div class="container py-4 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12">
@@ -124,7 +132,7 @@
               </div>
 
               <!-- Right Side (Summary) -->
-              <div class="col-lg-4 bg-body-tertiary">
+              <div class="col-lg-4 bg-body-tertiary summary-container">
                 <div class="p-4">
                   <h3 class="summary-heading fw-bold mb-4 mt-1 pt-1">Summary</h3>
                   <hr class="my-3">

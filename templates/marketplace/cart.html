@@ -13,88 +13,125 @@
   line-height: 2.15;
   padding-left: .75em;
   padding-right: .75em;
+
 }
 
 .card-registration .select-arrow {
   top: 13px;
 }
 
+/* General Styling */
+.cart-item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-item-container > div {
+  flex: 1;
+  margin: 5px;
+}
+
+.summary-container {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
-  .card-body img {
-    width: 60px; /* Reduce food item image size */
-    height: auto;
-  }
-
-  /* Ensure the cart details are displayed in one line */
-  .cart-item-details {
-    display: flex;
-    flex-direction: column;
-  }
-
   .cart-item-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    align-items: left;
-    margin-bottom: 20px;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px;
   }
 
   .cart-item-container > div {
-    flex: 1 1 45%;
-    text-align: left;
+    text-align: center;
     margin: 5px 0;
   }
 
-  .cart-item-container > div img {
-    width: 50px;
-    height: auto;
+  .summary-container {
+    margin-top: 20px;
+
+  }
+
+  h1 {
+    font-size: 1.75rem;
   }
 
   /* Adjustments for very small screens (like mobile) */
   @media (max-width: 575px) {
     .cart-item-container {
-      flex-direction: column;
+      flex-direction: row;
     }
 
     .cart-item-container > div {
-      flex: 1 1 100%;
-      text-align: left;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.2rem;
     }
   }
 }
 
-/* Smaller text for summary */
-.summary-text {
-  font-size: 0.9rem;
-}
-
+/* Styling the Summary Section */
 .summary-heading {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
+  color: #333;
+  text-align: center;
 }
 
-/* Adjust button size */
+.summary-text {
+  font-size: 1rem;
+}
+
 .btn-sm-custom {
-  font-size: 0.9rem;
+  font-size: 1rem;
   padding: 10px 20px;
 }
+
+/* Borders and Styling */
+.card-registration {
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+
+.cart-section {
+  border: 1px solid #333;
+  border-radius: 10px;
+}
+
+.summary-section {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border: 1px solid #007bff;
+  border-radius: 10px;
+}
+
 </style>
 
-<section class="h-100 h-custom" style="margin-bottom:300px;">
+<section class="h-100 h-custom" style="margin-bottom:400px;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12">
-        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+        <div class="card card-registration card-registration-2">
           <div class="card-body p-0">
             <div class="row g-0">
-              <div class="col-lg-8">
-                <div class="p-5">
-                  <div class="d-flex justify-content-between align-items-center mb-5">
+              <!-- Cart Section -->
+              <div class="col-lg-8 cart-section">
+                <div class="p-0">
+                  <div class="d-flex justify-content-between align-items-center mb-5 mt-2 pt-2">
                     <h1 class="fw-bold mb-0">Shopping Cart</h1>
                     <h6 class="mb-0 text-muted">{{ cart_items|length }} items</h6>
                   </div>
-                  <hr class="my-4">
+                  <hr class="my-2">
 
                   {% if cart_items %}
                     {% for item in cart_items %}
@@ -123,9 +160,11 @@
                   {% endif %}
                 </div>
               </div>
-              <div class="col-lg-4 bg-body-tertiary">
-                <div class="p-5">
-                  <h3 class="summary-heading mb-5 mt-2 pt-1">Summary</h3>
+
+              <!-- Summary Section -->
+              <div class="col-lg-4 summary-section mt-3">
+                <div class="p-3 summary-container">
+                  <h3 class="summary-heading mb-2 mt-0 pt-1">Summary</h3>
                   <hr class="my-4">
 
                   <div class="d-flex justify-content-between mb-4">
@@ -155,6 +194,7 @@
                   </a>
                 </div>
               </div>
+
             </div>
           </div>
         </div>

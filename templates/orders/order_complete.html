@@ -2,6 +2,12 @@
 
 {% block content %}
 <style>
+.summary-container {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
 /* Custom adjustments to remove extra spaces */
 @media (max-width: 768px) {
   .table-responsive {
@@ -22,8 +28,9 @@
     font-size: 1.1rem;
   }
 
-  .summary-text {
-    font-size: 0.9rem;
+ .summary-text {
+    font-size: 0.75rem;
+    padding: 0.2rem !important;
   }
 
   .btn-dark {
@@ -48,7 +55,7 @@
 
 </style>
 
-<section class="h-100 h-custom" style="margin-bottom: 60px;">
+<section class="h-100 h-custom" style="margin-bottom: 600px;">
   <div class="container py-4 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12">
@@ -101,8 +108,8 @@
               </div>
 
               <!-- Right Side (Summary) -->
-              <div class="col-lg-4 bg-body-tertiary">
-                <div class="p-4">
+              <div class="col-lg-4 bg-body-tertiary summary-container">
+                <div class="p-2">
                   <h3 class="summary-heading fw-bold mb-4 mt-1 pt-1">Summary</h3>
                   <hr class="my-3">
 

@@ -30,6 +30,11 @@
     width: 300px;
     }
 
+     .ordr{
+
+    color:white;
+    }
+
     /* For tables on smaller screens, ensure they are scrollable */
     .responsive-table {
         overflow-x: auto;
@@ -113,7 +118,7 @@
             <tbody>
                 {% for order in orders %}
                     <tr>
-                        <td style="background: #ff704d; color:white;">{{ order.order_number }}</td>
+                        <td class="ordr" style="background: #ff704d;">{{ order.order_number }}</td>
                         <td>{{ order.name }}</td>
                         <td><i class='fas fa-rupee-sign'></i>{{ order.total }}</td>
                         <td>{{ order.status }}</td>

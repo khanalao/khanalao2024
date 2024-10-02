@@ -1,12 +1,13 @@
 from django.db import models
 
-from vendor.models import Vendor
+from django.db import models
+from django.apps import apps
 
 
 # Create your models here.
 
 class Category(models.Model):
-    rest = models.ForeignKey(Vendor, on_delete=models.CASCADE)
+    rest = models.ForeignKey('vendor.Vendor', on_delete=models.CASCADE)
     cat_name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=100, unique=True)  # url for the category is called slug
     description = models.TextField(max_length=250, blank=True)
@@ -25,7 +26,7 @@ class Category(models.Model):
 
 
 class FoodItem(models.Model):
-    rest = models.ForeignKey(Vendor, on_delete=models.CASCADE)
+    rest = models.ForeignKey('vendor.Vendor', on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='fooditems')
     food_title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=100, unique=False)  # url for the category is called slug

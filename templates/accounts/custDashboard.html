@@ -25,6 +25,10 @@
 
     }
 
+    .ordr{
+        color:white;
+        }
+
    .card{
     width: 300px;
     }
@@ -141,7 +145,7 @@
             <tbody>
                 {% for order in recent_orders %}
                     <tr>
-                        <td style="background: #ff704d; color:white;">{{ order.order_number }}</td>
+                        <td class="ordr" style="background: #ff704d;">{{ order.order_number }}</td>
                         <td>{{ order.name }}</td>
                         <td><i class='fas fa-rupee-sign'></i>{{ order.total }}</td>
                         <td>{{ order.status }}</td>

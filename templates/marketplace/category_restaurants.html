@@ -1,28 +1,153 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
-<div class="container">
-    <h2>Restaurants Serving {{ category.name }}</h2>
-    <div class="row">
-        {% for restaurant in restaurants %}
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card h-100 text-white">
-                    {% if restaurant.user_profile.profile_picture %}
-                    <img class="card-img-top img-fluid" src="{{ restaurant.user_profile.profile_picture.url }}" alt="{{ restaurant.vendor_name }}" />
-                    {% else %}
-                    <img class="card-img-top img-fluid" src="{% static 'img/logo.png' %}" alt="{{ restaurant.vendor_name }}" />
-                    {% endif %}
-                    <div class="card-body">
-                        <a href="{% url 'rest_details' restaurant.vendor_slug %}">
-                            <h4 class="mb-0 fw-bold text-1000">{{ restaurant.vendor_name }}</h4>
-                        </a>
-                        <span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span>
-                        <span class="mb-0 text-primary">46</span>
+
+<style>
+    /* General Card Styles */
+    .restaurant-card {
+        height: auto;
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: #fff;
+    }
+
+    .restaurant-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    .restaurant-card img {
+        width: 80px;
+        height: auto;
+        max-height: 60px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+        border-radius: 50%;
+    }
+
+    .restaurant-card:hover img {
+        transform: scale(1.1);
+    }
+
+    .restaurant-card h5 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .restaurant-card small {
+        font-size: 0.85rem;
+        color: #666;
+    }
+
+    .restaurant-card .btn {
+        font-size: 0.9rem;
+        padding: 5px 12px;
+    }
+
+    /* Mobile Adjustments */
+    @media (max-width: 767px) {
+        .restaurant-card {
+            padding: 12px;
+            margin-bottom: 20px;
+        }
+
+        .restaurant-card img {
+            width: 60px;
+            max-height: 50px;
+        }
+
+        .restaurant-card h5 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .restaurant-card small {
+            font-size: 0.8rem;
+        }
+
+        .restaurant-card .btn {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+        }
+
+        .restaurant-card .d-flex {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .restaurant-card .ms-auto {
+            margin-top: 10px;
+            align-self: flex-end;
+        }
+
+        .restaurant-card .w-100 {
+            margin-top: 10px;
+        }
+    }
+
+    /* Container Adjustments */
+    .container-xxl {
+        padding: 0 15px;
+    }
+</style>
+
+<!-- Restaurant Section Start -->
+<div class="container-fluid page-body-wrapper" style="margin-top: 10px">
+    <div class="container-xxl py-5">
+        <div class="container mt-5">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s mt-5">
+
+                <h1 class="mb-2">Restaurants Serving {{ category.name }}</h1>
+                <h5 class="text-center text-primary fw-normal mb-5">{{ restaurants|length }} Restaurants Found</h5>
+            </div>
+            <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
+                <div class="tab-content">
+                    <div class="tab-pane fade show p-0 active">
+                        <div class="row g-4">
+                            {% for restaurant in restaurants %}
+                            <div class="col-sm-12 col-md-6 col-lg-4">
+                                <div class="restaurant-card border p-3 h-100">
+                                    <div class="d-flex align-items-center">
+                                        <!-- Restaurant Image -->
+                                        {% if restaurant.user_profile.profile_picture %}
+                                        <img class="img-fluid rounded" src="{{ restaurant.user_profile.profile_picture.url }}" alt="{{ restaurant.vendor_name }}">
+                                        {% else %}
+                                        <img class="img-fluid rounded" src="{% static 'img/logo.png' %}" alt="Default Image">
+                                        {% endif %}
+
+                                        <!-- Restaurant Info -->
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between">
+                                                <span>{{ restaurant.vendor_name }}</span>
+                                            </h5>
+                                            <small class="fst-italic">{{ restaurant.user_profile.address }}, {{ restaurant.user_profile.city }}, {{ restaurant.user_profile.state }}</small>
+                                        </div>
+
+                                        <!-- Menu Button -->
+                                        <div class="ms-auto">
+                                            <a href="{% url 'rest_details' restaurant.vendor_slug %}">
+                                                <button class="btn btn-primary" type="submit">Menu</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% empty %}
+                                <p>No restaurants found for this category.</p>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
-        {% empty %}
-            <p>No restaurants found for this category.</p>
-        {% endfor %}
+        </div>
     </div>
 </div>
+<!-- Restaurant Section End -->
+
 {% endblock %}

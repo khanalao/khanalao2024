@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<style>
+<style xmlns="http://www.w3.org/1999/html">
 
   /* Restaurant Card Styling */
   .restaurant-card {
@@ -20,7 +20,7 @@
 
    .card:hover {
     transform: scale(1.05); /* Slightly enlarge the card on hover */
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Add subtle shadow on hover */
+
   }
 
   .card-img-top {
@@ -62,6 +62,8 @@
       width: 1.75rem;
       margin-top: 318px;
     }
+
+
 
 }
 
@@ -181,39 +183,48 @@
               <div class="row">
                 <!-- Row 1 -->
                 <div class="col-sm-6">
+                   <a href="{% url 'category_restaurants' category_slug='pizza' %}">
                   <div class="card card-span h-100 rounded-circle">
                     <img class="img-fluid rounded-circle" src="{% static 'img/gallery/search-pizza.png' %}" alt="Pizza" />
                     <div class="card-body ps-0">
                       <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Pizza</h3>
                     </div>
                   </div>
+                   </a>
                 </div>
                 <div class="col-sm-6">
+                   <a href="{% url 'category_restaurants' category_slug='pizza' %}">
                   <div class="card card-span h-100 rounded-circle">
                     <img class="img-fluid rounded-circle" src="{% static 'img/gallery/burger.png' %}" alt="Burger" />
                     <div class="card-body ps-0">
                       <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h3>
                     </div>
                   </div>
+                   </a>
                 </div>
               </div>
               <div class="row">
                 <!-- Row 2 -->
                 <div class="col-sm-6">
+                   <a href="{% url 'category_restaurants' category_slug='pizza' %}">
                   <div class="card card-span h-100 rounded-circle">
                     <img class="img-fluid rounded-circle" src="{% static 'img/gallery/noodles.png' %}" alt="Noodles" />
                     <div class="card-body ps-0">
                       <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h3>
                     </div>
                   </div>
+                   </a>
                 </div>
+
                 <div class="col-sm-6">
+                   <a href="{% url 'category_restaurants' category_slug='pizza' %}">
                   <div class="card card-span h-100 rounded-circle">
                     <img class="img-fluid rounded-circle" src="{% static 'img/gallery/sub-sandwich.png' %}" alt="Sub-Sandwich" />
                     <div class="card-body ps-0">
                       <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-Sandwich</h3>
                     </div>
                   </div>
+                   </a>
                 </div>
               </div>
             </div>
@@ -223,20 +234,26 @@
               <div class="row">
                 <!-- Row 1 -->
                 <div class="col-sm-6">
+                  <a href="{% url 'category_restaurants' category_slug='pizza' %}">
                   <div class="card card-span h-100 rounded-circle">
                     <img class="img-fluid rounded-circle" src="{% static 'img/gallery/thai-soup.png' %}" alt="Sushi" />
                     <div class="card-body ps-0">
                       <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Soup</h3>
                     </div>
+
                   </div>
+                  </a>
+
                 </div>
                 <div class="col-sm-6">
+                   <a href="{% url 'category_restaurants' category_slug='pizza' %}">
                   <div class="card card-span h-100 rounded-circle">
                     <img class="img-fluid rounded-circle" src="{% static 'img/gallery/dancake.png' %}" alt="Salad" />
                     <div class="card-body ps-0">
                       <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Pan Cake</h3>
                     </div>
                   </div>
+                   </a>
                 </div>
               </div>
               <div class="row">

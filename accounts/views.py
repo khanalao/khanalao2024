@@ -54,7 +54,7 @@ def registerUser(request):
             # send_verification_email(request, user)
 
             messages.success(request, "Your account has been created !")
-            return redirect('registerUser')
+            return redirect('login')
         else:
             print(form.errors)
 

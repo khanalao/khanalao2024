@@ -181,7 +181,11 @@
                                     <p class="card-text">{{ food.description }}</p>
                                     <p class="card-text"><strong><i class='fas fa-rupee-sign' style="font-size: 9px;"></i>{{ food.price }}</strong></p>
                                     <p>
+                                        <form method="post" id="add-to-cart-form">
+                                            {% csrf_token %}
+                                    <input type="hidden" name="food_id" value="{{ food.id }}">
                                         <button class="btn btn-warning add_to_cart" data-id="{{ food.id }}" data-url="{% url 'add_to_cart' food.id %}">+ Cart</button>
+                                </form>
                                     </p>
                                 </div>
                             </div>
@@ -229,6 +233,50 @@ document.addEventListener('DOMContentLoaded', function () {
         contentWrapper.classList.toggle('fullwidth');
     });
 });
+</script>
+
+<script>
+    // Assuming you have an add to cart button with class 'add-to-cart'
+document.querySelectorAll('.add_to_cart').forEach(button => {
+    button.addEventListener('click', function(event) {
+        const foodId = this.getAttribute('data-id'); // Assuming you're storing food ID in a data attribute
+        fetch(`/add_to_cart/${foodId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'), // Include CSRF token for Django
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'Success') {
+                // Update the cart counter
+                document.querySelector('.cart-counter').textContent = data.cart_count;
+                alert(data.message); // Optional: Show a success message
+            } else {
+                alert(data.message); // Show an error message
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+});
+
+// Helper function to get CSRF token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
 </script>
 
 {% endblock %}
