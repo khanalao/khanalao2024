@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Restaurants Serving {{ category.name }}</h2>
+    <div class="row">
+        {% for restaurant in restaurants %}
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100 text-white">
+                    {% if restaurant.user_profile.profile_picture %}
+                    <img class="card-img-top img-fluid" src="{{ restaurant.user_profile.profile_picture.url }}" alt="{{ restaurant.vendor_name }}" />
+                    {% else %}
+                    <img class="card-img-top img-fluid" src="{% static 'img/logo.png' %}" alt="{{ restaurant.vendor_name }}" />
+                    {% endif %}
+                    <div class="card-body">
+                        <a href="{% url 'rest_details' restaurant.vendor_slug %}">
+                            <h4 class="mb-0 fw-bold text-1000">{{ restaurant.vendor_name }}</h4>
+                        </a>
+                        <span class="text-primary fs--1 me-1"><i class="fas fa-star"></i></span>
+                        <span class="mb-0 text-primary">46</span>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No restaurants found for this category.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
