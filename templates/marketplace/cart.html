@@ -64,6 +64,11 @@
     font-size: 1.75rem;
   }
 
+  h6 {
+    font-weight: 600;
+    font-size: 0.75rem;
+    }
+
   /* Adjustments for very small screens (like mobile) */
   @media (max-width: 575px) {
     .cart-item-container {
@@ -127,7 +132,7 @@
               <!-- Cart Section -->
               <div class="col-lg-8 cart-section">
                 <div class="p-0">
-                  <div class="d-flex justify-content-between align-items-center mb-5 mt-2 pt-2">
+                  <div class="d-flex justify-content-between align-items-center mb-3 mt-2 p-3">
                     <h1 class="fw-bold mb-0">Shopping Cart</h1>
                     <h6 class="mb-0 text-muted">{{ cart_items|length }} items</h6>
                   </div>
@@ -135,7 +140,7 @@
 
                   {% if cart_items %}
                     {% for item in cart_items %}
-                      <div class="cart-item-container">
+                      <div class="cart-item-container p-2">
                         <div>
                           <img src="{{ item.fooditem.image.url }}" alt="{{ item.fooditem.name }}" class="img-fluid rounded-3">
                         </div>

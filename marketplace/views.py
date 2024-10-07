@@ -124,6 +124,7 @@ def add_to_cart(request, food_id=None):
 
                 # Calculate the updated cart count
                 cart_count = Cart.objects.filter(user=request.user).aggregate(total=Sum('quantity'))['total'] or 0
+                print(cart_count)
 
                 return JsonResponse({'status': 'Success', 'message': 'Food Item added to cart.', 'cart_count': cart_count})
 

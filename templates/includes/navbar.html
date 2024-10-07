@@ -80,24 +80,7 @@
 <script src="{% static 'js/theme.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-    // Toggle the navbar when the toggle button is clicked
-    const navbarToggle = document.querySelector('.navbar-toggler');
-    const navbarContent = document.getElementById('navbarContent');
 
-    navbarToggle.addEventListener('click', () => {
-        navbarContent.classList.toggle('show'); // Use Bootstrap's class to show/hide
-    });
-
-    // Close the navbar when a link is clicked (optional)
-    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            if (navbarContent.classList.contains('show')) {
-                navbarContent.classList.remove('show'); // Close the navbar
-            }
-        });
-    });
-</script>
 
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
 
