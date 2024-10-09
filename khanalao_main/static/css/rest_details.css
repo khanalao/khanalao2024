@@ -1,0 +1,141 @@
+ .category-nav {
+        position: fixed;
+        top: 60px;
+        background-color: #f2f2f2;
+        height: calc(100% - 60px);
+        overflow-y: auto;
+    }
+
+    .category-item {
+        cursor: pointer;
+    }
+
+    .category-item:hover {
+        background-color: #ff3300;
+        color: black;
+    }
+
+    .menu-item {
+        margin-bottom: 20px;
+    }
+
+    .menu-item img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .menu-item .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .menu-item .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-item {
+        width: 31%; /* Adjust this width to fit three cards on larger screens if needed */
+        margin-right: 1.5%; /* Add spacing between cards */
+    }
+
+    .menu-item:nth-child(3n) {
+        margin-right: 0; /* Remove margin for every third item to align properly */
+    }
+
+    .sidebar-sticky {
+        position: fixed;
+        top: 130px;
+        background-color: #f2f2f2;
+        height: calc(100% - 60px);
+        overflow-y: auto;
+        transition: transform 0.3s ease;
+        transform: translateX(-100%); /* Hidden by default */
+        z-index: 1050;
+    }
+
+    .sidebar-sticky.active {
+        transform: translateX(0); /* Slide in when active */
+    }
+
+    .content-wrapper {
+        margin-left: 220px;
+        transition: margin-left 0.3s ease;
+        z-index: 1050;
+    }
+
+    .content-wrapper.fullwidth {
+        margin-left: 0; /* Full width when sidebar is hidden */
+    }
+
+    /* Media Queries for Mobile View */
+    @media (max-width: 768px) {
+        .sidebar-sticky {
+            width: 80%;
+            transform: translateX(-100%);
+        }
+
+        .sidebar-sticky.active {
+            transform: translateX(0);
+        }
+
+        .content-wrapper {
+            margin-left: 0;
+        }
+
+        #toggleSidebar {
+            position: fixed;
+            top: 70px;
+            left: 20px;
+            z-index: 1100;
+        }
+
+        .menu-item {
+            padding: 0px;
+            }
+
+        .card{
+            flex-direction: row;
+            }
+
+        .card-body{
+            padding: 0rem 0rem;
+           }
+
+        .menu-item {
+            width: 100%; /* Full width for small screens */
+            display: flex; /* Use flexbox to align image and text horizontally */
+            flex-direction: row; /* Ensure the image and text are in the same row */
+            align-items: center; /* Align items vertically centered */
+            padding: 10px;
+        }
+
+        .menu-item img {
+            width: 50%; /* Make the image take up 30% of the width */
+            height: auto; /* Maintain aspect ratio */
+            margin-right: 15px;
+        }
+
+        .menu-item .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 70%;
+        }
+
+        .card-body h5 {
+            font-size: 15px;
+            margin-top: 3px;
+        }
+
+        .card-body p {
+            font-size: 11px;
+        }
+
+        .add_to_cart {
+            width: 95%;
+            font-size: 13px;
+            margin-right: 5px;
+        }
+    }

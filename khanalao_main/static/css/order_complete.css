@@ -1,0 +1,50 @@
+.summary-container {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+/* Custom adjustments to remove extra spaces */
+@media (max-width: 768px) {
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-striped {
+    font-size: 0.85rem;
+  }
+
+  /* Adjust margin and padding */
+  .table td, .table th {
+    padding: 0.5rem;
+  }
+
+  .summary-heading {
+    font-size: 1.1rem;
+  }
+
+ .summary-text {
+    font-size: 0.75rem;
+    padding: 0.2rem !important;
+  }
+
+  .btn-dark {
+    font-size: 0.85rem;
+    padding: 8px 15px;
+  }
+
+  .mb-5 {
+    margin-bottom: 1.2rem !important;
+  }
+
+  .mt-2, .pt-1 {
+    margin-top: 0.5rem !important;
+    padding-top: 0.3rem !important;
+  }
+}
+
+.table th, .table td {
+  text-align: center;
+  vertical-align: middle;
+}

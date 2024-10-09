@@ -1,0 +1,82 @@
+ .navbar-brand img {
+        width: 30px;
+    }
+
+    .navbar-brand span {
+        font-size: 1.25rem;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .navbar-toggler {
+        border-color: transparent;
+    }
+
+    .navbar-nav {
+        text-align: left; /* Align items to the left */
+    }
+
+    .navbar-collapse {
+        justify-content: flex-start; /* Align the entire navbar contents to the left */
+    }
+
+    .cart-counter {
+    border-radius: 50%;
+    top: -10px;
+    right: -10px;
+    font-size: 0.75em; /* Adjust the size of the counter */
+    padding: 0.25em 0.5em;
+}
+
+.nav-item.position-relative {
+    display: flex;
+    align-items: center;
+}
+
+.nav-item.position-relative .fa-shopping-cart {
+    margin-right: 5px; /* Adds space between the icon and the counter */
+}
+
+    @media (max-width: 393px) {
+        .navbar-brand img {
+            width: 25px;
+        }
+
+        .navbar-brand span {
+            font-size: 1rem;
+        }
+
+        .btn-sm {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.75rem;
+        }
+
+        .navbar-nav .nav-link {
+            padding: 0.25rem 0.5rem;
+        }
+
+        .navbar-collapse {
+            text-align: left;
+        }
+
+        .navbar-nav {
+            width: 100%;
+            text-align: left;
+            margin-left: 0; /* Ensure no extra margin on the left */
+        }
+
+
+    .cart-counter {
+        top: 7px;
+        right: 245px;
+    }
+
+    .nav-item.position-relative .fa-shopping-cart {
+        margin-top:10px;
+        margin-left: 10px;
+        font-size: 1.25em; /* Adjust size for smaller screens */
+    }
+    }

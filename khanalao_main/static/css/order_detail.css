@@ -1,0 +1,95 @@
+ @media (max-width: 767px) {
+
+    .content-wrapper{
+      background: white;
+      }
+
+    .main-panel {
+      padding: 5px;
+    }
+
+    h2 {
+      font-size: 2rem; /* Make the heading smaller */
+      text-align: center;
+      background: #ff704d;
+      height:40px;
+    }
+
+
+
+    /* Adjust the table layout for mobile */
+    .responsive-table {
+      overflow-x: auto;
+
+    }
+
+    .p-5 {
+    padding: 1rem !important;
+}
+
+    table thead {
+      display: none; /* Hide headers for mobile */
+    }
+
+    table tbody tr {
+      display: block;
+      margin-bottom: 10px;
+      border-bottom: 1px solid black;
+      padding-bottom: 5px;
+    }
+
+    table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    table tbody tr td {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px;
+      font-size: 0.9rem; /* Smaller font size for mobile */
+    }
+
+    table tbody tr td::before {
+      content: attr(data-label); /* Label for mobile view */
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    /* Adjust the summary section for mobile */
+    .col-lg-4 {
+      padding: 10px;
+    }
+
+    .fw-bold {
+      font-size: 1.2rem; /* Slightly smaller for mobile */
+    }
+
+    .text-uppercase {
+      font-size: 1rem; /* Adjust font size */
+    }
+
+    .btn-danger {
+      font-size: 0.8rem;
+      padding: 6px;
+    }
+
+    .container-fluid {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .card-registration-2 {
+      margin: 0px;
+    }
+
+    .fa-check-circle {
+      font-size: 80px; /* Adjust icon size for mobile */
+    }
+  }
+
+  /* For screens larger than 767px, ensure good readability */
+  @media (min-width: 768px) {
+    .fa-check-circle {
+      font-size: 100px;
+    }
+  }

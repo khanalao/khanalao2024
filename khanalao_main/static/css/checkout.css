@@ -1,0 +1,81 @@
+/* Style for full-height custom class */
+@media (min-width: 1025px) {
+  .h-custom {
+    height: 100vh !important;
+  }
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+  font-size: 1rem;
+  line-height: 2.15;
+  padding-left: .75em;
+  padding-right: .75em;
+}
+
+.card-registration .select-arrow {
+  top: 13px;
+}
+
+.form-check-input {
+  display: inline-block;
+  margin-right: 10px;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.summary-container {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+/* Custom responsive adjustments */
+@media (max-width: 768px) {
+  /* Reduce space between form and summary on smaller screens */
+  .input-box {
+    margin-bottom: 1rem;
+  }
+
+  .summary-text {
+    font-size: 0.75rem;
+    padding: 0.2rem !important;
+  }
+
+
+
+  /* Adjust the table layout for smaller screens */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Adjust the table font size */
+  .table-striped {
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  /* Table cell padding adjustment for mobile view */
+  .table td, .table th {
+    padding: 0.5rem;
+  }
+
+  /* Make summary headings smaller */
+  .summary-heading {
+    font-size: 1.2rem;
+  }
+
+  /* Adjust button size */
+  .btn-dark {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+}
+
+.table th, .table td {
+  text-align: center;
+  vertical-align: middle;
+}

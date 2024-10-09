@@ -8,78 +8,10 @@
 
 <link href="{% static 'css/dashboard.css' %}" rel="stylesheet" />
 <link href="{% static 'css/iconmoon.css' %}" rel="stylesheet" />
+<link href="{% static 'css/myorders.css' %}" rel="stylesheet" />
 
 <style>
-    @media (max-width: 767px) {
 
-        .content-wrapper{
-      background: white;
-      }
-
-    .main-panel {
-        padding: 5px;
-    }
-    h2 {
-        font-size: 1.75rem;
-        text-align: center;
-         background: #ff704d;
-         color:white;
-    }
-
-    .card{
-    width: 300px;
-    }
-
-     .ordr{
-
-    color:white;
-    }
-
-    /* For tables on smaller screens, ensure they are scrollable */
-    .responsive-table {
-        overflow-x: auto;
-    }
-
-    table thead {
-        display: none; /* Hide table headers on mobile */
-    }
-
-    table tbody tr {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 10px;
-        border-bottom: 1px solid black;
-    }
-
-    table tbody tr:last-child {
-        border-bottom: none;
-    }
-
-    table tbody tr td {
-        display: flex;
-        justify-content: left;
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 10px;
-        border-bottom: none;
-    }
-
-    table tbody tr td::before {
-        content: attr(data-label); /* Add labels for mobile view */
-        font-weight: bold;
-    }
-
-    /* Adjust button size */
-    .btn-danger {
-        font-size: 0.8rem;
-        padding: 8px;
-    }
-
-    .container-fluid {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-}
 </style>
 
 <!--Main Section Start-->
@@ -104,7 +36,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="user-orders-list">
     <div class="responsive-table">
-        <table class="table table-hover table-borderless mb-2" id="myorderstable">
+        <table class="table table-hover table-borderless mb-2 mt-3" id="myorderstable">
             <thead>
                 <tr>
                     <th scope="col">Order</th>
