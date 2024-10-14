@@ -18,9 +18,10 @@
   {% include 'includes/c_sidebar.html' %}
   <div class="main-panel mb-5">
 
-    <h2 class="text-dark font-weight-bold mb-2 mt-5">Order Details</h2>
+
 
     <div class="row content-wrapper d-xl-flex justify-content-between align-items-start">
+      <h2 class="font-weight-bold mb-2 mt-5">Order Details</h2>
       <div class="row">
         <div class="col-sm-12">
           <div class="row d-flex justify-content-center align-items-center h-100 mb-5">
@@ -34,7 +35,7 @@
                         <div class="d-flex flex-column align-items-start mb-5">
                           <div style="margin-top: 0px;">
                             <p style="color:black; font-size:16px;">
-                              <strong>Order Number:</strong><span style="background: #ff704d;"> {{ order.order_number }} </span><br>
+                              <strong>Order Number:</strong><span style="background: #ff704d; color:white;"> {{ order.order_number }} </span><br>
                               <strong>Name:</strong> {{ order.name }} <br>
                               <strong>Address:</strong> {{ order.address }}, {{ order.city }} - {{ order.pin_code }} <br>
                               {{ order.state }}, {{ order.country }} <br>

@@ -6,14 +6,20 @@
 <style xmlns="http://www.w3.org/1999/html">
 
   /* Restaurant Card Styling */
+
   .restaurant-card {
-    height: 350px; /* Set a fixed height for the restaurant card */
+    height: 300px; /* Set a fixed height for the restaurant card */
     width: 100%; /* Ensure width is responsive */
     margin-bottom: 15px;
   }
 
+  .restaurant-card .img-fluid{
+    height: 200px;
+    width: 100%;
+    }
+
    .category-card {
-    height: 250px; /* Set a fixed height for the category card */
+    height: 100px; /* Set a fixed height for the category card */
     width: 100%; /* Ensure width is responsive */
     margin-bottom: 15px;
   }
@@ -24,7 +30,7 @@
   }
 
   .card-img-top {
-    height: 150px; /* Set a fixed height for the images */
+    height: 100px; /* Set a fixed height for the images */
     width: 100%;
     object-fit: cover; /* Ensure the images cover the area properly without distortion */
   }
@@ -35,10 +41,22 @@
     text-align: center; /* Center text inside the card body */
   }
 
+  .carousel-item.active {
+    display: flex;
+    }
+
   /* Responsive Adjustments for Smaller Screens */
   @media (max-width: 393px) {
+  .carousel-item.active {
+    display: block;
+    }
     .restaurant-card {
       height: 200px; /* Adjust the card height for smaller screens */
+    }
+
+     .restaurant-card .img-fluid {
+      height: 100px;
+      width: 100%;
     }
 
     .card-img-top {

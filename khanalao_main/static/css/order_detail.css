@@ -1,7 +1,12 @@
+ .content-wrapper{
+    margin-left: 300px;
+    }
+
  @media (max-width: 767px) {
 
     .content-wrapper{
       background: white;
+      margin-left: 0px;
       }
 
     .main-panel {
@@ -12,6 +17,7 @@
       font-size: 2rem; /* Make the heading smaller */
       text-align: center;
       background: #ff704d;
+      color: white;
       height:40px;
     }
 

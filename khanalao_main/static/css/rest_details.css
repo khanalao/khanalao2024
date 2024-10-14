@@ -44,6 +44,12 @@
         margin-right: 0; /* Remove margin for every third item to align properly */
     }
 
+     #toggleSidebar {
+            position: fixed;
+            top: 87px;
+            left: 15px;
+            z-index: 1100;
+        }
     .sidebar-sticky {
         position: fixed;
         top: 130px;
@@ -86,9 +92,10 @@
 
         #toggleSidebar {
             position: fixed;
-            top: 70px;
-            left: 20px;
+            top: 82px;
+            left: 5px;
             z-index: 1100;
+
         }
 
         .menu-item {
