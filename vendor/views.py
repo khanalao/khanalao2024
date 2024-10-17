@@ -83,6 +83,7 @@ def foodItems_by_category(request, pk=None):
 def add_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
+
         if form.is_valid():
             cat_name = form.cleaned_data['cat_name']
             category = form.save(commit=False)
@@ -98,6 +99,7 @@ def add_category(request):
 
     context = {
         'form': form,
+
     }
     return render(request, 'restaurant/add_category.html', context)
 

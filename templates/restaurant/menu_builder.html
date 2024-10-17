@@ -73,12 +73,13 @@
     <div class="title">Build Your Food Menu</div>
     <div class="content" style="margin-top:20px;">
         <h4 style="color: #e63900;">Menu Categories</h4>
+        {% if cat %}
         <div class="float-right mb-4">
             <a href="{% url 'add_category' %}"><button class="btn btn-outline-danger btn-lg mr-2" type="submit"><i class="fa fa-plus" style="font-size:16px; color:black;"></i> Category</button></a>
             <a href="{% url 'add_food' %}"><button class="btn btn-outline-danger btn-lg" type="submit"><i class="fa fa-plus" style="font-size:16px; color:black;"></i> Food Item</button></a>
         </div>
 
-        {% if cat %}
+
 
         <table class="table table-hover">
   <thead style="background-color:#ff471a; color:white;">
@@ -107,7 +108,7 @@
          {% else %}
             <h4 class="text-center">NO Categories FOUND !!</h4>
         <div class="text-center mt-3">
-            <a href="{% url 'add_food' %}"><button class="btn btn-outline-danger btn-lg mr-2" type="submit"><i class="fa fa-plus" style="font-size:16px; color:black;"></i> Category</button></a>
+            <a href="{% url 'add_category' %}"><button class="btn btn-outline-danger btn-lg mr-2" type="submit"><i class="fa fa-plus" style="font-size:16px; color:black;"></i> Category</button></a>
         </div>
         {% endif %}
     </div>

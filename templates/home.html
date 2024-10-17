@@ -211,7 +211,7 @@
                    </a>
                 </div>
                 <div class="col-sm-6">
-                   <a href="{% url 'category_restaurants' category_slug='pizza' %}">
+                   <a href="{% url 'category_restaurants' category_slug='burger' %}">
                   <div class="card card-span h-100 rounded-circle">
                     <img class="img-fluid rounded-circle" src="{% static 'img/gallery/burger.png' %}" alt="Burger" />
                     <div class="card-body ps-0">
@@ -224,22 +224,22 @@
               <div class="row">
                 <!-- Row 2 -->
                 <div class="col-sm-6">
-                   <a href="{% url 'category_restaurants' category_slug='pizza' %}">
+                   <a href="{% url 'category_restaurants' category_slug='pasta' %}">
                   <div class="card card-span h-100 rounded-circle">
                     <img class="img-fluid rounded-circle" src="{% static 'img/gallery/noodles.png' %}" alt="Noodles" />
                     <div class="card-body ps-0">
-                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h3>
+                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Pasta</h3>
                     </div>
                   </div>
                    </a>
                 </div>
 
                 <div class="col-sm-6">
-                   <a href="{% url 'category_restaurants' category_slug='pizza' %}">
+                   <a href="{% url 'category_restaurants' category_slug='sandwich' %}">
                   <div class="card card-span h-100 rounded-circle">
                     <img class="img-fluid rounded-circle" src="{% static 'img/gallery/sub-sandwich.png' %}" alt="Sub-Sandwich" />
                     <div class="card-body ps-0">
-                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-Sandwich</h3>
+                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Sandwich</h3>
                     </div>
                   </div>
                    </a>
@@ -252,7 +252,7 @@
               <div class="row">
                 <!-- Row 1 -->
                 <div class="col-sm-6">
-                  <a href="{% url 'category_restaurants' category_slug='pizza' %}">
+                  <a href="{% url 'category_restaurants' category_slug='soup' %}">
                   <div class="card card-span h-100 rounded-circle">
                     <img class="img-fluid rounded-circle" src="{% static 'img/gallery/thai-soup.png' %}" alt="Sushi" />
                     <div class="card-body ps-0">
@@ -264,11 +264,11 @@
 
                 </div>
                 <div class="col-sm-6">
-                   <a href="{% url 'category_restaurants' category_slug='pizza' %}">
+                   <a href="{% url 'category_restaurants' category_slug='shakes' %}">
                   <div class="card card-span h-100 rounded-circle">
                     <img class="img-fluid rounded-circle" src="{% static 'img/gallery/dancake.png' %}" alt="Salad" />
                     <div class="card-body ps-0">
-                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Pan Cake</h3>
+                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Shakes</h3>
                     </div>
                   </div>
                    </a>
@@ -277,20 +277,24 @@
               <div class="row">
                 <!-- Row 2 -->
                 <div class="col-sm-6">
+                   <a href="{% url 'category_restaurants' category_slug='paratha' %}">
                   <div class="card card-span h-100 rounded-circle">
                     <img class="img-fluid rounded-circle" src="{% static 'img/gallery/steak.png' %}" alt="Steak" />
                     <div class="card-body ps-0">
-                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h3>
+                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Parathas</h3>
                     </div>
                   </div>
+                   </a>
                 </div>
                 <div class="col-sm-6">
+                   <a href="{% url 'category_restaurants' category_slug='maggi' %}">
                   <div class="card card-span h-100 rounded-circle">
                     <img class="img-fluid rounded-circle" src="{% static 'img/gallery/chowmein.png' %}" alt="Pasta" />
                     <div class="card-body ps-0">
-                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h3>
+                      <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Maggi</h3>
                     </div>
                   </div>
+                   </a>
                 </div>
               </div>
             </div>
@@ -332,7 +336,7 @@
     <div id="restaurantCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         {% for r in rest %}
-        {% if forloop.counter0|divisibleby:2 %}
+        {% if forloop.counter0|divisibleby:4 %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
           <div class="row gx-4 gy-4">
         {% endif %}
@@ -355,7 +359,7 @@
           </div>
         </div>
 
-        {% if forloop.counter0|add:1|divisibleby:2 or forloop.last %}
+        {% if forloop.counter0|add:1|divisibleby:4 or forloop.last %}
           </div>
         </div>
         {% endif %}
@@ -392,14 +396,14 @@
               <p class="mb-md-0">Pick your favorite food</p>
             </div>
           </div>
-          <div class="col-sm-6 col-md-3 mb-3">
+          <div class="col-sm-6 col-md-3 mb-4">
             <div class="text-center">
               <img class="shadow-icon" src="{% static 'img/gallery/pay.png' %}" height="112" alt="Payment" />
               <h6 class="mt-2 fw-bold">Payment</h6>
               <p class="mb-md-0">Cash on Delivery</p>
             </div>
           </div>
-          <div class="col-sm-6 col-md-3 mb-3">
+          <div class="col-sm-6 col-md-3 mb-4">
             <div class="text-center">
               <img class="shadow-icon" src="{% static 'img/gallery/meals.png' %}" height="112" alt="Delivery" />
               <h6 class="mt-2 fw-bold">Delivery</h6>

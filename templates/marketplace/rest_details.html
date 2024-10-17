@@ -7,7 +7,7 @@
 </style>
 
 <!-- Toggle button for sidebar -->
-<button id="toggleSidebar" class="btn btn-primary" style="">Menu</button>
+<button id="toggleSidebar" class="btn btn-primary" style="">Menu<i class="fas fa-angle-right" style="font-size:25px;"></i></button>
 
 <div class="container-fluid" style="margin-top: 80px; margin-left: 20px;">
     <div class="row">
@@ -25,6 +25,15 @@
         </div>
 
         <!-- Main content -->
+        {% if messages %}
+  <div class="alert-container">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mb-5 mt-5">
             <div class="pt-3 content-wrapper">
                 {% for c in cat %}
@@ -94,34 +103,39 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-
 <script>
-    // Assuming you have an add to cart button with class 'add-to-cart'
-document.querySelectorAll('.add_to_cart').forEach(button => {
-    button.addEventListener('click', function(event) {
-        const foodId = this.getAttribute('data-id'); // Assuming you're storing food ID in a data attribute
-        fetch(`/add_to_cart/${foodId}/`, {
+document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const foodId = this.dataset.foodid;  // Assuming data-foodid attribute holds the food ID
+
+        fetch(`/add-to-cart/${foodId}/`, {
             method: 'POST',
             headers: {
-                'X-CSRFToken': getCookie('csrftoken'), // Include CSRF token for Django
-                'X-Requested-With': 'XMLHttpRequest'
+                'X-CSRFToken': getCookie('csrftoken'), // Use CSRF token for security
+                'x-requested-with': 'XMLHttpRequest'
             }
         })
         .then(response => response.json())
         .then(data => {
             if (data.status === 'Success') {
-                // Update the cart counter
-                document.querySelector('.cart-counter').textContent = data.cart_count;
-                alert(data.message); // Optional: Show a success message
+                // Update the cart count on the page
+                document.querySelector('#cart-count').innerText = data.cart_count;
+
+                // Show a success alert dynamically
+                showAlert('success', data.message);
             } else {
-                alert(data.message); // Show an error message
+                // Show an error alert
+                showAlert('error', data.message);
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error);
+            showAlert('error', 'Something went wrong. Please try again.');
+        });
     });
 });
 
-// Helper function to get CSRF token
+// Helper function to get the CSRF token from the cookie (Django uses CSRF tokens)
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -137,6 +151,22 @@ function getCookie(name) {
     return cookieValue;
 }
 
+// Function to show an alert dynamically
+function showAlert(type, message) {
+    const alertBox = document.createElement('div');
+    alertBox.classList.add('alert', `alert-${type}`);
+    alertBox.innerText = message;
+
+    // Append the alert box to the body or a specific container
+    document.body.appendChild(alertBox);
+
+    // Automatically remove the alert after 3 seconds
+    setTimeout(() => {
+        alertBox.remove();
+    }, 3000);
+}
+
 </script>
+
 
 {% endblock %}

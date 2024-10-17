@@ -1,4 +1,5 @@
 import razorpay as razorpay
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch
 from django.http import HttpResponse, JsonResponse
@@ -126,7 +127,9 @@ def add_to_cart(request, food_id=None):
                 cart_count = Cart.objects.filter(user=request.user).aggregate(total=Sum('quantity'))['total'] or 0
                 print(cart_count)
 
-                return JsonResponse({'status': 'Success', 'message': 'Food Item added to cart.', 'cart_count': cart_count})
+                # messages.success(request, f"{fooditem.food_title} has been added to your cart!")
+                return JsonResponse(
+                    {'status': 'Success', 'message': 'Food Item added to cart.', 'cart_count': cart_count})
 
             except FoodItem.DoesNotExist:
                 return JsonResponse({'status': 'Failed', 'message': 'This food does not exist!'})
@@ -256,11 +259,11 @@ def payment_success(request):
 
 
 def category_restaurants(request, category_slug):
-    category = get_object_or_404(Category, slug=category_slug)
-    restaurants = Vendor.objects.filter(category__slug=category_slug, is_approved=True)
+    categories = Category.objects.filter(slug__icontains=category_slug)
+    restaurants = Vendor.objects.filter(category__in=categories, is_approved=True).distinct()
 
     context = {
-        'category': category,
+        'category': categories,
         'restaurants': restaurants,
     }
 
