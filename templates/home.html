@@ -7,6 +7,26 @@
 
   /* Restaurant Card Styling */
 
+.card-span img {
+  width: 180px;  /* Adjust width to your preference */
+  height: 180px; /* Adjust height to your preference */
+  object-fit: cover; /* Ensures the image covers the entire area without distortion */
+}
+
+.card-span {
+  width: 220px;  /* Adjust as per your design needs */
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto; /* Center the card */
+}
+
+  .restaurantCarousel {
+    display: flex;
+    flex:wrap: wrap;
+  }
+
   .restaurant-card {
     height: 300px; /* Set a fixed height for the restaurant card */
     width: 100%; /* Ensure width is responsive */
@@ -45,8 +65,40 @@
     display: flex;
     }
 
+    .carousel-item .col-sm-6,
+  .carousel-item .col-md-4,
+  .carousel-item .col-xl {
+    flex: 0 0 50%; /* Makes each item take up 50% of the row width */
+    max-width: 50%;
+  }
+
+ .restaurants .col-sm-6,
+.restaurants .col-md-4,
+.restaurants .col-xl {
+  flex: 0 0 25%; /* 25% width for restaurants */
+  max-width: 25%;
+}
+
   /* Responsive Adjustments for Smaller Screens */
   @media (max-width: 393px) {
+
+  .card-span img {
+  width: 100px;  /* Adjust width to your preference */
+  height: 100px; /* Adjust height to your preference */
+  object-fit: cover; /* Ensures the image covers the entire area without distortion */
+}
+
+.card-span {
+  width: 150px;  /* Adjust as per your design needs */
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -20px;
+
+}
+
+
   .carousel-item.active {
     display: block;
     }
@@ -81,7 +133,12 @@
       margin-top: 318px;
     }
 
-
+  .carousel-item .col-sm-6,
+  .carousel-item .col-md-4,
+  .carousel-item .col-xl {
+    flex: 0 0 50%; /* Makes each item take up 50% of the row width */
+    max-width: 50%;
+  }
 
 }
 
@@ -92,12 +149,7 @@
   }
 
   /* Adjust category cards to fit in two rows */
-  .carousel-item .col-sm-6,
-  .carousel-item .col-md-4,
-  .carousel-item .col-xl {
-    flex: 0 0 50%; /* Makes each item take up 50% of the row width */
-    max-width: 50%;
-  }
+
 
   .carousel-item {
     padding: 10px;
@@ -197,7 +249,7 @@
         <div class="carousel slide" id="carouselSearchByFood" data-bs-touch="true" data-bs-interval="false">
           <div class="carousel-inner">
             <!-- First carousel item (active) -->
-            <div class="carousel-item active">
+            <div class="categories carousel-item active">
               <div class="row">
                 <!-- Row 1 -->
                 <div class="col-sm-6">
@@ -226,7 +278,7 @@
                 <div class="col-sm-6">
                    <a href="{% url 'category_restaurants' category_slug='pasta' %}">
                   <div class="card card-span h-100 rounded-circle">
-                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/noodles.png' %}" alt="Noodles" />
+                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/download.jfif' %}" alt="Noodles" />
                     <div class="card-body ps-0">
                       <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Pasta</h3>
                     </div>
@@ -237,7 +289,7 @@
                 <div class="col-sm-6">
                    <a href="{% url 'category_restaurants' category_slug='sandwich' %}">
                   <div class="card card-span h-100 rounded-circle">
-                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/sub-sandwich.png' %}" alt="Sub-Sandwich" />
+                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/crispy-sandwitch.png' %}" alt="Sub-Sandwich" />
                     <div class="card-body ps-0">
                       <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Sandwich</h3>
                     </div>
@@ -254,7 +306,7 @@
                 <div class="col-sm-6">
                   <a href="{% url 'category_restaurants' category_slug='soup' %}">
                   <div class="card card-span h-100 rounded-circle">
-                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/thai-soup.png' %}" alt="Sushi" />
+                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/download (14).jfif' %}" alt="Sushi" />
                     <div class="card-body ps-0">
                       <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Soup</h3>
                     </div>
@@ -266,7 +318,7 @@
                 <div class="col-sm-6">
                    <a href="{% url 'category_restaurants' category_slug='shakes' %}">
                   <div class="card card-span h-100 rounded-circle">
-                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/dancake.png' %}" alt="Salad" />
+                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/download (5).jfif' %}" alt="Salad" />
                     <div class="card-body ps-0">
                       <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Shakes</h3>
                     </div>
@@ -279,7 +331,7 @@
                 <div class="col-sm-6">
                    <a href="{% url 'category_restaurants' category_slug='paratha' %}">
                   <div class="card card-span h-100 rounded-circle">
-                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/steak.png' %}" alt="Steak" />
+                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/paratha.jfif' %}" alt="Steak" />
                     <div class="card-body ps-0">
                       <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Parathas</h3>
                     </div>
@@ -289,7 +341,7 @@
                 <div class="col-sm-6">
                    <a href="{% url 'category_restaurants' category_slug='maggi' %}">
                   <div class="card card-span h-100 rounded-circle">
-                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/chowmein.png' %}" alt="Pasta" />
+                    <img class="img-fluid rounded-circle" src="{% static 'img/gallery/images.jfif' %}" alt="Pasta" />
                     <div class="card-body ps-0">
                       <h3 class="text-center fw-bold text-1000 text-truncate mb-2">Maggi</h3>
                     </div>
@@ -337,7 +389,7 @@
       <div class="carousel-inner">
         {% for r in rest %}
         {% if forloop.counter0|divisibleby:4 %}
-        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <div class="carousel-item restaurants {% if forloop.first %}active{% endif %}">
           <div class="row gx-4 gy-4">
         {% endif %}
 
@@ -366,7 +418,7 @@
         {% endfor %}
       </div>
 
-      <div class="col-lg-4 text-lg-end text-center" style="color:white;">
+      <div class="col-lg-8 text-lg-end text-center" style="color:white;">
         <a class="btn btn-danger me-2" href="{% url 'marketplace' %}" role="button">VIEW ALL RESTAURANTS <i class="fas fa-chevron-right ms-2"></i></a>
       </div>
     </div>
